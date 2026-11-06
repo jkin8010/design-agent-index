@@ -37,9 +37,9 @@ Raw data for this snapshot: [`data/snapshots/2026-11-06.json`](data/snapshots/20
 
 | # | Project | What it does | Score | Stars | Updated | License |
 |---|---|---|---:|---:|---|---|
-| 1 | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | An AI skill that provides design intelligence for building professional UI/UX acros… | 100 | 145,790 | 2026-11-05 | MIT |
+| 1 | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | An AI skill that provides design intelligence for building professional UI/UX acros… | 100 | 145,792 | 2026-11-05 | MIT |
 | 2 | [kaankiziltug/logo-design-skill](https://github.com/kaankiziltug/logo-design-skill) | A comprehensive logo-design skill for Claude, Gemini CLI, Codex and other AI agents… | 98 | 6,074 | 2026-11-03 | MIT |
-| 3 | [Nutlope/hallmark](https://github.com/Nutlope/hallmark) | Anti-AI-slop design skill for Claude Code, Cursor, and Codex. | 92 | 48,908 | 2026-11-05 | MIT |
+| 3 | [Nutlope/hallmark](https://github.com/Nutlope/hallmark) | Anti-AI-slop design skill for Claude Code, Cursor, and Codex. | 92 | 48,909 | 2026-11-05 | MIT |
 | 4 | [alchaincyf/huashu-design](https://github.com/alchaincyf/huashu-design) | Huashu Design 3.0 · 在 agent 里打一句话，拿回能交付的设计：网页 / App 原型 / 可编辑 PPTX / 动画 / 信息图 · 六个候选… | 88 | 28,821 | 2026-11-04 | MIT |
 | 5 | [kwakseongjae/oh-my-design](https://github.com/kwakseongjae/oh-my-design) | Give your AI coding agent a design system. One command installs 500+ quality-graded… | 88 | 568 | 2026-11-06 | MIT |
 | 6 | [oil-oil/oil-ui](https://github.com/oil-oil/oil-ui) | UI design skill for Claude Code, Codex and other AI agents: explore distinct direct… | 83 | 2,825 | 2026-11-04 | MIT |
@@ -103,7 +103,7 @@ Tools that turn a live site (or a brand) into a `DESIGN.md`, plus the format spe
 | 2 | [fivetaku/insane-design](https://github.com/fivetaku/insane-design) | URL one-shot design system extractor — fetches real CSS, analyzes tokens, generates… | 75 | 134 | 2026-10-13 | MIT |
 | 3 | [Railly/tinte](https://github.com/Railly/tinte) | Compile your design system into an Agent Plugin. Extract an identity from any refer… | 71 | 626 | 2026-08-08 | MIT |
 | 4 | [shaom/brand-to-design-md-skill](https://github.com/shaom/brand-to-design-md-skill) | A portable local skill that turns a public brand URL into a source-aware DESIGN.md,… | 47 | 211 | 2026-08-08 | — |
-| 5 | [bergside/design-md-chrome](https://github.com/bergside/design-md-chrome) | Chrome extension to extract styles from any website and generate DESIGN.md files an… | 42 | 3,142 | 2026-05-25 | MIT |
+| 5 | [bergside/design-md-chrome](https://github.com/bergside/design-md-chrome) | Chrome extension to extract styles from any website and generate DESIGN.md files an… | 42 | 3,143 | 2026-05-25 | MIT |
 | 6 | [bergside/design-md-figma](https://github.com/bergside/design-md-figma) | Figma plugin that extracts local style guidelines and generates DESIGN.md and SKILL… | 38 | 156 | 2026-05-25 | MIT |
 
 ## Get listed / correct a row

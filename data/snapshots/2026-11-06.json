@@ -12,7 +12,7 @@
    "category": "skill",
    "author_desc": "An AI skill that provides design intelligence for building professional UI/UX across multiple platforms.",
    "signals": {
-    "stars": 145790,
+    "stars": 145792,
     "forks": 15427,
     "pushed": "2026-11-05",
     "created": "2025-11-30",
@@ -43,7 +43,8 @@
      "ui-design",
      "uikit",
      "windsurf-ai"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 100,
@@ -61,7 +62,7 @@
    "category": "skill",
    "author_desc": "Anti-AI-slop design skill for Claude Code, Cursor, and Codex.",
    "signals": {
-    "stars": 48908,
+    "stars": 48909,
     "forks": 2592,
     "pushed": "2026-11-05",
     "created": "2026-04-27",
@@ -72,7 +73,8 @@
     "tests": false,
     "ci": true,
     "license": "MIT",
-    "topics": []
+    "topics": [],
+    "archived": false
    },
    "score_detail": {
     "total": 92,
@@ -114,7 +116,8 @@
      "html",
      "pptx",
      "prototype"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 88,
@@ -143,7 +146,8 @@
     "tests": true,
     "ci": true,
     "license": "Apache-2.0",
-    "topics": []
+    "topics": [],
+    "archived": false
    },
    "score_detail": {
     "total": 91,
@@ -181,7 +185,8 @@
      "gemini-cli",
      "logo-design",
      "svg"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 98,
@@ -219,7 +224,8 @@
      "frontend",
      "ui-design",
      "ux-design"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 83,
@@ -265,7 +271,8 @@
      "skill",
      "skills",
      "svg"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 57,
@@ -294,7 +301,8 @@
     "tests": false,
     "ci": false,
     "license": "MIT",
-    "topics": []
+    "topics": [],
+    "archived": false
    },
    "score_detail": {
     "total": 44,
@@ -335,7 +343,8 @@
      "threejs",
      "web-design",
      "webgl"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 60,
@@ -378,7 +387,8 @@
      "superdesign",
      "ui-design",
      "ux-design"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 58,
@@ -416,7 +426,8 @@
      "design-language",
      "design-system",
      "openai"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 48,
@@ -452,7 +463,8 @@
      "design-system",
      "frontend-design",
      "ui-design"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 74,
@@ -499,7 +511,8 @@
      "terminal-colors",
      "theme-generator",
      "vscode-theme"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 71,
@@ -541,7 +554,8 @@
      "tailwindcss",
      "typescript",
      "vibe-coding"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 88,
@@ -570,7 +584,8 @@
     "tests": false,
     "ci": false,
     "license": null,
-    "topics": []
+    "topics": [],
+    "archived": false
    },
    "score_detail": {
     "total": 49,
@@ -612,7 +627,8 @@
      "pptx-generator",
      "presentation-design",
      "skill"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 70,
@@ -641,7 +657,8 @@
     "tests": false,
     "ci": false,
     "license": "NOASSERTION",
-    "topics": []
+    "topics": [],
+    "archived": false
    },
    "score_detail": {
     "total": 41,
@@ -685,7 +702,8 @@
      "refero",
      "skill",
      "ui-design"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 63,
@@ -714,7 +732,8 @@
     "tests": false,
     "ci": false,
     "license": "MIT",
-    "topics": []
+    "topics": [],
+    "archived": false
    },
    "score_detail": {
     "total": 49,
@@ -743,7 +762,8 @@
     "tests": false,
     "ci": true,
     "license": null,
-    "topics": []
+    "topics": [],
+    "archived": false
    },
    "score_detail": {
     "total": 53,
@@ -792,7 +812,8 @@
      "typescript",
      "ui",
      "webgl"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 73,
@@ -821,7 +842,8 @@
     "tests": false,
     "ci": true,
     "license": "MIT",
-    "topics": []
+    "topics": [],
+    "archived": false
    },
    "score_detail": {
     "total": 43,
@@ -860,7 +882,8 @@
      "dtcg",
      "figma",
      "playwright"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 55,
@@ -889,7 +912,8 @@
     "tests": false,
     "ci": false,
     "license": null,
-    "topics": []
+    "topics": [],
+    "archived": false
    },
    "score_detail": {
     "total": 36,
@@ -918,7 +942,8 @@
     "tests": true,
     "ci": false,
     "license": "MIT",
-    "topics": []
+    "topics": [],
+    "archived": false
    },
    "score_detail": {
     "total": 59,
@@ -955,7 +980,8 @@
      "design-tokens",
      "figma",
      "skills"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 67,
@@ -984,7 +1010,8 @@
     "tests": false,
     "ci": false,
     "license": "MIT",
-    "topics": []
+    "topics": [],
+    "archived": false
    },
    "score_detail": {
     "total": 39,
@@ -1013,7 +1040,8 @@
     "tests": false,
     "ci": false,
     "license": null,
-    "topics": []
+    "topics": [],
+    "archived": false
    },
    "score_detail": {
     "total": 47,
@@ -1042,7 +1070,8 @@
     "tests": false,
     "ci": false,
     "license": "MIT",
-    "topics": []
+    "topics": [],
+    "archived": false
    },
    "score_detail": {
     "total": 43,
@@ -1071,7 +1100,8 @@
     "tests": true,
     "ci": true,
     "license": "MIT",
-    "topics": []
+    "topics": [],
+    "archived": false
    },
    "score_detail": {
     "total": 65,
@@ -1100,7 +1130,8 @@
     "tests": true,
     "ci": false,
     "license": null,
-    "topics": []
+    "topics": [],
+    "archived": false
    },
    "score_detail": {
     "total": 54,
@@ -1137,7 +1168,8 @@
      "image-generation",
      "photo-effects",
      "prompt-engineering"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 78,
@@ -1166,7 +1198,8 @@
     "tests": false,
     "ci": false,
     "license": null,
-    "topics": []
+    "topics": [],
+    "archived": false
    },
    "score_detail": {
     "total": 41,
@@ -1205,7 +1238,8 @@
      "design-tokens",
      "prompt-engineering",
      "ui-ux"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 67,
@@ -1234,7 +1268,8 @@
     "tests": false,
     "ci": false,
     "license": "MIT",
-    "topics": []
+    "topics": [],
+    "archived": false
    },
    "score_detail": {
     "total": 50,
@@ -1273,7 +1308,8 @@
      "gemini-cli",
      "html-css",
      "ui"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 41,
@@ -1302,7 +1338,8 @@
     "tests": false,
     "ci": false,
     "license": "MIT",
-    "topics": []
+    "topics": [],
+    "archived": false
    },
    "score_detail": {
     "total": 34,
@@ -1331,7 +1368,8 @@
     "tests": false,
     "ci": true,
     "license": "MIT",
-    "topics": []
+    "topics": [],
+    "archived": false
    },
    "score_detail": {
     "total": 75,
@@ -1372,7 +1410,8 @@
      "journeymap",
      "ux-design",
      "ux-research"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 61,
@@ -1401,7 +1440,8 @@
     "tests": false,
     "ci": false,
     "license": "MIT",
-    "topics": []
+    "topics": [],
+    "archived": false
    },
    "score_detail": {
     "total": 46,
@@ -1445,7 +1485,8 @@
      "slopbeth",
      "slopgent",
      "writing"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 63,
@@ -1484,7 +1525,8 @@
      "vibe-coding",
      "vibe-design",
      "vibecoding"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 71,
@@ -1519,7 +1561,8 @@
      "design-md",
      "design-system",
      "figma"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 35,
@@ -1567,7 +1610,8 @@
      "design-system",
      "google-stitch",
      "skills"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 60,
@@ -1596,7 +1640,8 @@
     "tests": false,
     "ci": true,
     "license": "MIT",
-    "topics": []
+    "topics": [],
+    "archived": false
    },
    "score_detail": {
     "total": 73,
@@ -1646,7 +1691,8 @@
      "react-native",
      "swiftui",
      "ui-kit"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 48,
@@ -1684,7 +1730,8 @@
      "llm",
      "markdown",
      "ui"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 36,
@@ -1713,7 +1760,8 @@
     "tests": false,
     "ci": true,
     "license": null,
-    "topics": []
+    "topics": [],
+    "archived": false
    },
    "score_detail": {
     "total": 45,
@@ -1747,7 +1795,8 @@
      "design-system",
      "design-tokens",
      "designmd"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 41,
@@ -1780,7 +1829,8 @@
      "agent",
      "ai",
      "design"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 52,
@@ -1798,7 +1848,7 @@
    "category": "extractor",
    "author_desc": "Chrome extension to extract styles from any website and generate DESIGN.md files and design skills for AI based on TypeUI",
    "signals": {
-    "stars": 3142,
+    "stars": 3143,
     "forks": 341,
     "pushed": "2026-05-25",
     "created": "2026-04-14",
@@ -1824,7 +1874,8 @@
      "skills",
      "skills-ai",
      "typeui"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 42,
@@ -1864,7 +1915,8 @@
      "figma",
      "skill",
      "typeui"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 38,
@@ -1906,7 +1958,8 @@
      "vibe-coding",
      "vibecoding",
      "website-design"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 55,
@@ -1939,7 +1992,8 @@
      "design-systems",
      "design-tokens",
      "designmd"
-    ]
+    ],
+    "archived": false
    },
    "score_detail": {
     "total": 43,
