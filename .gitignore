@@ -5,3 +5,4 @@ candidates.json
 shortlist.json
 bench/.cache/
 bench/*.log
+bench/runs/**/.claude/
