@@ -1,96 +1,81 @@
-# Design bench (v0.2, work in progress)
+# Design bench — methodology release (v0.2)
 
 Same briefs. Same model. One design skill per cell. Renders published.
 
-The index in the repo root measures whether a skill is *maintained*. This bench measures what it
-actually *produces*. They are separate on purpose: stars and file counts cannot tell you whether the
-output looks like a human designed it.
+This is a **method-only release**. There is no leaderboard here, on purpose: a ranked table without a
+named model, N≥3 repetitions and a control row is a rumour, not a measurement. The rules for when
+results get published are written down in [`METHODOLOGY.md`](METHODOLOGY.md#10-what-would-make-a-ranking-publishable).
 
-## How a cell is defined
+## What is here
 
-```
-bench/runs/<date>/<skill>/<brief>/
-  prompt.md      exactly what the agent was asked (brief + skill hint + hard constraints)
-  index.html     the deliverable, one self-contained file
-  meta.json      model, CLI version, skill commit, duration, exit code
-  metrics.json   objective measurements (playwright)
-  score.json     the 0–100 score with its component breakdown
-  shot-1440.jpg  render at 1440px
-  shot-375.jpg   render at 375px
-```
+| Path | What it is |
+|---|---|
+| [`METHODOLOGY.md`](METHODOLOGY.md) | the full method: briefs, isolation, stop rule, metrics, weights, biases, publication rules |
+| `briefs/` | 12 fixed briefs, copy pinned verbatim |
+| `runner.py` | runs one `(skill, brief)` cell, isolated, with a wall-clock budget |
+| `measure.py` | Playwright measurements at 1440 and 375 |
+| `score.py` | deterministic 0–100 from `metrics.json` alone |
+| `check_content.py` | copy-fidelity gate, reported separately from the score |
+| `aggregate.py` | median + spread across N repetitions |
+| `report.py` | per-batch report and screenshot gallery |
+| `example/` | one complete worked cell (control, brief 01) — prompt, HTML, metrics, score, both screenshots |
 
-A *cell* is one (skill, brief) pair. The control cell has no skill installed — it is the baseline
-every skill is measured against.
+Raw cells for unpublished batches are not committed (`bench/runs/` is ignored). Published batches will
+live under `bench/results/<batch>/`.
 
-## The 12 briefs
-
-Landing page · dashboard · pricing · mobile onboarding · API docs · product detail · long-form article ·
-admin table · auth + error states · 16:9 slide · status page · case study.
-
-Every brief pins the copy verbatim: same words in every cell, so differences come from design, not content.
-Hard constraints are identical everywhere: one HTML file, no CDN, no external fonts or images, system fonts
-only, CSS-only imagery, usable at 375px and 1440px, no horizontal scroll.
-
-## Run it
+## Run one cell
 
 ```bash
-# one cell
 python3 bench/runner.py --skill hallmark --brief 01-saas-landing
-
-# a matrix, 3 at a time
-python3 bench/runner.py --skill all --brief all --parallel 3
-
-# measure → score → report for whatever ran
 python3 bench/measure.py --date 2026-11-06
 python3 bench/score.py   --date 2026-11-06
-python3 bench/report.py  --date 2026-11-06     # REPORT.md + gallery.html
+python3 bench/report.py  --date 2026-11-06
 ```
 
-`--agent codex` swaps the CLI. The model is taken from the operator's config and recorded in
-`meta.json`; the harness runs Claude Code against a **clean config dir** (`bench/.cache/claude-home`,
-auth env only) so personal plugins and skills cannot contaminate a cell. That detail is the difference
-between a benchmark and a demo.
+A full matrix with repetitions:
 
-## What is measured (deterministic)
+```bash
+python3 bench/runner.py --skills control,hallmark,impeccable \
+  --briefs 01-saas-landing,02-dashboard,03-pricing,08-admin-table \
+  --repeat 3 --timeout 1200 --parallel 3 --post --date 2026-11-06-r2
 
-| Dimension | Weight | Rule |
-|---|---:|---|
-| Render | 10 | no console errors |
-| Responsive | 15 | no 375px overflow (10) · tap targets ≥44px (5) |
-| Contrast | 15 | share of text runs meeting 4.5:1, computed from computed styles (oklch included) |
-| Typography | 10 | ≤3 font families (5) · 4–9 distinct sizes (5) |
-| Colour discipline | 10 | ≤8 background colours (5) · ≤5 text colours (5) |
-| Anti-slop | 20 | −6 purple/violet gradient · −4 backdrop-filter glass · −3 gradient text · −3 emoji in copy · −1 per buzzword (max 4) |
-| Structure | 10 | exactly one `h1` (5) · ≥4 semantic landmarks (5) |
-| Weight | 10 | ≤300KB full (10) · ≤600KB (6) |
+python3 bench/check_content.py --date 2026-11-06-r2
+python3 bench/score.py         --date 2026-11-06-r2
+python3 bench/aggregate.py     --date 2026-11-06-r2   # medians + min/max
+```
 
-Deliberately **not** measured yet: whether the composition is good, whether the hierarchy matches the
-brief's intent, whether it would survive a real design review. That is the human/LLM review layer, and
-it is not in v0.2.
+`--agent codex` swaps the CLI. The model comes from the operator's config and is recorded per cell in
+`meta.json`; Claude Code runs against a **clean config directory** so personal plugins cannot
+contaminate a cell.
 
-## Cost and time, measured
+## The worked example
 
-The first pilot cell (`hallmark` × `01-saas-landing`) took **11 minutes** wall clock and produced a
-27.8KB HTML file that scored 89/100.
+`bench/example/01-saas-landing-control/` is the control cell for brief 01 with no skill installed. It
+exists so the method can be inspected end to end — the exact prompt, the HTML, every metric, and the
+score derived from those metrics — without publishing a comparison.
+
+## Cost, measured
 
 | Matrix | Cells | Sequential | At `--parallel 3` |
 |---|---:|---:|---:|
-| Pilot (1 skill × 1 brief) | 1 | 11 min | — |
-| Lean publish (6 × 4) | 24 | ~4.4 h | ~1.5 h |
-| Full (12 × 12) | 144 | ~26 h | ~9 h |
+| One cell | 1 | 10–14 min | — |
+| Lean round, N=1 | 24 | ~4.5 h | ~1.7 h |
+| Lean round, N=3 | 48 | ~9 h | ~3.5 h |
+| Full 12×12, N=1 | 144 | ~26 h | ~9 h |
 
-The full matrix is a weekend job, not a CI job. v0.2 publishes the lean matrix; the full one runs when
-there is a reason to.
+The full matrix is a weekend job, not a CI job.
 
-## Known limitations
+## Status
 
-- **One generation per cell.** No best-of-N, so a single unlucky run can misrepresent a skill. v0.2.1 runs 3
-  and takes the median.
-- **The model is a variable.** A skill that helps one model may not help another. The model id is recorded
-  per cell, and comparisons are only valid within the same date + model.
-- **Skill invocation is advisory.** The prompt tells the agent the skill is installed and to follow it; the
-  agent decides how much to use. That is realistic, but it means results measure "skill + agent judgement",
-  not the skill alone.
-- **The anti-slop heuristics are crude.** A purple gradient is not automatically bad. Treat that 20 points
-  as a warning light, not a verdict.
-- **No human review yet.** Nothing in v0.2 says "this looks like a designer made it".
+Round 1 (24 cells, N=1) is done and is what the methodology was built from; its raw cells stay in git
+history and are deliberately not published as a ranking. Round 2 (4 skills × 4 briefs × N=3, 1200s
+budget) is the first batch that satisfies the publication conditions for repetition and control.
+
+## Limits, stated up front
+
+- scores measure hygiene (render, contrast, responsiveness, discipline), **not taste**
+- one model only; comparisons are valid within a batch, never across models
+- one generation per cell; N=3 medians replace single samples from round 2 on
+- the anti-slop rules are heuristics — treat those 20 points as a warning light
+
+Full bias list: [`METHODOLOGY.md` §11](METHODOLOGY.md#11-known-biases-and-threats-to-validity).

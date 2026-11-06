@@ -31,21 +31,24 @@ corpora, and the tools that extract a design system from a live site.
 | Docs surface | 15 | ≥200 files 15 · ≥50 10 · else 5 |
 
 Full rules, inclusion criteria and known biases: [METHODOLOGY.md](METHODOLOGY.md).
-### Benchmark (v0.2, in progress)
+### Benchmark (v0.2 — methodology published, results deliberately withheld)
 
-Signal scores say whether a skill is maintained, not whether it designs well. The bench runs the **same 12
-briefs** through each skill with one model and publishes the renders, screenshots and a deterministic score
-(contrast, responsiveness, typography, colour discipline, anti-slop heuristics). Harness and rubric:
-[`bench/`](bench/README.md). First pilot cell is committed under `bench/runs/`.
+Signal scores say whether a skill is *maintained*, not whether it *designs well*. The bench runs the same 12
+briefs through each skill on one model, screenshots both 1440px and 375px, and scores the render on eight
+deterministic dimensions (contrast, responsiveness, typography, colour discipline, anti-slop heuristics).
+
+**No leaderboard is published here yet.** A ranked table without a named model, N≥3 repetitions, a control
+row and published spread is a rumour, not a measurement — [the method and its publication rules](bench/METHODOLOGY.md)
+ship first, and one complete worked cell is in [`bench/example/`](bench/example/).
 Raw data for this snapshot: [`data/snapshots/2026-11-06.json`](data/snapshots/2026-11-06.json).
 
 ## Skills
 
 | # | Project | What it does | Score | Stars | Updated | License |
 |---|---|---|---:|---:|---|---|
-| 1 | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | An AI skill that provides design intelligence for building professional UI/UX acros… | 100 | 145,792 | 2026-11-05 | MIT |
+| 1 | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | An AI skill that provides design intelligence for building professional UI/UX acros… | 100 | 145,790 | 2026-11-05 | MIT |
 | 2 | [kaankiziltug/logo-design-skill](https://github.com/kaankiziltug/logo-design-skill) | A comprehensive logo-design skill for Claude, Gemini CLI, Codex and other AI agents… | 98 | 6,074 | 2026-11-03 | MIT |
-| 3 | [Nutlope/hallmark](https://github.com/Nutlope/hallmark) | Anti-AI-slop design skill for Claude Code, Cursor, and Codex. | 92 | 48,909 | 2026-11-05 | MIT |
+| 3 | [Nutlope/hallmark](https://github.com/Nutlope/hallmark) | Anti-AI-slop design skill for Claude Code, Cursor, and Codex. | 92 | 48,908 | 2026-11-05 | MIT |
 | 4 | [alchaincyf/huashu-design](https://github.com/alchaincyf/huashu-design) | Huashu Design 3.0 · 在 agent 里打一句话，拿回能交付的设计：网页 / App 原型 / 可编辑 PPTX / 动画 / 信息图 · 六个候选… | 88 | 28,821 | 2026-11-04 | MIT |
 | 5 | [kwakseongjae/oh-my-design](https://github.com/kwakseongjae/oh-my-design) | Give your AI coding agent a design system. One command installs 500+ quality-graded… | 88 | 568 | 2026-11-06 | MIT |
 | 6 | [oil-oil/oil-ui](https://github.com/oil-oil/oil-ui) | UI design skill for Claude Code, Codex and other AI agents: explore distinct direct… | 83 | 2,825 | 2026-11-04 | MIT |
@@ -109,7 +112,7 @@ Tools that turn a live site (or a brand) into a `DESIGN.md`, plus the format spe
 | 2 | [fivetaku/insane-design](https://github.com/fivetaku/insane-design) | URL one-shot design system extractor — fetches real CSS, analyzes tokens, generates… | 75 | 134 | 2026-10-13 | MIT |
 | 3 | [Railly/tinte](https://github.com/Railly/tinte) | Compile your design system into an Agent Plugin. Extract an identity from any refer… | 71 | 626 | 2026-08-08 | MIT |
 | 4 | [shaom/brand-to-design-md-skill](https://github.com/shaom/brand-to-design-md-skill) | A portable local skill that turns a public brand URL into a source-aware DESIGN.md,… | 47 | 211 | 2026-08-08 | — |
-| 5 | [bergside/design-md-chrome](https://github.com/bergside/design-md-chrome) | Chrome extension to extract styles from any website and generate DESIGN.md files an… | 42 | 3,143 | 2026-05-25 | MIT |
+| 5 | [bergside/design-md-chrome](https://github.com/bergside/design-md-chrome) | Chrome extension to extract styles from any website and generate DESIGN.md files an… | 42 | 3,142 | 2026-05-25 | MIT |
 | 6 | [bergside/design-md-figma](https://github.com/bergside/design-md-figma) | Figma plugin that extracts local style guidelines and generates DESIGN.md and SKILL… | 38 | 156 | 2026-05-25 | MIT |
 
 ## Get listed / correct a row

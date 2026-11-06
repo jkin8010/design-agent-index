@@ -35,6 +35,13 @@ REQUIRED = {
         "You can change this any time.",
         "Continue",
     ],
+    "03-pricing": [
+        "Hobby", "Team", "Business", "$29", "$99",
+        "Checks per month", "History",
+        "Can I change plans later?",
+        "What counts as a monitor?",
+        "Do you offer invoicing?",
+    ],
     "08-admin-table": [
         "Export CSV", "Paid", "Pending", "Refunded",
         "Empty state", "Order", "Customer", "Amount",

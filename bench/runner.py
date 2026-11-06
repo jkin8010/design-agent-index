@@ -118,10 +118,11 @@ def cli_version(agent):
     return out.splitlines()[0] if out else "unknown"
 
 
-def run_cell(skill, brief_id, agent, date, force=False, post=False):
+def run_cell(skill, brief_id, agent, date, force=False, post=False, tag="", timeout=TIMEOUT):
     brief_path = os.path.join(BENCH, "briefs", f"{brief_id}.md")
     brief = open(brief_path).read()
-    cell = os.path.join(BENCH, "runs", date, skill["name"], brief_id)
+    dir_name = f"{brief_id}__{tag}" if tag else brief_id
+    cell = os.path.join(BENCH, "runs", date, skill["name"], dir_name)
     out_html = os.path.join(cell, "index.html")
     if os.path.exists(out_html) and not force:
         print(f"skip (exists): {skill['name']}/{brief_id}")
@@ -150,7 +151,7 @@ def run_cell(skill, brief_id, agent, date, force=False, post=False):
     if agent == "claude":
         env["CLAUDE_CONFIG_DIR"] = clean_claude_home()
     try:
-        proc, secs = sh(agent_cmd(agent, prompt), cwd=cell, env=env)
+        proc, secs = sh(agent_cmd(agent, prompt), cwd=cell, env=env, timeout=timeout)
         code = proc.returncode
         tail = (proc.stdout or "")[-1500:]
     except subprocess.TimeoutExpired:
@@ -163,6 +164,7 @@ def run_cell(skill, brief_id, agent, date, force=False, post=False):
         "skill_commit": head,
         "installed_skills": installed,
         "brief": brief_id,
+        "tag": tag,
         "agent": agent,
         "agent_version": cli_version(agent),
         "model_env": {k: v for k, v in os.environ.items() if k.startswith("ANTHROPIC_MODEL")},
@@ -176,7 +178,7 @@ def run_cell(skill, brief_id, agent, date, force=False, post=False):
     open(os.path.join(cell, "meta.json"), "w").write(json.dumps(meta, ensure_ascii=False, indent=1))
     if ok and post:
         subprocess.run([sys.executable, os.path.join(BENCH, "measure.py"),
-                        "--date", date, "--cell", f"{skill['name']}/{brief_id}"])
+                        "--date", date, "--cell", f"{skill['name']}/{dir_name}"])
     print(f"{'ok ' if ok else 'FAIL'} {skill['name']}/{brief_id} {secs}s exit={code} bytes={meta['html_bytes']}")
 
 
@@ -191,6 +193,8 @@ def main():
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--parallel", type=int, default=1, help="cells to run concurrently")
     ap.add_argument("--post", action="store_true", help="measure each cell as soon as it finishes")
+    ap.add_argument("--repeat", type=int, default=1, help="N runs per cell, tagged r1..rN")
+    ap.add_argument("--timeout", type=int, default=TIMEOUT, help="per-cell agent budget in seconds")
     args = ap.parse_args()
 
     skills = SKILLS["skills"]
@@ -216,13 +220,15 @@ def main():
         if not briefs:
             raise SystemExit(f"unknown brief {args.brief}")
 
-    cells = [(s, b) for s in skills for b in briefs]
+    cells = [(s, b, f"r{i+1}" if args.repeat > 1 else "")
+             for i in range(args.repeat) for s in skills for b in briefs]
     if args.parallel > 1:
         with ThreadPoolExecutor(max_workers=args.parallel) as ex:
-            list(ex.map(lambda sb: run_cell(sb[0], sb[1], args.agent, args.date, args.force, args.post), cells))
+            list(ex.map(lambda c: run_cell(c[0], c[1], args.agent, args.date, args.force, args.post,
+                                           c[2], args.timeout), cells))
     else:
-        for skill, brief in cells:
-            run_cell(skill, brief, args.agent, args.date, args.force, args.post)
+        for skill, brief, tag in cells:
+            run_cell(skill, brief, args.agent, args.date, args.force, args.post, tag, args.timeout)
 
 
 if __name__ == "__main__":

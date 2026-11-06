@@ -6,3 +6,5 @@ shortlist.json
 bench/.cache/
 bench/*.log
 bench/runs/**/.claude/
+bench/runs/smoke/
+bench/runs/

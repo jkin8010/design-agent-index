@@ -181,12 +181,15 @@ corpora, and the tools that extract a design system from a live site.
 | Docs surface | 15 | ≥200 files 15 · ≥50 10 · else 5 |
 
 Full rules, inclusion criteria and known biases: [METHODOLOGY.md](METHODOLOGY.md).
-### Benchmark (v0.2, in progress)
+### Benchmark (v0.2 — methodology published, results deliberately withheld)
 
-Signal scores say whether a skill is maintained, not whether it designs well. The bench runs the **same 12
-briefs** through each skill with one model and publishes the renders, screenshots and a deterministic score
-(contrast, responsiveness, typography, colour discipline, anti-slop heuristics). Harness and rubric:
-[`bench/`](bench/README.md). First pilot cell is committed under `bench/runs/`.
+Signal scores say whether a skill is *maintained*, not whether it *designs well*. The bench runs the same 12
+briefs through each skill on one model, screenshots both 1440px and 375px, and scores the render on eight
+deterministic dimensions (contrast, responsiveness, typography, colour discipline, anti-slop heuristics).
+
+**No leaderboard is published here yet.** A ranked table without a named model, N≥3 repetitions, a control
+row and published spread is a rumour, not a measurement — [the method and its publication rules](bench/METHODOLOGY.md)
+ship first, and one complete worked cell is in [`bench/example/`](bench/example/).
 Raw data for this snapshot: [`data/snapshots/{today.isoformat()}.json`](data/snapshots/{today.isoformat()}.json).
 
 ## Skills
