@@ -1,0 +1,42 @@
+name: repo checks
+
+# Rules that only live in a document get ignored. This job makes the rulebook executable:
+# a PR that breaks the structure, the guardrails, or a published batch's gate fails here.
+
+on:
+  pull_request:
+    paths:
+      - "bench/**"
+      - "scripts/**"
+      - "registry.json"
+      - "RULES.md"
+      - "README.md"
+  push:
+    branches: [main]
+    paths:
+      - "bench/**"
+      - "scripts/**"
+      - "RULES.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Syntax check (scripts + bench)
+        run: python -m compileall -q scripts bench
+
+      - name: Repository structure, guardrails, published batches
+        run: python scripts/check_repo.py
+
+      - name: Rulebook present
+        run: test -s RULES.md && test -s bench/METHODOLOGY.md
