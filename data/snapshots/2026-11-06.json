@@ -1,0 +1,1956 @@
+{
+ "generated_at": "2026-11-06",
+ "method": "v0.1-signals",
+ "counts": {
+  "skills": 37,
+  "collections": 11,
+  "extractors": 6
+ },
+ "entries": [
+  {
+   "repo": "nextlevelbuilder/ui-ux-pro-max-skill",
+   "category": "skill",
+   "author_desc": "An AI skill that provides design intelligence for building professional UI/UX across multiple platforms.",
+   "signals": {
+    "stars": 145790,
+    "forks": 15427,
+    "pushed": "2026-11-05",
+    "created": "2025-11-30",
+    "files": 839,
+    "skill_md": true,
+    "design_md": true,
+    "plugin": true,
+    "tests": true,
+    "ci": true,
+    "license": "MIT",
+    "topics": [
+     "ai-skills",
+     "antigravity",
+     "claude",
+     "claude-code",
+     "codex",
+     "command-line",
+     "copilot",
+     "cursor-ai",
+     "html5",
+     "kiro",
+     "landing-page",
+     "mobile-ui",
+     "qoder",
+     "react",
+     "tailwindcss",
+     "trae",
+     "ui-design",
+     "uikit",
+     "windsurf-ai"
+    ]
+   },
+   "score_detail": {
+    "total": 100,
+    "activity": 25,
+    "packaged": 20,
+    "engineering": 15,
+    "adoption": 25,
+    "docs": 15
+   },
+   "score": 100,
+   "stale": false
+  },
+  {
+   "repo": "Nutlope/hallmark",
+   "category": "skill",
+   "author_desc": "Anti-AI-slop design skill for Claude Code, Cursor, and Codex.",
+   "signals": {
+    "stars": 48908,
+    "forks": 2592,
+    "pushed": "2026-11-05",
+    "created": "2026-04-27",
+    "files": 1001,
+    "skill_md": true,
+    "design_md": true,
+    "plugin": true,
+    "tests": false,
+    "ci": true,
+    "license": "MIT",
+    "topics": []
+   },
+   "score_detail": {
+    "total": 92,
+    "activity": 25,
+    "packaged": 20,
+    "engineering": 7,
+    "adoption": 25,
+    "docs": 15
+   },
+   "score": 92,
+   "stale": false
+  },
+  {
+   "repo": "alchaincyf/huashu-design",
+   "category": "skill",
+   "author_desc": "Huashu Design 3.0 · 在 agent 里打一句话，拿回能交付的设计：网页 / App 原型 / 可编辑 PPTX / 动画 / 信息图 · 六个候选挑三个方向 · 84 种带样张的风格库 · 越用越懂你的外观账本与设计体检 · HTML-native design skill for Claude Code, Codex, Cursor & any agent",
+   "signals": {
+    "stars": 28821,
+    "forks": 3113,
+    "pushed": "2026-11-04",
+    "created": "2026-04-19",
+    "files": 480,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": false,
+    "tests": true,
+    "ci": false,
+    "license": "MIT",
+    "topics": [
+     "agent-skills",
+     "ai-design",
+     "claude-code",
+     "claude-skills",
+     "codex",
+     "cursor",
+     "deepseek-harness",
+     "design",
+     "dsh-plugin",
+     "html",
+     "pptx",
+     "prototype"
+    ]
+   },
+   "score_detail": {
+    "total": 88,
+    "activity": 25,
+    "packaged": 12,
+    "engineering": 11,
+    "adoption": 25,
+    "docs": 15
+   },
+   "score": 88,
+   "stale": false
+  },
+  {
+   "repo": "google-labs-code/design.md",
+   "category": "spec",
+   "author_desc": "A format specification for describing a visual identity to coding agents. DESIGN.md gives agents a persistent, structured understanding of a design system.",
+   "signals": {
+    "stars": 28754,
+    "forks": 2286,
+    "pushed": "2026-11-03",
+    "created": "2026-04-10",
+    "files": 164,
+    "skill_md": true,
+    "design_md": true,
+    "plugin": false,
+    "tests": true,
+    "ci": true,
+    "license": "Apache-2.0",
+    "topics": []
+   },
+   "score_detail": {
+    "total": 91,
+    "activity": 25,
+    "packaged": 16,
+    "engineering": 15,
+    "adoption": 25,
+    "docs": 10
+   },
+   "score": 91,
+   "stale": false
+  },
+  {
+   "repo": "kaankiziltug/logo-design-skill",
+   "category": "skill",
+   "author_desc": "A comprehensive logo-design skill for Claude, Gemini CLI, Codex and other AI agents: principles, process, SVG craft, testing tools and a 1,400+ logo reference library.",
+   "signals": {
+    "stars": 6074,
+    "forks": 483,
+    "pushed": "2026-11-03",
+    "created": "2026-09-26",
+    "files": 1582,
+    "skill_md": true,
+    "design_md": true,
+    "plugin": true,
+    "tests": true,
+    "ci": true,
+    "license": "MIT",
+    "topics": [
+     "agent-skills",
+     "branding",
+     "claude",
+     "claude-skills",
+     "codex",
+     "gemini-cli",
+     "logo-design",
+     "svg"
+    ]
+   },
+   "score_detail": {
+    "total": 98,
+    "activity": 25,
+    "packaged": 20,
+    "engineering": 15,
+    "adoption": 23,
+    "docs": 15
+   },
+   "score": 98,
+   "stale": false
+  },
+  {
+   "repo": "oil-oil/oil-ui",
+   "category": "skill",
+   "author_desc": "UI design skill for Claude Code, Codex and other AI agents: explore distinct directions, compare them side by side, refine against real screenshots. 给 AI Agent 用的 UI 设计 Skill。",
+   "signals": {
+    "stars": 2825,
+    "forks": 158,
+    "pushed": "2026-11-04",
+    "created": "2026-09-30",
+    "files": 64,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": false,
+    "tests": true,
+    "ci": true,
+    "license": "MIT",
+    "topics": [
+     "agent-skills",
+     "ai-design",
+     "claude-code",
+     "claude-skills",
+     "codex",
+     "frontend",
+     "ui-design",
+     "ux-design"
+    ]
+   },
+   "score_detail": {
+    "total": 83,
+    "activity": 25,
+    "packaged": 12,
+    "engineering": 15,
+    "adoption": 21,
+    "docs": 10
+   },
+   "score": 83,
+   "stale": false
+  },
+  {
+   "repo": "oil-oil/beautify-github-readme",
+   "category": "skill",
+   "author_desc": "README design skill for Claude Code & Codex. 帮你把 GitHub README 做得好看又好懂。",
+   "signals": {
+    "stars": 1949,
+    "forks": 132,
+    "pushed": "2026-10-04",
+    "created": "2026-07-13",
+    "files": 54,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": "MIT",
+    "topics": [
+     "agent-skill",
+     "agent-skills",
+     "claude-code",
+     "claude-skills",
+     "codex",
+     "codex-skill",
+     "design",
+     "documentation",
+     "github",
+     "github-readme",
+     "markdown",
+     "readme",
+     "readme-design",
+     "skill",
+     "skills",
+     "svg"
+    ]
+   },
+   "score_detail": {
+    "total": 57,
+    "activity": 12,
+    "packaged": 12,
+    "engineering": 3,
+    "adoption": 20,
+    "docs": 10
+   },
+   "score": 57,
+   "stale": false
+  },
+  {
+   "repo": "kylezantos/design-motion-principles",
+   "category": "skill",
+   "author_desc": "A motion design skill with two modes — build interactive components with purposeful motion, or audit existing animations. Context-aware, per-designer guidance distilled from the published work of Emil Kowalski, Jakub Krehel, and Jhey Tompkins.",
+   "signals": {
+    "stars": 1514,
+    "forks": 117,
+    "pushed": "2026-05-30",
+    "created": "2026-01-14",
+    "files": 22,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": "MIT",
+    "topics": []
+   },
+   "score_detail": {
+    "total": 44,
+    "activity": 5,
+    "packaged": 12,
+    "engineering": 3,
+    "adoption": 19,
+    "docs": 5
+   },
+   "score": 44,
+   "stale": false
+  },
+  {
+   "repo": "agiwhitelist/auteur",
+   "category": "skill",
+   "author_desc": "The Claude Code skill that directs a website like a film. Commit-sheet, generated assets, build, and an executable anti-slop linter that gates every ship.",
+   "signals": {
+    "stars": 1045,
+    "forks": 19,
+    "pushed": "2026-08-06",
+    "created": "2026-07-11",
+    "files": 57,
+    "skill_md": true,
+    "design_md": true,
+    "plugin": true,
+    "tests": false,
+    "ci": true,
+    "license": "MIT",
+    "topics": [
+     "agent-skills",
+     "anti-slop",
+     "claude-code",
+     "claude-code-skills",
+     "creative-coding",
+     "generative-art",
+     "gsap",
+     "landing-page",
+     "threejs",
+     "web-design",
+     "webgl"
+    ]
+   },
+   "score_detail": {
+    "total": 60,
+    "activity": 5,
+    "packaged": 20,
+    "engineering": 7,
+    "adoption": 18,
+    "docs": 10
+   },
+   "score": 60,
+   "stale": false
+  },
+  {
+   "repo": "superdesigndev/superdesign-skill",
+   "category": "skill",
+   "author_desc": "The design skill for Claude Code, Cursor and any coding agent. Stop shipping AI-slop UI: turn it into shippable, tasteful frontend. Install: npx skills add superdesigndev/superdesign-skill. Powered by superdesign.dev",
+   "signals": {
+    "stars": 949,
+    "forks": 75,
+    "pushed": "2026-08-21",
+    "created": "2026-01-21",
+    "files": 43,
+    "skill_md": true,
+    "design_md": true,
+    "plugin": true,
+    "tests": false,
+    "ci": false,
+    "license": "MIT",
+    "topics": [
+     "agent-skills",
+     "ai-design",
+     "claude-code",
+     "claude-skill",
+     "claude-skills",
+     "coding-agent",
+     "cursor",
+     "design-agent",
+     "dsh-plugin",
+     "frontend",
+     "superdesign",
+     "ui-design",
+     "ux-design"
+    ]
+   },
+   "score_detail": {
+    "total": 58,
+    "activity": 12,
+    "packaged": 20,
+    "engineering": 3,
+    "adoption": 18,
+    "docs": 5
+   },
+   "score": 58,
+   "stale": false
+  },
+  {
+   "repo": "dominikmartn/hue",
+   "category": "skill",
+   "author_desc": "open-source skill that learns any brand and turns it into a complete design system. works on claude code and codex. install once, every UI your assistant builds matches your brand.",
+   "signals": {
+    "stars": 884,
+    "forks": 70,
+    "pushed": "2026-06-11",
+    "created": "2026-04-12",
+    "files": 77,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": "MIT",
+    "topics": [
+     "ai-tools",
+     "anthropic",
+     "claude-code",
+     "claude-skill",
+     "codex",
+     "design-language",
+     "design-system",
+     "openai"
+    ]
+   },
+   "score_detail": {
+    "total": 48,
+    "activity": 5,
+    "packaged": 12,
+    "engineering": 3,
+    "adoption": 18,
+    "docs": 10
+   },
+   "score": 48,
+   "stale": false
+  },
+  {
+   "repo": "joeseesun/qiaomu-design",
+   "category": "skill",
+   "author_desc": "偏执型设计顾问：反 AI 味设计 + 风格试衣间 + 58 站设计系统库的 Claude Code Skill | Opinionated design advisor for Claude Code: anti-generic UI, style fitting room, 58 real-site design systems.",
+   "signals": {
+    "stars": 675,
+    "forks": 50,
+    "pushed": "2026-10-13",
+    "created": "2026-03-02",
+    "files": 187,
+    "skill_md": true,
+    "design_md": true,
+    "plugin": false,
+    "tests": true,
+    "ci": false,
+    "license": "MIT",
+    "topics": [
+     "agent-skill",
+     "chinese-typography",
+     "claude-code",
+     "design-system",
+     "frontend-design",
+     "ui-design"
+    ]
+   },
+   "score_detail": {
+    "total": 74,
+    "activity": 20,
+    "packaged": 16,
+    "engineering": 11,
+    "adoption": 17,
+    "docs": 10
+   },
+   "score": 74,
+   "stale": false
+  },
+  {
+   "repo": "Railly/tinte",
+   "category": "extractor",
+   "author_desc": "Compile your design system into an Agent Plugin. Extract an identity from any reference, emit SKILL.md + tokens.css, lint what bypasses your tokens.",
+   "signals": {
+    "stars": 626,
+    "forks": 39,
+    "pushed": "2026-08-08",
+    "created": "2023-10-12",
+    "files": 936,
+    "skill_md": true,
+    "design_md": true,
+    "plugin": true,
+    "tests": false,
+    "ci": true,
+    "license": "MIT",
+    "topics": [
+     "agent-native",
+     "agent-plugins",
+     "ai-coding",
+     "cli",
+     "color-tokens",
+     "design-system",
+     "design-systems",
+     "design-tokens",
+     "nextjs",
+     "oklch",
+     "one-hunter",
+     "registry",
+     "shadcn-preset",
+     "shadcn-ui",
+     "terminal-colors",
+     "theme-generator",
+     "vscode-theme"
+    ]
+   },
+   "score_detail": {
+    "total": 71,
+    "activity": 12,
+    "packaged": 20,
+    "engineering": 7,
+    "adoption": 17,
+    "docs": 15
+   },
+   "score": 71,
+   "stale": false
+  },
+  {
+   "repo": "kwakseongjae/oh-my-design",
+   "category": "skill",
+   "author_desc": "Give your AI coding agent a design system. One command installs 500+ quality-graded company DESIGN.md references + skills into Claude Code, Codex, Cursor, and OpenCode. Free, MIT, zero AI calls.",
+   "signals": {
+    "stars": 568,
+    "forks": 49,
+    "pushed": "2026-11-06",
+    "created": "2026-04-13",
+    "files": 13627,
+    "skill_md": true,
+    "design_md": true,
+    "plugin": false,
+    "tests": true,
+    "ci": true,
+    "license": "MIT",
+    "topics": [
+     "cli",
+     "design-md",
+     "design-system",
+     "design-tokens",
+     "google-stitch",
+     "nextjs",
+     "open-source",
+     "react",
+     "shadcn-ui",
+     "tailwindcss",
+     "typescript",
+     "vibe-coding"
+    ]
+   },
+   "score_detail": {
+    "total": 88,
+    "activity": 25,
+    "packaged": 16,
+    "engineering": 15,
+    "adoption": 17,
+    "docs": 15
+   },
+   "score": 88,
+   "stale": false
+  },
+  {
+   "repo": "ceorkm/mobile-app-ui-design",
+   "category": "skill",
+   "author_desc": "Professional mobile app UI/UX design skill for Claude Code",
+   "signals": {
+    "stars": 506,
+    "forks": 44,
+    "pushed": "2026-10-28",
+    "created": "2026-02-15",
+    "files": 6,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": null,
+    "topics": []
+   },
+   "score_detail": {
+    "total": 49,
+    "activity": 20,
+    "packaged": 8,
+    "engineering": 0,
+    "adoption": 16,
+    "docs": 5
+   },
+   "score": 49,
+   "stale": false
+  },
+  {
+   "repo": "sunchaokun/PPT-Design-Skill",
+   "category": "skill",
+   "author_desc": "Precision PPT design skill for OpenCode/Claude Code/Codex, with 40,000+ styles, pixel-perfect Build Mode control, AI image generation, and fully editable PPTX. 面向专业演示设计场景，帮助用户从需求分析、视觉方向选择到原生可编辑 PPTX 交付，打造高质量、可持续修改的演示文稿。",
+   "signals": {
+    "stars": 483,
+    "forks": 30,
+    "pushed": "2026-09-16",
+    "created": "2026-07-09",
+    "files": 769,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": false,
+    "tests": true,
+    "ci": true,
+    "license": "MIT",
+    "topics": [
+     "ai-coding-tools",
+     "claude-code-skills",
+     "codex",
+     "codex-skill",
+     "codex-skills",
+     "dsh-plugin",
+     "opencode-skills",
+     "ppt",
+     "pptx",
+     "pptx-generator",
+     "presentation-design",
+     "skill"
+    ]
+   },
+   "score_detail": {
+    "total": 70,
+    "activity": 12,
+    "packaged": 12,
+    "engineering": 15,
+    "adoption": 16,
+    "docs": 15
+   },
+   "score": 70,
+   "stale": false
+  },
+  {
+   "repo": "moguzbulbul/blueprint-animation",
+   "category": "skill",
+   "author_desc": "Claude Design skill: animated before → after UX redesign, explained step by step through a blueprint drawing. By @moguzbulbul.",
+   "signals": {
+    "stars": 430,
+    "forks": 23,
+    "pushed": "2026-09-27",
+    "created": "2026-09-27",
+    "files": 7,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": "NOASSERTION",
+    "topics": []
+   },
+   "score_detail": {
+    "total": 41,
+    "activity": 12,
+    "packaged": 8,
+    "engineering": 0,
+    "adoption": 16,
+    "docs": 5
+   },
+   "score": 41,
+   "stale": false
+  },
+  {
+   "repo": "referodesign/refero_skill",
+   "category": "skill",
+   "author_desc": "Research-first design skill for AI agents. 150K+ real app screens and flows via Refero MCP.",
+   "signals": {
+    "stars": 336,
+    "forks": 31,
+    "pushed": "2026-10-15",
+    "created": "2026-02-05",
+    "files": 43,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": true,
+    "tests": false,
+    "ci": true,
+    "license": "MIT",
+    "topics": [
+     "agent",
+     "agent-skills",
+     "claude",
+     "claude-code-plugin",
+     "codex-plugin",
+     "cursor",
+     "cursor-plugin",
+     "design",
+     "figma",
+     "gemini-cli-extension",
+     "mcp",
+     "refero",
+     "skill",
+     "ui-design"
+    ]
+   },
+   "score_detail": {
+    "total": 63,
+    "activity": 20,
+    "packaged": 16,
+    "engineering": 7,
+    "adoption": 15,
+    "docs": 5
+   },
+   "score": 63,
+   "stale": false
+  },
+  {
+   "repo": "tasteskill/tasteskill",
+   "category": "skill",
+   "author_desc": "The Anti-Slop Frontend Framework for AI Agents",
+   "signals": {
+    "stars": 318,
+    "forks": 40,
+    "pushed": "2026-05-24",
+    "created": "2026-05-24",
+    "files": 75,
+    "skill_md": true,
+    "design_md": true,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": "MIT",
+    "topics": []
+   },
+   "score_detail": {
+    "total": 49,
+    "activity": 5,
+    "packaged": 16,
+    "engineering": 3,
+    "adoption": 15,
+    "docs": 10
+   },
+   "score": 49,
+   "stale": false
+  },
+  {
+   "repo": "cth9191/motion-design",
+   "category": "skill",
+   "author_desc": "Motion design skill for Codex and Claude Code. Adapt source examples into complete films through Higgsfield.",
+   "signals": {
+    "stars": 271,
+    "forks": 21,
+    "pushed": "2026-09-06",
+    "created": "2026-09-04",
+    "files": 77,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": false,
+    "tests": false,
+    "ci": true,
+    "license": null,
+    "topics": []
+   },
+   "score_detail": {
+    "total": 53,
+    "activity": 12,
+    "packaged": 12,
+    "engineering": 4,
+    "adoption": 15,
+    "docs": 10
+   },
+   "score": 53,
+   "stale": false
+  },
+  {
+   "repo": "arla6ka/design.how",
+   "category": "skill",
+   "author_desc": "Design systems, skills and visuals for coding agents",
+   "signals": {
+    "stars": 257,
+    "forks": 18,
+    "pushed": "2026-11-04",
+    "created": "2026-09-28",
+    "files": 1799,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": true,
+    "tests": false,
+    "ci": false,
+    "license": "MIT",
+    "topics": [
+     "agent-skills",
+     "ai-agents",
+     "canvas",
+     "claude-code",
+     "codex",
+     "coding-agents",
+     "creative-coding",
+     "cursor",
+     "design-system",
+     "design-tokens",
+     "kinetic-typography",
+     "react",
+     "shadcn",
+     "shadcn-registry",
+     "shaders",
+     "tailwindcss",
+     "typescript",
+     "ui",
+     "webgl"
+    ]
+   },
+   "score_detail": {
+    "total": 73,
+    "activity": 25,
+    "packaged": 16,
+    "engineering": 3,
+    "adoption": 14,
+    "docs": 15
+   },
+   "score": 73,
+   "stale": false
+  },
+  {
+   "repo": "content-designer/ux-writing-skill",
+   "category": "skill",
+   "author_desc": "Agent Skill for systematic UX writing — scale content quality through AI-powered design system enforcement. Works with Claude and Codex.",
+   "signals": {
+    "stars": 252,
+    "forks": 28,
+    "pushed": "2026-05-26",
+    "created": "2025-11-10",
+    "files": 32,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": false,
+    "tests": false,
+    "ci": true,
+    "license": "MIT",
+    "topics": []
+   },
+   "score_detail": {
+    "total": 43,
+    "activity": 5,
+    "packaged": 12,
+    "engineering": 7,
+    "adoption": 14,
+    "docs": 5
+   },
+   "score": 43,
+   "stale": false
+  },
+  {
+   "repo": "uxKero/anydesign",
+   "category": "skill",
+   "author_desc": "Claude skill that analyzes images, websites, and Figma files and generates a structured design.md with token system, component inventory, and reconstruction notes.",
+   "signals": {
+    "stars": 237,
+    "forks": 15,
+    "pushed": "2026-09-15",
+    "created": "2026-05-18",
+    "files": 58,
+    "skill_md": true,
+    "design_md": true,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": "MIT",
+    "topics": [
+     "ai-agents",
+     "anthropic",
+     "claude-code",
+     "claude-skill",
+     "design-system",
+     "design-tokens",
+     "dtcg",
+     "figma",
+     "playwright"
+    ]
+   },
+   "score_detail": {
+    "total": 55,
+    "activity": 12,
+    "packaged": 16,
+    "engineering": 3,
+    "adoption": 14,
+    "docs": 10
+   },
+   "score": 55,
+   "stale": false
+  },
+  {
+   "repo": "ponyodong2026/ponyo-cover-anchor-system",
+   "category": "skill",
+   "author_desc": "Xiaohongshu cover design skill: information density × visual anchors",
+   "signals": {
+    "stars": 224,
+    "forks": 31,
+    "pushed": "2026-06-22",
+    "created": "2026-06-21",
+    "files": 38,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": null,
+    "topics": []
+   },
+   "score_detail": {
+    "total": 36,
+    "activity": 5,
+    "packaged": 12,
+    "engineering": 0,
+    "adoption": 14,
+    "docs": 5
+   },
+   "score": 36,
+   "stale": false
+  },
+  {
+   "repo": "Nutlope/variate",
+   "category": "skill",
+   "author_desc": "A compact design skill that generates four design variations of a component to iterate better on your UIs. A skill for Claude Code, Codex CLI, and opencode.",
+   "signals": {
+    "stars": 221,
+    "forks": 10,
+    "pushed": "2026-08-20",
+    "created": "2026-07-17",
+    "files": 75,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": false,
+    "tests": true,
+    "ci": false,
+    "license": "MIT",
+    "topics": []
+   },
+   "score_detail": {
+    "total": 59,
+    "activity": 12,
+    "packaged": 12,
+    "engineering": 11,
+    "adoption": 14,
+    "docs": 10
+   },
+   "score": 59,
+   "stale": false
+  },
+  {
+   "repo": "murphytrueman/design-system-ops",
+   "category": "skill",
+   "author_desc": "Claude Code skills for the work that keeps a design system alive",
+   "signals": {
+    "stars": 215,
+    "forks": 7,
+    "pushed": "2026-09-24",
+    "created": "2026-03-09",
+    "files": 187,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": true,
+    "tests": true,
+    "ci": true,
+    "license": "MIT",
+    "topics": [
+     "claude-code",
+     "claude-code-plugin",
+     "design-system",
+     "design-systems",
+     "design-tokens",
+     "figma",
+     "skills"
+    ]
+   },
+   "score_detail": {
+    "total": 67,
+    "activity": 12,
+    "packaged": 16,
+    "engineering": 15,
+    "adoption": 14,
+    "docs": 10
+   },
+   "score": 67,
+   "stale": false
+  },
+  {
+   "repo": "jiji262/claude-design-skill",
+   "category": "skill",
+   "author_desc": "A portable Claude Skill that turns Claude into an expert designer for HTML artifacts — decks, landing pages, prototypes, animations, posters. Adapted from Claude.ai's internal Design system prompt.",
+   "signals": {
+    "stars": 214,
+    "forks": 35,
+    "pushed": "2026-07-15",
+    "created": "2026-04-20",
+    "files": 47,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": "MIT",
+    "topics": []
+   },
+   "score_detail": {
+    "total": 39,
+    "activity": 5,
+    "packaged": 12,
+    "engineering": 3,
+    "adoption": 14,
+    "docs": 5
+   },
+   "score": 39,
+   "stale": false
+  },
+  {
+   "repo": "shaom/brand-to-design-md-skill",
+   "category": "extractor",
+   "author_desc": "A portable local skill that turns a public brand URL into a source-aware DESIGN.md, extracting visual evidence into design tokens, component guidance, usage boundaries, and optional responsive demo verification.",
+   "signals": {
+    "stars": 211,
+    "forks": 18,
+    "pushed": "2026-08-08",
+    "created": "2026-04-23",
+    "files": 28,
+    "skill_md": true,
+    "design_md": true,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": null,
+    "topics": []
+   },
+   "score_detail": {
+    "total": 47,
+    "activity": 12,
+    "packaged": 16,
+    "engineering": 0,
+    "adoption": 14,
+    "docs": 5
+   },
+   "score": 47,
+   "stale": false
+  },
+  {
+   "repo": "senlindesign/claude2figma",
+   "category": "skill",
+   "author_desc": "An enforcement layer for Claude Code + Figma — 4 skills that keep AI on your Design System rails. Components stay linked, tokens stay bound, nothing goes off-spec.",
+   "signals": {
+    "stars": 207,
+    "forks": 17,
+    "pushed": "2026-05-13",
+    "created": "2026-04-30",
+    "files": 23,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": true,
+    "tests": false,
+    "ci": false,
+    "license": "MIT",
+    "topics": []
+   },
+   "score_detail": {
+    "total": 43,
+    "activity": 5,
+    "packaged": 16,
+    "engineering": 3,
+    "adoption": 14,
+    "docs": 5
+   },
+   "score": 43,
+   "stale": false
+  },
+  {
+   "repo": "Owl-Listener/ai-design-skills",
+   "category": "skill",
+   "author_desc": "AI Design Skills Collection: agentic skills, commands, and plugins for designing AI products — from interaction patterns to alignment, evaluation, agent orchestration, and prompt architecture.",
+   "signals": {
+    "stars": 200,
+    "forks": 37,
+    "pushed": "2026-06-09",
+    "created": "2026-03-09",
+    "files": 421,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": true,
+    "tests": true,
+    "ci": true,
+    "license": "MIT",
+    "topics": []
+   },
+   "score_detail": {
+    "total": 65,
+    "activity": 5,
+    "packaged": 16,
+    "engineering": 15,
+    "adoption": 14,
+    "docs": 15
+   },
+   "score": 65,
+   "stale": false
+  },
+  {
+   "repo": "SpaceZephyr/design-buddy",
+   "category": "skill",
+   "author_desc": "Design Buddy: visual production Agent Skills for brand design systems, GPT-image-2 images, diagrams, infographics, logos, slide decks, WeChat layouts and social images",
+   "signals": {
+    "stars": 188,
+    "forks": 37,
+    "pushed": "2026-07-06",
+    "created": "2026-03-31",
+    "files": 259,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": false,
+    "tests": true,
+    "ci": false,
+    "license": null,
+    "topics": []
+   },
+   "score_detail": {
+    "total": 54,
+    "activity": 5,
+    "packaged": 12,
+    "engineering": 8,
+    "adoption": 14,
+    "docs": 15
+   },
+   "score": 54,
+   "stale": false
+  },
+  {
+   "repo": "Vieeeeeee/wibi-style",
+   "category": "skill",
+   "author_desc": "47 installable visual-design skills for Codex, with reusable Python tooling and versioned packages. Turn photos into artwork. Try online: style.abdc.online",
+   "signals": {
+    "stars": 184,
+    "forks": 12,
+    "pushed": "2026-11-05",
+    "created": "2026-08-09",
+    "files": 1515,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": false,
+    "tests": true,
+    "ci": true,
+    "license": "NOASSERTION",
+    "topics": [
+     "agent-skills",
+     "ai",
+     "ai-art",
+     "codex",
+     "image-generation",
+     "photo-effects",
+     "prompt-engineering"
+    ]
+   },
+   "score_detail": {
+    "total": 78,
+    "activity": 25,
+    "packaged": 12,
+    "engineering": 12,
+    "adoption": 14,
+    "docs": 15
+   },
+   "score": 78,
+   "stale": false
+  },
+  {
+   "repo": "ziguishian/brand-design-skill",
+   "category": "skill",
+   "author_desc": "Brand Design Skill 是一个 image-first 的 Codex 品牌设计 Skill。它通过对话式流程引导 Agent 完成苏格拉底式需求澄清、Logo 图像探索、最终图像 Logo 资产、行业化 VI 应用场景，以及高质量 HTML 品牌手册。|",
+   "signals": {
+    "stars": 182,
+    "forks": 10,
+    "pushed": "2026-06-27",
+    "created": "2026-06-22",
+    "files": 73,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": null,
+    "topics": []
+   },
+   "score_detail": {
+    "total": 41,
+    "activity": 5,
+    "packaged": 12,
+    "engineering": 0,
+    "adoption": 14,
+    "docs": 10
+   },
+   "score": 41,
+   "stale": false
+  },
+  {
+   "repo": "touchine-ojo/OJO-Design-Skills",
+   "category": "skill",
+   "author_desc": "Reusable UI/UX design skills for AI coding agents — Codex, Claude Code, ZCode, and more.",
+   "signals": {
+    "stars": 173,
+    "forks": 9,
+    "pushed": "2026-11-01",
+    "created": "2026-07-07",
+    "files": 64,
+    "skill_md": true,
+    "design_md": true,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": "MIT",
+    "topics": [
+     "agent-skills",
+     "ai-agent",
+     "claude-code",
+     "codex",
+     "design-methodology",
+     "design-system",
+     "design-tokens",
+     "prompt-engineering",
+     "ui-ux"
+    ]
+   },
+   "score_detail": {
+    "total": 67,
+    "activity": 25,
+    "packaged": 16,
+    "engineering": 3,
+    "adoption": 13,
+    "docs": 10
+   },
+   "score": 67,
+   "stale": false
+  },
+  {
+   "repo": "zeke/swiss-design-skill",
+   "category": "skill",
+   "author_desc": "A Swiss International Style design system skill for AI agents",
+   "signals": {
+    "stars": 162,
+    "forks": 17,
+    "pushed": "2026-09-24",
+    "created": "2026-04-29",
+    "files": 55,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": "MIT",
+    "topics": []
+   },
+   "score_detail": {
+    "total": 50,
+    "activity": 12,
+    "packaged": 12,
+    "engineering": 3,
+    "adoption": 13,
+    "docs": 10
+   },
+   "score": 50,
+   "stale": false
+  },
+  {
+   "repo": "Ilm-Alan/frontend-design",
+   "category": "skill",
+   "author_desc": "Frontend design skill for Claude Code, Codex, and Gemini CLI. Eight aesthetic anchors, each locking palette, typography, and texture to specific CSS tokens. Pick one per brief.",
+   "signals": {
+    "stars": 157,
+    "forks": 23,
+    "pushed": "2026-09-26",
+    "created": "2026-01-11",
+    "files": 3,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": "MIT",
+    "topics": [
+     "agent-skill",
+     "ai-coding-assistant",
+     "claude-code",
+     "codex",
+     "design-system",
+     "frontend-design",
+     "gemini-cli",
+     "html-css",
+     "ui"
+    ]
+   },
+   "score_detail": {
+    "total": 41,
+    "activity": 12,
+    "packaged": 8,
+    "engineering": 3,
+    "adoption": 13,
+    "docs": 5
+   },
+   "score": 41,
+   "stale": false
+  },
+  {
+   "repo": "alima-max/prototype-to-figma-skill",
+   "category": "skill",
+   "author_desc": "Claude skill: Prototype → Figma. Analyzes a Claude Code prototype, maps components to your Figma design system via search + Code Connect, explodes each interaction flow into state-by-state frames, and annotates triggers, transitions, and edge cases, making prototypes reviewable by PMs, designers, and engineers without running code.",
+   "signals": {
+    "stars": 142,
+    "forks": 14,
+    "pushed": "2026-07-28",
+    "created": "2026-04-13",
+    "files": 4,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": "MIT",
+    "topics": []
+   },
+   "score_detail": {
+    "total": 34,
+    "activity": 5,
+    "packaged": 8,
+    "engineering": 3,
+    "adoption": 13,
+    "docs": 5
+   },
+   "score": 34,
+   "stale": false
+  },
+  {
+   "repo": "fivetaku/insane-design",
+   "category": "extractor",
+   "author_desc": "URL one-shot design system extractor — fetches real CSS, analyzes tokens, generates design.md + interactive HTML report",
+   "signals": {
+    "stars": 134,
+    "forks": 19,
+    "pushed": "2026-10-13",
+    "created": "2026-04-12",
+    "files": 3613,
+    "skill_md": true,
+    "design_md": true,
+    "plugin": true,
+    "tests": false,
+    "ci": true,
+    "license": "MIT",
+    "topics": []
+   },
+   "score_detail": {
+    "total": 75,
+    "activity": 20,
+    "packaged": 20,
+    "engineering": 7,
+    "adoption": 13,
+    "docs": 15
+   },
+   "score": 75,
+   "stale": false
+  },
+  {
+   "repo": "cuellarfr/design-skills",
+   "category": "skill",
+   "author_desc": "UX and design skills for Claude Code — research, critique, accessibility, journey mapping and more.",
+   "signals": {
+    "stars": 116,
+    "forks": 9,
+    "pushed": "2026-09-30",
+    "created": "2026-03-19",
+    "files": 160,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": true,
+    "tests": true,
+    "ci": false,
+    "license": "MIT",
+    "topics": [
+     "accessibility",
+     "claude",
+     "claude-code",
+     "claude-skills",
+     "codex",
+     "cursor",
+     "design",
+     "design-critique",
+     "journeymap",
+     "ux-design",
+     "ux-research"
+    ]
+   },
+   "score_detail": {
+    "total": 61,
+    "activity": 12,
+    "packaged": 16,
+    "engineering": 11,
+    "adoption": 12,
+    "docs": 10
+   },
+   "score": 61,
+   "stale": false
+  },
+  {
+   "repo": "MickeyAlton33/web-designer-plugin",
+   "category": "skill",
+   "author_desc": "Award-winning web design skill for Claude Code. 48 patterns from 38 top websites. Stop generating generic AI frontends.",
+   "signals": {
+    "stars": 113,
+    "forks": 14,
+    "pushed": "2026-06-10",
+    "created": "2026-03-26",
+    "files": 59,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": true,
+    "tests": false,
+    "ci": false,
+    "license": "MIT",
+    "topics": []
+   },
+   "score_detail": {
+    "total": 46,
+    "activity": 5,
+    "packaged": 16,
+    "engineering": 3,
+    "adoption": 12,
+    "docs": 10
+   },
+   "score": 46,
+   "stale": false
+  },
+  {
+   "repo": "ehmo/slopkit",
+   "category": "skill",
+   "author_desc": "Anti-slop skills for AI agents: slopbeth cleans the shipped writing, slopgent cleans the conversation.",
+   "signals": {
+    "stars": 113,
+    "forks": 9,
+    "pushed": "2026-07-22",
+    "created": "2026-06-18",
+    "files": 270,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": true,
+    "tests": true,
+    "ci": true,
+    "license": "MIT",
+    "topics": [
+     "ai-slop",
+     "ai-writing",
+     "anti-slop",
+     "benchmark",
+     "claude-code",
+     "codex",
+     "editing",
+     "hermes",
+     "openclaw",
+     "opencode",
+     "pi",
+     "slopbeth",
+     "slopgent",
+     "writing"
+    ]
+   },
+   "score_detail": {
+    "total": 63,
+    "activity": 5,
+    "packaged": 16,
+    "engineering": 15,
+    "adoption": 12,
+    "docs": 15
+   },
+   "score": 63,
+   "stale": false
+  },
+  {
+   "repo": "VoltAgent/awesome-design-md",
+   "category": "collection",
+   "author_desc": "A collection of DESIGN.md files analysis by popular brand design systems. Drop one into your project and let coding agents generate a matching UI.",
+   "signals": {
+    "stars": 125815,
+    "forks": 13932,
+    "pushed": "2026-10-28",
+    "created": "2026-03-31",
+    "files": 260,
+    "skill_md": false,
+    "design_md": true,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": "MIT",
+    "topics": [
+     "awesome-list",
+     "design-md",
+     "design-system",
+     "design-tokens",
+     "figma",
+     "landing-page",
+     "vibe-coding",
+     "vibe-design",
+     "vibecoding"
+    ]
+   },
+   "score_detail": {
+    "total": 71,
+    "activity": 20,
+    "packaged": 8,
+    "engineering": 3,
+    "adoption": 25,
+    "docs": 15
+   },
+   "score": 71,
+   "stale": false
+  },
+  {
+   "repo": "VoltAgent/awesome-claude-design",
+   "category": "collection",
+   "author_desc": "Awesome Claude Design: 68 ready-to-use design system inspirations in DESIGN.md format. Drop one in, scaffold a full UI in one shot.",
+   "signals": {
+    "stars": 4343,
+    "forks": 479,
+    "pushed": "2026-06-20",
+    "created": "2026-04-18",
+    "files": 2,
+    "skill_md": false,
+    "design_md": false,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": "MIT",
+    "topics": [
+     "claude-code",
+     "claude-design",
+     "design-md",
+     "design-system",
+     "figma"
+    ]
+   },
+   "score_detail": {
+    "total": 35,
+    "activity": 5,
+    "packaged": 0,
+    "engineering": 3,
+    "adoption": 22,
+    "docs": 5
+   },
+   "score": 35,
+   "stale": false
+  },
+  {
+   "repo": "bergside/awesome-design-skills",
+   "category": "collection",
+   "author_desc": "List of 67 awesome DESIGN.md and SKILL.md design skill files for agentic tools like Claude Design, Google Stitch, Codex, Cursor, and other AI tools",
+   "signals": {
+    "stars": 3526,
+    "forks": 334,
+    "pushed": "2026-06-28",
+    "created": "2026-03-09",
+    "files": 284,
+    "skill_md": true,
+    "design_md": true,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": "MIT",
+    "topics": [
+     "agent-skills",
+     "agentic-ai",
+     "agentic-workflow",
+     "agents",
+     "ai",
+     "ai-agents",
+     "ai-tools",
+     "awesome",
+     "awesome-list",
+     "awesome-readme",
+     "claude-design",
+     "codex",
+     "cursor",
+     "design",
+     "design-md",
+     "design-system",
+     "google-stitch",
+     "skills"
+    ]
+   },
+   "score_detail": {
+    "total": 60,
+    "activity": 5,
+    "packaged": 16,
+    "engineering": 3,
+    "adoption": 21,
+    "docs": 15
+   },
+   "score": 60,
+   "stale": false
+  },
+  {
+   "repo": "kzhrknt/awesome-design-md-jp",
+   "category": "collection",
+   "author_desc": "日本語UIをAIエージェントに正しくつくらせるためのDESIGN.md集。Japanese DESIGN.md collection for AI agents — extending Google Stitch format with CJK typography.",
+   "signals": {
+    "stars": 1003,
+    "forks": 74,
+    "pushed": "2026-11-06",
+    "created": "2026-04-06",
+    "files": 2488,
+    "skill_md": false,
+    "design_md": true,
+    "plugin": false,
+    "tests": false,
+    "ci": true,
+    "license": "MIT",
+    "topics": []
+   },
+   "score_detail": {
+    "total": 73,
+    "activity": 25,
+    "packaged": 8,
+    "engineering": 7,
+    "adoption": 18,
+    "docs": 15
+   },
+   "score": 73,
+   "stale": false
+  },
+  {
+   "repo": "Meliwat/awesome-ios-design-md",
+   "category": "collection",
+   "author_desc": "200 production-grade DESIGN.md design systems for the world's best apps. Framework-neutral plus SwiftUI, Jetpack Compose, and Expo. Hand one to your AI agent, ship pixel-matched UI.",
+   "signals": {
+    "stars": 632,
+    "forks": 40,
+    "pushed": "2026-05-21",
+    "created": "2026-04-16",
+    "files": 1233,
+    "skill_md": false,
+    "design_md": true,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": "MIT",
+    "topics": [
+     "ai-agents",
+     "ai-coding",
+     "android",
+     "awesome",
+     "awesome-list",
+     "claude",
+     "cursor",
+     "design-md",
+     "design-system",
+     "design-systems",
+     "design-to-code",
+     "design-tokens",
+     "expo",
+     "frontend",
+     "ios",
+     "jetpack-compose",
+     "llm",
+     "react-native",
+     "swiftui",
+     "ui-kit"
+    ]
+   },
+   "score_detail": {
+    "total": 48,
+    "activity": 5,
+    "packaged": 8,
+    "engineering": 3,
+    "adoption": 17,
+    "docs": 15
+   },
+   "score": 48,
+   "stale": false
+  },
+  {
+   "repo": "VoltAgent/official-design-md",
+   "category": "collection",
+   "author_desc": "Official DESIGN.md files published by companies themselves. First-party design systems that AI agents read to generate consistent UI.",
+   "signals": {
+    "stars": 530,
+    "forks": 50,
+    "pushed": "2026-09-21",
+    "created": "2026-06-27",
+    "files": 2,
+    "skill_md": false,
+    "design_md": false,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": "MIT",
+    "topics": [
+     "ai-agents",
+     "design-md",
+     "design-system",
+     "design-tokens",
+     "frontend",
+     "llm",
+     "markdown",
+     "ui"
+    ]
+   },
+   "score_detail": {
+    "total": 36,
+    "activity": 12,
+    "packaged": 0,
+    "engineering": 3,
+    "adoption": 16,
+    "docs": 5
+   },
+   "score": 36,
+   "stale": false
+  },
+  {
+   "repo": "fchangjun/awesome-design-md-cn",
+   "category": "collection",
+   "author_desc": "Stitch 提出的设计系统文档格式 —— 用纯文本 Markdown 记录设计系统，让 AI 编码 Agent 能够生成风格一致的 UI。",
+   "signals": {
+    "stars": 149,
+    "forks": 33,
+    "pushed": "2026-07-07",
+    "created": "2026-04-07",
+    "files": 549,
+    "skill_md": false,
+    "design_md": true,
+    "plugin": false,
+    "tests": false,
+    "ci": true,
+    "license": null,
+    "topics": []
+   },
+   "score_detail": {
+    "total": 45,
+    "activity": 5,
+    "packaged": 8,
+    "engineering": 4,
+    "adoption": 13,
+    "docs": 15
+   },
+   "score": 45,
+   "stale": false
+  },
+  {
+   "repo": "ricocc/brands-design-md",
+   "category": "collection",
+   "author_desc": "Brands DESIGN.md library",
+   "signals": {
+    "stars": 172,
+    "forks": 11,
+    "pushed": "2026-08-05",
+    "created": "2026-08-02",
+    "files": 560,
+    "skill_md": false,
+    "design_md": true,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": null,
+    "topics": [
+     "brands",
+     "design-system",
+     "design-tokens",
+     "designmd"
+    ]
+   },
+   "score_detail": {
+    "total": 41,
+    "activity": 5,
+    "packaged": 8,
+    "engineering": 0,
+    "adoption": 13,
+    "docs": 15
+   },
+   "score": 41,
+   "stale": false
+  },
+  {
+   "repo": "Khalidabdi1/design-ai",
+   "category": "collection",
+   "author_desc": "DESIGN.md examples for AI coding agents, AI design tools, and website-inspired UI generation.",
+   "signals": {
+    "stars": 252,
+    "forks": 21,
+    "pushed": "2026-09-28",
+    "created": "2026-04-05",
+    "files": 610,
+    "skill_md": false,
+    "design_md": true,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": "MIT",
+    "topics": [
+     "agent",
+     "ai",
+     "design"
+    ]
+   },
+   "score_detail": {
+    "total": 52,
+    "activity": 12,
+    "packaged": 8,
+    "engineering": 3,
+    "adoption": 14,
+    "docs": 15
+   },
+   "score": 52,
+   "stale": false
+  },
+  {
+   "repo": "bergside/design-md-chrome",
+   "category": "extractor",
+   "author_desc": "Chrome extension to extract styles from any website and generate DESIGN.md files and design skills for AI based on TypeUI",
+   "signals": {
+    "stars": 3142,
+    "forks": 341,
+    "pushed": "2026-05-25",
+    "created": "2026-04-14",
+    "files": 30,
+    "skill_md": false,
+    "design_md": true,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": "MIT",
+    "topics": [
+     "ai",
+     "chrome",
+     "chrome-extension",
+     "claude",
+     "claude-design",
+     "codex",
+     "design-md",
+     "design-skills",
+     "extension",
+     "gemini",
+     "open-source",
+     "skills",
+     "skills-ai",
+     "typeui"
+    ]
+   },
+   "score_detail": {
+    "total": 42,
+    "activity": 5,
+    "packaged": 8,
+    "engineering": 3,
+    "adoption": 21,
+    "docs": 5
+   },
+   "score": 42,
+   "stale": false
+  },
+  {
+   "repo": "bergside/design-md-figma",
+   "category": "extractor",
+   "author_desc": "Figma plugin that extracts local style guidelines and generates DESIGN.md and SKILL.md files for AI tools such as Claude Code, Codex, Cursor, and other AI tools",
+   "signals": {
+    "stars": 156,
+    "forks": 20,
+    "pushed": "2026-05-25",
+    "created": "2026-03-09",
+    "files": 35,
+    "skill_md": true,
+    "design_md": false,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": "MIT",
+    "topics": [
+     "agentic",
+     "agents",
+     "agentskills",
+     "design",
+     "design-md",
+     "design-system",
+     "designmd",
+     "figma",
+     "skill",
+     "typeui"
+    ]
+   },
+   "score_detail": {
+    "total": 38,
+    "activity": 5,
+    "packaged": 12,
+    "engineering": 3,
+    "adoption": 13,
+    "docs": 5
+   },
+   "score": 38,
+   "stale": false
+  },
+  {
+   "repo": "scroobius-pip/fudge-design-md",
+   "category": "collection",
+   "author_desc": "DESIGN.md guides generated from real website references captured by Fudge.",
+   "signals": {
+    "stars": 122,
+    "forks": 3,
+    "pushed": "2026-08-11",
+    "created": "2026-07-27",
+    "files": 2921,
+    "skill_md": false,
+    "design_md": true,
+    "plugin": false,
+    "tests": false,
+    "ci": true,
+    "license": "MIT",
+    "topics": [
+     "ai-design",
+     "awesome-list",
+     "design-md",
+     "design-system",
+     "design-tokens",
+     "figma",
+     "figmadesign",
+     "google-stitch",
+     "landing-page",
+     "vibe-coding",
+     "vibecoding",
+     "website-design"
+    ]
+   },
+   "score_detail": {
+    "total": 55,
+    "activity": 12,
+    "packaged": 8,
+    "engineering": 7,
+    "adoption": 13,
+    "docs": 15
+   },
+   "score": 55,
+   "stale": false
+  },
+  {
+   "repo": "ricocc/ricoui-design-md",
+   "category": "collection",
+   "author_desc": "ricoui-design-md is a local-first design-system workspace built around `DESIGN.md`.",
+   "signals": {
+    "stars": 111,
+    "forks": 20,
+    "pushed": "2026-08-04",
+    "created": "2026-07-27",
+    "files": 920,
+    "skill_md": false,
+    "design_md": true,
+    "plugin": false,
+    "tests": false,
+    "ci": false,
+    "license": "Apache-2.0",
+    "topics": [
+     "design-systems",
+     "design-tokens",
+     "designmd"
+    ]
+   },
+   "score_detail": {
+    "total": 43,
+    "activity": 5,
+    "packaged": 8,
+    "engineering": 3,
+    "adoption": 12,
+    "docs": 15
+   },
+   "score": 43,
+   "stale": false
+  }
+ ]
+}
