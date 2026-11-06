@@ -1,0 +1,18 @@
+{
+ "total": 78,
+ "parts": {
+  "render": 10,
+  "responsive": 10,
+  "contrast": 15,
+  "typography": 5,
+  "colour": 2,
+  "anti_slop": 16,
+  "structure": 10,
+  "weight": 10
+ },
+ "slop_penalty": 4,
+ "skill": "control",
+ "brief": "01-saas-landing",
+ "seconds": null,
+ "agent": null
+}

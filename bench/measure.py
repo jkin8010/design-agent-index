@@ -83,6 +83,15 @@ def parse_color(s):
     if not s:
         return None
     s = s.strip()
+    if s.startswith("#"):
+        h = s[1:]
+        if len(h) in (3, 4):
+            h = "".join(c * 2 for c in h)
+        if len(h) not in (6, 8):
+            return None
+        r, g, b = int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16)
+        a = int(h[6:8], 16) / 255 if len(h) == 8 else 1.0
+        return r, g, b, a
     nums = re.findall(r"-?[\d.]+", s)
     if s.startswith("oklch") and len(nums) >= 3:
         L, C, H = float(nums[0]), float(nums[1]), float(nums[2])

@@ -35,7 +35,7 @@ def score(m):
 
     # 3 contrast (15)
     fail = m.get("contrast_fail_ratio")
-    parts["contrast"] = 15 if fail is None else round(15 * (1 - fail))
+    parts["contrast"] = 0 if fail is None else round(15 * (1 - fail))
 
     # 4 typography (10)
     fonts = len(m.get("fonts") or [])
