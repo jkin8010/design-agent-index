@@ -144,12 +144,12 @@ def measure_cell(page, path, out_dir):
     page.goto("file://" + path, wait_until="load")
     page.wait_for_timeout(600)
     m = page.evaluate(JS)
-    page.screenshot(path=os.path.join(out_dir, "shot-1440.png"), full_page=True)
+    page.screenshot(path=os.path.join(out_dir, "shot-1440.jpg"), full_page=True, type="jpeg", quality=85)
 
     page.set_viewport_size({"width": 375, "height": 812})
     page.wait_for_timeout(300)
     m375 = page.evaluate(JS)
-    page.screenshot(path=os.path.join(out_dir, "shot-375.png"), full_page=True)
+    page.screenshot(path=os.path.join(out_dir, "shot-375.jpg"), full_page=True, type="jpeg", quality=85)
 
     ratios = [c for c in (contrast(p["fg"], p["bg"]) for p in m["pairs"]) if c is not None]
     m.update({

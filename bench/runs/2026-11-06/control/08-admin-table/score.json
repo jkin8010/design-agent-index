@@ -1,0 +1,18 @@
+{
+ "total": 85,
+ "parts": {
+  "render": 10,
+  "responsive": 12,
+  "contrast": 14,
+  "typography": 7,
+  "colour": 2,
+  "anti_slop": 20,
+  "structure": 10,
+  "weight": 10
+ },
+ "slop_penalty": 0,
+ "skill": "control",
+ "brief": "08-admin-table",
+ "seconds": 542.4,
+ "agent": "claude"
+}

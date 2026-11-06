@@ -1,0 +1,18 @@
+{
+ "total": 83,
+ "parts": {
+  "render": 10,
+  "responsive": 15,
+  "contrast": 15,
+  "typography": 5,
+  "colour": 2,
+  "anti_slop": 16,
+  "structure": 10,
+  "weight": 10
+ },
+ "slop_penalty": 4,
+ "skill": "ui-ux-pro-max",
+ "brief": "01-saas-landing",
+ "seconds": 651.9,
+ "agent": "claude"
+}

@@ -1,0 +1,18 @@
+{
+ "total": 94,
+ "parts": {
+  "render": 10,
+  "responsive": 15,
+  "contrast": 15,
+  "typography": 10,
+  "colour": 4,
+  "anti_slop": 20,
+  "structure": 10,
+  "weight": 10
+ },
+ "slop_penalty": 0,
+ "skill": "ui-ux-pro-max",
+ "brief": "04-mobile-onboarding",
+ "seconds": 725.4,
+ "agent": "claude"
+}

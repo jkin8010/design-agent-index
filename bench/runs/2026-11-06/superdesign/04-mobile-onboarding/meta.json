@@ -1,0 +1,18 @@
+{
+ "skill": "superdesign",
+ "repo": "superdesigndev/superdesign-skill",
+ "skill_commit": "f9f05cd988c247dce6c072eaf9ac6b162f2ffc4b",
+ "installed_skills": [
+  "superdesign-skills-superdesign"
+ ],
+ "brief": "04-mobile-onboarding",
+ "agent": "claude",
+ "agent_version": "2.1.263 (Claude Code)",
+ "model_env": {},
+ "started": "2026-11-06T16:09:33",
+ "seconds": 364.6,
+ "exit_code": 0,
+ "html_written": true,
+ "html_bytes": 25818,
+ "stdout_tail": "Created `index.html`.\n"
+}

@@ -7,10 +7,10 @@
  "agent": "claude",
  "agent_version": "2.1.263 (Claude Code)",
  "model_env": {},
- "started": "2026-11-06T13:58:55",
- "seconds": 900.0,
- "exit_code": "timeout",
+ "started": "2026-11-06T14:17:10",
+ "seconds": 827.6,
+ "exit_code": 0,
  "html_written": true,
- "html_bytes": 42191,
- "stdout_tail": ""
+ "html_bytes": 39249,
+ "stdout_tail": "Done.\n"
 }

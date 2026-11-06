@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#faf7ef">
+<title>Kite — Let's set up your view</title>
+<style>
+  :root {
+    color-scheme: light;
+    --paper: #faf7ef;
+    --paper-deep: #f4f0e6;
+    --card: #f8f5ed;
+    --card-hover: #fffdf8;
+    --ink: #1b2b24;
+    --ink-soft: #3f4e46;
+    --muted: #5d6a63;
+    --line: #e4dfd3;
+    --line-strong: #8f8b7f;
+    --forest: #1d3d32;
+    --forest-deep: #173229;
+    --forest-soft: #6d8a7a;
+    --sage: #dfe8da;
+    --gold: #e5c684;
+    --gold-deep: #b78636;
+    --focus: #a66f1f;
+    --radius: 20px;
+    --font: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    min-width: 100%;
+    background: #e9e6dc;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    min-width: 100%;
+    min-height: 100svh;
+    margin: 0;
+    padding: 44px 0;
+    display: grid;
+    place-items: center;
+    overflow-x: hidden;
+    background:
+      radial-gradient(circle at 13% 12%, rgba(164, 187, 167, 0.5) 0, rgba(164, 187, 167, 0) 38%),
+      radial-gradient(circle at 87% 88%, rgba(221, 191, 151, 0.44) 0, rgba(221, 191, 151, 0) 42%),
+      #e9e6dc;
+    color: var(--ink);
+    font-family: var(--font);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    z-index: 0;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  body::before {
+    width: 420px;
+    height: 420px;
+    top: -190px;
+    right: 7%;
+    border: 1px solid rgba(255, 253, 247, 0.46);
+    box-shadow: 0 0 0 42px rgba(255, 253, 247, 0.08), 0 0 0 86px rgba(255, 253, 247, 0.05);
+  }
+
+  body::after {
+    width: 250px;
+    height: 250px;
+    bottom: -96px;
+    left: 9%;
+    border: 1px solid rgba(255, 253, 247, 0.34);
+    box-shadow: 0 0 0 34px rgba(255, 253, 247, 0.07);
+  }
+
+  button,
+  input {
+    font: inherit;
+  }
+
+  button {
+    appearance: none;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .app {
+    position: relative;
+    z-index: 1;
+    width: min(1120px, calc(100% - 80px));
+    min-height: min(780px, calc(100svh - 88px));
+    display: grid;
+    grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 34px;
+    background: var(--paper);
+    box-shadow:
+      0 46px 90px -42px rgba(27, 47, 38, 0.48),
+      0 12px 30px -18px rgba(27, 47, 38, 0.18);
+  }
+
+  /* ---------- Visual side ---------- */
+
+  .visual {
+    position: relative;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 36px 34px 20px;
+    background-color: #1a392f;
+    background-image:
+      radial-gradient(circle at 18% 5%, rgba(207, 224, 201, 0.17), transparent 40%),
+      radial-gradient(circle at 88% 92%, rgba(227, 198, 144, 0.12), transparent 45%),
+      linear-gradient(155deg, #24483c 0%, #1a392f 48%, #142e26 100%);
+  }
+
+  .visual::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.5;
+    background-image: radial-gradient(rgba(247, 242, 229, 0.15) 0.65px, transparent 0.65px);
+    background-size: 17px 17px;
+    mask-image: linear-gradient(to bottom, #000 0%, transparent 78%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 78%);
+    pointer-events: none;
+  }
+
+  .visual::after {
+    content: "";
+    position: absolute;
+    width: 440px;
+    height: 440px;
+    right: -250px;
+    top: 100px;
+    border: 1px solid rgba(241, 233, 215, 0.1);
+    border-radius: 50%;
+    box-shadow:
+      0 0 0 62px rgba(241, 233, 215, 0.035),
+      0 0 0 130px rgba(241, 233, 215, 0.02);
+    pointer-events: none;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: #f8f2e3;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1;
+  }
+
+  .brand .mark {
+    display: block;
+    width: 27px;
+    height: 27px;
+    flex: none;
+  }
+
+  .visual .brand {
+    position: relative;
+    z-index: 2;
+    align-self: flex-start;
+  }
+
+  .visual-art {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px -22px -6px;
+  }
+
+  .kite-art {
+    display: block;
+    width: min(100%, 438px);
+    height: auto;
+    max-height: 96%;
+    overflow: visible;
+  }
+
+  .art-float {
+    transform-origin: 285px 300px;
+    animation: drift 9s ease-in-out infinite alternate;
+  }
+
+  @keyframes drift {
+    from { transform: translateY(-5px) rotate(-0.5deg); }
+    to   { transform: translateY(7px) rotate(0.5deg); }
+  }
+
+  /* ---------- Panel ---------- */
+
+  .panel {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 38px 52px 34px;
+    background-color: var(--paper);
+    background-image:
+      radial-gradient(circle at 100% 0%, rgba(219, 231, 214, 0.56), transparent 38%),
+      linear-gradient(180deg, #fcfaf4 0%, var(--paper) 58%, #f8f4ea 100%);
+  }
+
+  .panel::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 44px;
+    width: 1px;
+    height: calc(100% - 88px);
+    background: linear-gradient(to bottom, transparent, rgba(29, 61, 50, 0.08) 18%, rgba(29, 61, 50, 0.08) 82%, transparent);
+    pointer-events: none;
+  }
+
+  .panel-inner {
+    width: 100%;
+    max-width: 548px;
+    margin: 0 auto;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .topbar {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+  }
+
+  .back {
+    width: 44px;
+    height: 44px;
+    margin-left: -10px;
+    display: inline-grid;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+  }
+
+  .back svg {
+    width: 21px;
+    height: 21px;
+    display: block;
+  }
+
+  .back:hover {
+    background: rgba(29, 61, 50, 0.07);
+    color: var(--ink);
+  }
+
+  .back:active {
+    transform: scale(0.94);
+  }
+
+  .step-label {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: 0.018em;
+    white-space: nowrap;
+  }
+
+  .brand-mobile {
+    display: none;
+    justify-self: center;
+    align-items: center;
+    gap: 7px;
+    color: var(--ink);
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1;
+  }
+
+  .brand-mobile .mark {
+    width: 23px;
+    height: 23px;
+  }
+
+  .progress {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+    margin-top: 18px;
+  }
+
+  .seg {
+    position: relative;
+    height: 6px;
+    overflow: hidden;
+    border-radius: 99px;
+    background: #e9e4d8;
+  }
+
+  .seg.is-filled {
+    background: linear-gradient(90deg, #315c4b, var(--forest));
+  }
+
+  .seg.is-current {
+    background: linear-gradient(90deg, var(--forest), #5e7d6d);
+  }
+
+  .content {
+    margin-top: clamp(28px, 4.6vh, 42px);
+  }
+
+  h1 {
+    max-width: 12ch;
+    margin: 0;
+    color: var(--ink);
+    font-size: clamp(2.05rem, 2.8vw, 2.6rem);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1.06;
+  }
+
+  .question {
+    margin: 14px 0 0;
+    color: #4a584f;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.012em;
+    line-height: 1.4;
+  }
+
+  .options {
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .option {
+    position: relative;
+    min-width: 0;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .option input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    opacity: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .option-card {
+    position: relative;
+    min-height: 126px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 14px;
+    overflow: hidden;
+    padding: 15px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--card);
+    color: var(--ink);
+    transition:
+      background-color 170ms ease,
+      border-color 170ms ease,
+      box-shadow 170ms ease,
+      transform 170ms cubic-bezier(0.2, 0.75, 0.3, 1);
+  }
+
+  .option-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-image: linear-gradient(150deg, #25493d 0%, var(--forest) 52%, #163128 100%);
+    opacity: 0;
+    transition: opacity 180ms ease;
+    pointer-events: none;
+  }
+
+  .option-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .option-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .option-icon {
+    width: 37px;
+    height: 37px;
+    flex: none;
+    display: grid;
+    place-items: center;
+    border-radius: 11px;
+    background: var(--tint);
+    color: var(--tint-ink);
+    transition: background-color 170ms ease, color 170ms ease;
+  }
+
+  .option-icon svg {
+    width: 21px;
+    height: 21px;
+    display: block;
+  }
+
+  .option-check {
+    width: 22px;
+    height: 22px;
+    flex: none;
+    display: grid;
+    place-items: center;
+    border: 1.5px solid var(--line-strong);
+    border-radius: 7px;
+    background: #fffdf8;
+    color: var(--forest-deep);
+    transition:
+      background-color 160ms ease,
+      border-color 160ms ease,
+      transform 160ms cubic-bezier(0.2, 0.75, 0.3, 1);
+  }
+
+  .option-check svg {
+    width: 12px;
+    height: 12px;
+    display: block;
+    opacity: 0;
+    transform: scale(0.55);
+    transition: opacity 150ms ease, transform 150ms cubic-bezier(0.2, 0.75, 0.3, 1);
+  }
+
+  .option-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+
+  .option-label {
+    color: var(--ink);
+    font-size: 15.5px;
+    font-weight: 600;
+    letter-spacing: -0.018em;
+    line-height: 1.25;
+    transition: color 170ms ease;
+  }
+
+  .option-desc {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.002em;
+    line-height: 1.35;
+    transition: color 170ms ease;
+  }
+
+  .option input:checked + .option-card {
+    border-color: var(--forest);
+    background-color: var(--forest);
+    box-shadow:
+      0 15px 26px -15px rgba(21, 51, 41, 0.7),
+      inset 0 1px 0 rgba(255, 255, 255, 0.11);
+  }
+
+  .option input:checked + .option-card::before {
+    opacity: 1;
+  }
+
+  .option input:checked + .option-card .option-icon {
+    background: rgba(255, 250, 238, 0.13);
+    color: #f4e9d3;
+  }
+
+  .option input:checked + .option-card .option-label {
+    color: #fffaf0;
+  }
+
+  .option input:checked + .option-card .option-desc {
+    color: #c8d2c6;
+  }
+
+  .option input:checked + .option-card .option-check {
+    border-color: var(--gold);
+    background: var(--gold);
+  }
+
+  .option input:checked + .option-card .option-check svg {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .option input:focus-visible + .option-card {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  @media (hover: hover) {
+    .option:hover .option-card {
+      transform: translateY(-2px);
+      border-color: #b4c3b5;
+      background: var(--card-hover);
+      box-shadow: 0 12px 24px -20px rgba(27, 53, 43, 0.45);
+    }
+
+    .option:hover input:checked + .option-card {
+      border-color: #315f4e;
+      box-shadow:
+        0 18px 28px -15px rgba(21, 51, 41, 0.75),
+        inset 0 1px 0 rgba(255, 255, 255, 0.13);
+    }
+  }
+
+  .option:active .option-card {
+    transform: translateY(0) scale(0.992);
+  }
+
+  /* ---------- Footer ---------- */
+
+  .footer {
+    margin-top: auto;
+    padding-top: clamp(24px, 4vh, 36px);
+  }
+
+  .reassurance {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin: 0 0 15px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .reassurance svg {
+    width: 15px;
+    height: 15px;
+    flex: none;
+    color: var(--forest-soft);
+  }
+
+  .continue {
+    position: relative;
+    width: 100%;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 13px 0 21px;
+    border: 0;
+    border-radius: 16px;
+    background-color: #1a3a30;
+    background-image: linear-gradient(180deg, #244a3d 0%, #1a3a30 100%);
+    box-shadow:
+      0 14px 26px -16px rgba(23, 56, 44, 0.72),
+      inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    color: #fffcf4;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+    text-align: left;
+    cursor: pointer;
+    transition:
+      background 170ms ease,
+      box-shadow 170ms ease,
+      transform 170ms ease;
+  }
+
+  .continue .label {
+    flex: 1;
+  }
+
+  .continue .arrow {
+    width: 32px;
+    height: 32px;
+    flex: none;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(255, 250, 238, 0.11);
+    color: #fff9ed;
+    transition: background-color 170ms ease, transform 170ms ease;
+  }
+
+  .continue .arrow svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+  }
+
+  .continue:hover {
+    background-color: #1d4035;
+    background-image: linear-gradient(180deg, #2b5446 0%, #1d4035 100%);
+    box-shadow:
+      0 18px 30px -16px rgba(23, 56, 44, 0.78),
+      inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  }
+
+  .continue:hover .arrow {
+    background: rgba(255, 250, 238, 0.18);
+    transform: translateX(2px);
+  }
+
+  .continue:active {
+    transform: translateY(1px);
+    box-shadow:
+      0 8px 18px -12px rgba(23, 56, 44, 0.68),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .skip {
+    min-height: 44px;
+    margin: 7px auto 0;
+    padding: 0 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 8px;
+    background: none;
+    color: #56645c;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    text-decoration: underline;
+    text-decoration-color: #b6c0b7;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    cursor: pointer;
+    transition: color 150ms ease, text-decoration-color 150ms ease, background-color 150ms ease;
+  }
+
+  .skip:hover {
+    color: var(--ink);
+    text-decoration-color: var(--ink);
+    background: rgba(29, 61, 50, 0.045);
+  }
+
+  .skip:active {
+    background: rgba(29, 61, 50, 0.08);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  .continue:focus-visible,
+  .back:focus-visible,
+  .skip:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ---------- Tablet ---------- */
+
+  @media (max-width: 1030px) {
+    body {
+      padding: 26px 0;
+    }
+
+    .app {
+      width: min(640px, calc(100% - 48px));
+      min-height: min(800px, calc(100svh - 52px));
+      grid-template-columns: minmax(0, 1fr);
+      border-radius: 30px;
+    }
+
+    .visual {
+      display: none;
+    }
+
+    .panel {
+      padding: 34px 42px 32px;
+    }
+
+    .panel::before {
+      display: none;
+    }
+
+    .panel-inner {
+      max-width: 500px;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+    }
+
+    .back {
+      justify-self: start;
+    }
+
+    .step-label {
+      justify-self: end;
+    }
+
+    .brand-mobile {
+      display: inline-flex;
+    }
+
+    }
+
+  @media (min-width: 1031px) and (max-height: 870px) {
+    .panel {
+      padding-top: 30px;
+      padding-bottom: 26px;
+    }
+
+    .content {
+      margin-top: 28px;
+    }
+
+    h1 {
+      font-size: 2.3rem;
+    }
+
+    .options {
+      margin-top: 20px;
+    }
+
+    .option-card {
+      min-height: 112px;
+    }
+
+    .footer {
+      padding-top: 18px;
+    }
+
+    .reassurance {
+      margin-bottom: 10px;
+    }
+
+    .skip {
+      margin-top: 2px;
+    }
+  }
+
+  /* ---------- Mobile ---------- */
+
+  @media (max-width: 600px) {
+    html,
+    body {
+      background: var(--paper);
+    }
+
+    body {
+      display: block;
+      padding: 0;
+    }
+
+    body::before,
+    body::after {
+      display: none;
+    }
+
+    .app {
+      width: 100%;
+      min-height: 100svh;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .panel {
+      min-height: 100svh;
+      padding:
+        max(12px, env(safe-area-inset-top))
+        20px
+        calc(14px + env(safe-area-inset-bottom));
+      background-color: var(--paper);
+      background-image:
+        radial-gradient(circle at 100% 0%, rgba(219, 231, 214, 0.54), transparent 32%),
+        linear-gradient(180deg, #fcfaf4 0%, var(--paper) 64%, #f8f4ea 100%);
+    }
+
+    .panel-inner {
+      max-width: none;
+    }
+
+    .topbar {
+      min-height: 40px;
+      gap: 6px;
+    }
+
+    .back {
+      width: 44px;
+      height: 44px;
+      margin-left: -10px;
+    }
+
+    .back svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .brand-mobile {
+      font-size: 16px;
+    }
+
+    .brand-mobile .mark {
+      width: 21px;
+      height: 21px;
+    }
+
+    .step-label {
+      font-size: 12px;
+    }
+
+    .progress {
+      gap: 6px;
+      margin-top: 15px;
+    }
+
+    .seg {
+      height: 5px;
+    }
+
+    .content {
+      margin-top: 30px;
+    }
+
+    h1 {
+      font-size: clamp(1.92rem, 8.3vw, 2.15rem);
+      letter-spacing: -0.043em;
+      line-height: 1.08;
+    }
+
+    .question {
+      margin-top: 13px;
+      font-size: 16px;
+    }
+
+    .options {
+      margin-top: 21px;
+      gap: 10px;
+    }
+
+    .option-card {
+      min-height: 120px;
+      gap: 12px;
+      padding: 13px;
+      border-radius: 17px;
+    }
+
+    .option-icon {
+      width: 35px;
+      height: 35px;
+      border-radius: 10px;
+    }
+
+    .option-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .option-check {
+      width: 21px;
+      height: 21px;
+      border-radius: 6.5px;
+    }
+
+    .option-label {
+      font-size: 15px;
+    }
+
+    .option-desc {
+      font-size: 12px;
+    }
+
+    .footer {
+      padding-top: 27px;
+    }
+
+    .reassurance {
+      margin-bottom: 13px;
+      font-size: 12.5px;
+    }
+
+    .continue {
+      min-height: 54px;
+      border-radius: 15px;
+      font-size: 15.5px;
+    }
+
+    .skip {
+      margin-top: 6px;
+    }
+  }
+
+  @media (max-width: 355px) {
+    .panel {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+    }
+
+    .option-card {
+      min-height: 116px;
+      padding: 12px;
+    }
+
+    .option-label {
+      font-size: 14.5px;
+    }
+
+    .option-desc {
+      font-size: 12px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    .art-float {
+      animation: none;
+    }
+  }
+</style>
+</head>
+<body>
+<main class="app" aria-labelledby="page-title">
+  <aside class="visual" aria-label="Kite">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+        <path d="M14 2.5 24.5 14 14 25.5 3.5 14Z" fill="#e9d8b1"/>
+        <path d="M14 2.5 24.5 14H14Z" fill="#d4b878"/>
+        <path d="M3.5 14H24.5L14 25.5Z" fill="#8fa997"/>
+        <path d="M14 2.5v23M3.5 14h21" stroke="#173229" stroke-opacity=".24" stroke-width=".7"/>
+        <path d="M19.4 21.2c2.2 2.1 3.8 1 4.1 3.4" stroke="#e9d8b1" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
+      </svg>
+      <span>Kite</span>
+    </div>
+
+    <div class="visual-art" aria-hidden="true">
+      <svg class="kite-art" viewBox="0 0 560 660" fill="none">
+        <defs>
+          <radialGradient id="orbGlow" cx="50%" cy="45%" r="55%">
+            <stop offset="0" stop-color="#dce9d7" stop-opacity=".17"/>
+            <stop offset=".66" stop-color="#dce9d7" stop-opacity=".05"/>
+            <stop offset="1" stop-color="#dce9d7" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="facetTop" x1="285" y1="85" x2="150" y2="293" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#f4ead4"/>
+            <stop offset="1" stop-color="#d9c292"/>
+          </linearGradient>
+          <linearGradient id="facetRight" x1="290" y1="88" x2="450" y2="292" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#b0c4b0"/>
+            <stop offset="1" stop-color="#7d9985"/>
+          </linearGradient>
+          <linearGradient id="facetLeft" x1="126" y1="292" x2="288" y2="508" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#e5cf9e"/>
+            <stop offset="1" stop-color="#c5a464"/>
+          </linearGradient>
+          <linearGradient id="facetBottom" x1="446" y1="292" x2="290" y2="508" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#8da791"/>
+            <stop offset="1" stop-color="#4b6b59"/>
+          </linearGradient>
+        </defs>
+
+        <circle cx="292" cy="324" r="256" fill="url(#orbGlow)"/>
+
+        <g stroke="#f7f1e3" stroke-opacity=".14" stroke-width="1" stroke-linecap="round">
+          <path d="M-34 406c132-74 244 64 626-46"/>
+          <path d="M-42 455c130-70 254 60 638-51"/>
+          <path d="M-52 505c132-58 260 48 652-38"/>
+        </g>
+
+        <g stroke="#f7f1e3" stroke-opacity=".3" stroke-width="1" stroke-linecap="round">
+          <path d="M78 256h46"/>
+          <path d="M58 272h28"/>
+          <path d="M102 235h21"/>
+        </g>
+
+        <path d="M285 501c-22 45 45 65 23 116-12 26 26 43 53 27" stroke="#ead8ae" stroke-opacity=".68" stroke-width="1.8" stroke-linecap="round" stroke-dasharray=".5 10"/>
+        <g fill="#dfc58d">
+          <path d="m298 543 14-7-2 16z" opacity=".88"/>
+          <path d="m310 586-12-4 10-10z" opacity=".6"/>
+          <path d="m325 628 14-8-3 17z" opacity=".4"/>
+        </g>
+
+        <ellipse cx="289" cy="522" rx="109" ry="15" fill="#0b1f19" opacity=".28"/>
+
+        <g class="art-float">
+          <path d="M285 73 455 290 285 517 115 290Z" stroke="#f7f1e3" stroke-opacity=".14"/>
+
+          <path d="M285 85 125 290h160Z" fill="url(#facetTop)"/>
+          <path d="M285 85 445 290H285Z" fill="url(#facetRight)"/>
+          <path d="M125 290 285 505V290Z" fill="url(#facetLeft)"/>
+          <path d="M445 290 285 505V290Z" fill="url(#facetBottom)"/>
+
+          <path d="M285 85v420M125 290h320" stroke="#faf4e7" stroke-opacity=".19" stroke-width="1.2"/>
+          <path d="M285 85 125 290" stroke="#fff9ed" stroke-opacity=".44" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M285 85 445 290" stroke="#dbe8da" stroke-opacity=".2" stroke-width="1.1" stroke-linecap="round"/>
+          <circle cx="285" cy="290" r="3" fill="#f7ecd5" opacity=".78"/>
+        </g>
+
+        <g fill="#f2e6cd">
+          <path d="m454 186 4 9-4 9-4-9z" opacity=".54"/>
+          <path d="m108 442 3 7-3 7-3-7z" opacity=".42"/>
+          <circle cx="474" cy="430" r="2" opacity=".5"/>
+          <circle cx="137" cy="170" r="2.4" opacity=".36"/>
+          <circle cx="400" cy="92" r="1.7" opacity=".42"/>
+        </g>
+      </svg>
+    </div>
+  </aside>
+
+  <section class="panel">
+    <div class="panel-inner">
+      <header class="topbar">
+        <button class="back" type="button" aria-label="Go back to the previous step">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M14.5 6 8.5 12l6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <div class="brand brand-mobile">
+          <svg class="mark" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+            <path d="M14 2.5 24.5 14 14 25.5 3.5 14Z" fill="#e9d8b1"/>
+            <path d="M14 2.5 24.5 14H14Z" fill="#d4b878"/>
+            <path d="M3.5 14H24.5L14 25.5Z" fill="#8fa997"/>
+            <path d="M14 2.5v23M3.5 14h21" stroke="#173229" stroke-opacity=".24" stroke-width=".7"/>
+            <path d="M19.4 21.2c2.2 2.1 3.8 1 4.1 3.4" stroke="#e9d8b1" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
+          </svg>
+          <span>Kite</span>
+        </div>
+
+        <p class="step-label">Step 2 of 3</p>
+      </header>
+
+      <div class="progress" role="progressbar" aria-label="Onboarding progress" aria-valuemin="1" aria-valuemax="3" aria-valuenow="2" aria-valuetext="Step 2 of 3">
+        <span class="seg is-filled"></span>
+        <span class="seg is-current"></span>
+        <span class="seg"></span>
+      </div>
+
+      <div class="content">
+        <h1 id="page-title">Let's set up your view</h1>
+        <h2 class="question" id="question">What do you want to track?</h2>
+
+        <div class="options" role="group" aria-labelledby="question">
+          <label class="option">
+            <input type="checkbox" name="tracking" value="Daily spending">
+            <span class="option-card">
+              <span class="option-top">
+                <span class="option-icon" style="--tint: #f1e5d0; --tint-ink: #7b5a28;">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4.5 7.5a2.25 2.25 0 0 1 2.25-2.25h9.5A2.25 2.25 0 0 1 18.5 7.5" stroke="currentColor" stroke-width="1.65" stroke-linecap="round"/>
+                    <rect x="3.75" y="7.75" width="16.5" height="11.5" rx="3" stroke="currentColor" stroke-width="1.65"/>
+                    <path d="M14.75 12.25h2a1.75 1.75 0 1 1 0 3.5h-2z" stroke="currentColor" stroke-width="1.65" stroke-linejoin="round"/>
+                    <circle cx="16.05" cy="14" r=".7" fill="currentColor"/>
+                  </svg>
+                </span>
+                <span class="option-check" aria-hidden="true">
+                  <svg viewBox="0 0 12 12" fill="none">
+                    <path d="m2.4 6.25 2.25 2.2 4.95-5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </span>
+              <span class="option-copy">
+                <span class="option-label">Daily spending</span>
+                <span class="option-desc">Everyday purchases</span>
+              </span>
+            </span>
+          </label>
+
+          <label class="option">
+            <input type="checkbox" name="tracking" value="Bills">
+            <span class="option-card">
+              <span class="option-top">
+                <span class="option-icon" style="--tint: #e3ebe0; --tint-ink: #3e634f;">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 3.75h12v16.5l-2-1.4-2 1.4-2-1.4-2 1.4-2-1.4-2 1.4z" stroke="currentColor" stroke-width="1.65" stroke-linejoin="round"/>
+                    <path d="M9 8h6M9 11.5h6M9 15h3.5" stroke="currentColor" stroke-width="1.65" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                <span class="option-check" aria-hidden="true">
+                  <svg viewBox="0 0 12 12" fill="none">
+                    <path d="m2.4 6.25 2.25 2.2 4.95-5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </span>
+              <span class="option-copy">
+                <span class="option-label">Bills</span>
+                <span class="option-desc">Recurring payments</span>
+              </span>
+            </span>
+          </label>
+
+          <label class="option">
+            <input type="checkbox" name="tracking" value="Savings goals">
+            <span class="option-card">
+              <span class="option-top">
+                <span class="option-icon" style="--tint: #e8ead9; --tint-ink: #5d6335;">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <circle cx="12" cy="12" r="8.25" stroke="currentColor" stroke-width="1.65"/>
+                    <circle cx="12" cy="12" r="4.1" stroke="currentColor" stroke-width="1.65"/>
+                    <circle cx="12" cy="12" r="1.15" fill="currentColor"/>
+                  </svg>
+                </span>
+                <span class="option-check" aria-hidden="true">
+                  <svg viewBox="0 0 12 12" fill="none">
+                    <path d="m2.4 6.25 2.25 2.2 4.95-5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </span>
+              <span class="option-copy">
+                <span class="option-label">Savings goals</span>
+                <span class="option-desc">Money set aside</span>
+              </span>
+            </span>
+          </label>
+
+          <label class="option">
+            <input type="checkbox" name="tracking" value="Debt">
+            <span class="option-card">
+              <span class="option-top">
+                <span class="option-icon" style="--tint: #efe0d7; --tint-ink: #7c4f3e;">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <rect x="3.75" y="3.75" width="16.5" height="16.5" rx="4" stroke="currentColor" stroke-width="1.65"/>
+                    <path d="m7.5 9 3 3.25 2.2-2.2 3.8 4.45" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14.25 14.5h2.25v-2.25" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="option-check" aria-hidden="true">
+                  <svg viewBox="0 0 12 12" fill="none">
+                    <path d="m2.4 6.25 2.25 2.2 4.95-5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </span>
+              <span class="option-copy">
+                <span class="option-label">Debt</span>
+                <span class="option-desc">What you owe</span>
+              </span>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <p class="reassurance" id="reassurance">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M15.9 8.6a6 6 0 1 1-1.8-3.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M16 3.6v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>You can change this any time.</span>
+        </p>
+
+        <button class="continue" type="button" aria-describedby="reassurance">
+          <span class="label">Continue</span>
+          <span class="arrow" aria-hidden="true">
+            <svg viewBox="0 0 18 18" fill="none">
+              <path d="M3.25 9h11M9.75 4.5 14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </button>
+
+        <button class="skip" type="button">Skip for now</button>
+      </footer>
+    </div>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+ "total": 84,
+ "parts": {
+  "render": 10,
+  "responsive": 10,
+  "contrast": 15,
+  "typography": 5,
+  "colour": 4,
+  "anti_slop": 20,
+  "structure": 10,
+  "weight": 10
+ },
+ "slop_penalty": 0,
+ "skill": "impeccable",
+ "brief": "01-saas-landing",
+ "seconds": 900.0,
+ "agent": "claude"
+}

@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orders · Operations</title>
+<style>
+  :root {
+    --canvas: #f1f0e9;
+    --surface: #fdfdfb;
+    --surface-soft: #f7f7f2;
+    --ink: #151a16;
+    --muted: #62695f;
+    --quiet: #6c7369;
+    --line: #e0e2d9;
+    --line-strong: #ced1c6;
+    --accent: #173f5b;
+    --accent-deep: #0d2d43;
+    --focus: #2c6d97;
+    --paid-bg: #e8f3eb;
+    --paid-line: #c9e2d1;
+    --paid-text: #1b5a34;
+    --pending-bg: #fbf2dc;
+    --pending-line: #ecd9b2;
+    --pending-text: #74500d;
+    --refunded-bg: #fbeae6;
+    --refunded-line: #f0d0c8;
+    --refunded-text: #883222;
+    --radius: 8px;
+    --shadow: 0 1px 2px rgba(21, 26, 22, 0.04), 0 18px 40px -32px rgba(21, 26, 22, 0.3);
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-width: 0;
+    background-color: var(--canvas);
+    background-image: radial-gradient(rgba(21, 26, 22, 0.055) 0.6px, transparent 0.6px);
+    background-size: 17px 17px;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  button,
+  input,
+  select {
+    font: inherit;
+    color: inherit;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  svg {
+    display: block;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  ::selection {
+    background: #cddde8;
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  .skip-link {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    z-index: 100;
+    transform: translateY(-160%);
+    background: var(--ink);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: #141a17;
+    color: #f5f7f2;
+    border-bottom: 1px solid #080c09;
+  }
+
+  .topbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    width: 100%;
+    max-width: 1180px;
+    height: 48px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .topbar__identity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .topbar__name {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .topbar__slash {
+    color: #59625a;
+    font-size: 12px;
+  }
+
+  .topbar__section {
+    overflow: hidden;
+    color: #abb4ac;
+    font-size: 12.5px;
+    letter-spacing: 0.01em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .topbar__meta {
+    color: #9ba49c;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .page {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+  }
+
+  .page-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+    margin-bottom: 26px;
+  }
+
+  .eyebrow {
+    margin: 0 0 10px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .eyebrow span {
+    color: #8a9087;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(32px, 4vw, 42px);
+    font-weight: 650;
+    letter-spacing: -0.04em;
+    line-height: 1.02;
+  }
+
+  .intro {
+    max-width: 54ch;
+    margin: 12px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .period {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+    flex: none;
+    padding-bottom: 4px;
+  }
+
+  .period__label {
+    color: var(--quiet);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .period__value {
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .panel {
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 16px;
+    background: var(--surface-soft);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .search-field {
+    position: relative;
+    flex: 0 1 340px;
+    min-width: 180px;
+  }
+
+  .search-field__icon {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    width: 15px;
+    height: 15px;
+    color: var(--quiet);
+    pointer-events: none;
+    transform: translateY(-50%);
+  }
+
+  .search-field input {
+    width: 100%;
+    height: 40px;
+    padding: 0 12px 0 35px;
+    background: #fff;
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    color: var(--ink);
+    font-size: 14px;
+    transition: border-color 120ms ease, box-shadow 120ms ease;
+  }
+
+  .search-field input::placeholder {
+    color: #6f756c;
+    opacity: 1;
+  }
+
+  .search-field input:hover {
+    border-color: #b8bdb1;
+  }
+
+  .search-field input:focus {
+    outline: none;
+    border-color: var(--focus);
+    box-shadow: 0 0 0 3px rgba(44, 109, 151, 0.14);
+  }
+
+  .toolbar__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+  }
+
+  .select-field {
+    position: relative;
+  }
+
+  .select-field select {
+    height: 40px;
+    min-width: 148px;
+    padding: 0 34px 0 12px;
+    appearance: none;
+    background: #fff;
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    color: var(--ink);
+    font-size: 13.5px;
+    cursor: pointer;
+    transition: border-color 120ms ease, box-shadow 120ms ease;
+  }
+
+  .select-field select:hover {
+    border-color: #b8bdb1;
+  }
+
+  .select-field select:focus {
+    outline: none;
+    border-color: var(--focus);
+    box-shadow: 0 0 0 3px rgba(44, 109, 151, 0.14);
+  }
+
+  .select-field__chevron {
+    position: absolute;
+    top: 50%;
+    right: 11px;
+    width: 14px;
+    height: 14px;
+    color: var(--quiet);
+    pointer-events: none;
+    transform: translateY(-50%);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 0 14px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+  }
+
+  .btn svg {
+    width: 15px;
+    height: 15px;
+    flex: none;
+  }
+
+  .btn--primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .btn--primary:hover {
+    background: var(--accent-deep);
+    border-color: var(--accent-deep);
+  }
+
+  .btn--primary:active {
+    transform: translateY(1px);
+  }
+
+  .btn--primary:disabled {
+    background: #6f8190;
+    border-color: #6f8190;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  .btn--secondary {
+    background: var(--surface);
+    border-color: var(--line-strong);
+    color: var(--ink);
+  }
+
+  .btn--secondary:hover {
+    background: var(--surface-soft);
+    border-color: #b8bdb1;
+  }
+
+  .table-wrap {
+    position: relative;
+    width: 100%;
+  }
+
+  .orders {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+  .col-order {
+    width: 18%;
+  }
+
+  .col-customer {
+    width: 32%;
+  }
+
+  .col-status {
+    width: 17%;
+  }
+
+  .col-amount {
+    width: 15%;
+  }
+
+  .col-created {
+    width: 18%;
+  }
+
+  .orders th {
+    height: 37px;
+    padding: 0 18px;
+    background: var(--surface-soft);
+    border-bottom: 1px solid var(--line);
+    color: var(--quiet);
+    font-family: var(--mono);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-align: left;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .orders th.is-amount,
+  .orders td.is-amount {
+    text-align: right;
+  }
+
+  .orders td {
+    height: 55px;
+    padding: 0 18px;
+    border-bottom: 1px solid var(--line);
+    font-size: 13.5px;
+    vertical-align: middle;
+  }
+
+  .orders tbody tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .orders tbody tr[data-row] {
+    transition: background-color 120ms ease;
+  }
+
+  .orders tbody tr[data-row]:hover {
+    background: #f8f9f4;
+  }
+
+  .order-id {
+    color: var(--ink-soft);
+    font-family: var(--mono);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.01em;
+  }
+
+  .customer-name {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .amount {
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  .created {
+    color: var(--muted);
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-width: 74px;
+    min-height: 24px;
+    padding: 3px 8px;
+    border: 1px solid;
+    border-radius: 4px;
+    font-size: 11.5px;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .status__dot {
+    width: 5px;
+    height: 5px;
+    flex: none;
+    background: currentColor;
+    border-radius: 50%;
+  }
+
+  .status--paid {
+    background: var(--paid-bg);
+    border-color: var(--paid-line);
+    color: var(--paid-text);
+  }
+
+  .status--pending {
+    background: var(--pending-bg);
+    border-color: var(--pending-line);
+    color: var(--pending-text);
+  }
+
+  .status--refunded {
+    background: var(--refunded-bg);
+    border-color: var(--refunded-line);
+    color: var(--refunded-text);
+  }
+
+  .table-empty {
+    padding: 46px 24px;
+    text-align: center;
+  }
+
+  .table-empty__title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 650;
+  }
+
+  .table-empty__copy {
+    max-width: 38ch;
+    margin: 4px auto 0;
+    color: var(--muted);
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+
+  .table-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 11px 16px 11px 18px;
+    background: var(--surface-soft);
+    border-top: 1px solid var(--line);
+  }
+
+  .table-footer__summary {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .pagination {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .page-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    min-width: 34px;
+    min-height: 34px;
+    padding: 0 8px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 550;
+  }
+
+  .page-btn svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .page-btn:disabled {
+    color: #9a9f97;
+    cursor: not-allowed;
+  }
+
+  .page-btn:not(:disabled):hover {
+    background: #fff;
+    border-color: var(--line-strong);
+    color: var(--ink);
+  }
+
+  .page-current {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    min-height: 32px;
+    padding: 0 8px;
+    background: var(--ink);
+    border-radius: 5px;
+    color: #fff;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .empty-section {
+    margin-top: 38px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line-strong);
+  }
+
+  .empty-section__head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 13px;
+  }
+
+  .empty-section__head h2 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+  }
+
+  .empty-section__head p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 38px 24px 36px;
+    background-color: rgba(253, 253, 251, 0.68);
+    background-image: repeating-linear-gradient(135deg, transparent 0, transparent 9px, rgba(21, 26, 22, 0.018) 9px, rgba(21, 26, 22, 0.018) 10px);
+    border: 1px dashed #c3c7ba;
+    border-radius: var(--radius);
+    text-align: center;
+  }
+
+  .empty-state__icon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    margin-bottom: 14px;
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: 7px;
+    color: var(--quiet);
+    box-shadow: 0 1px 1px rgba(21, 26, 22, 0.04);
+  }
+
+  .empty-state__icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .empty-state h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 650;
+  }
+
+  .empty-state p {
+    max-width: 42ch;
+    margin: 5px 0 16px;
+    color: var(--muted);
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+
+  .empty-state .btn {
+    min-height: 40px;
+  }
+
+  @media (max-width: 850px) {
+    .search-field {
+      flex-basis: 280px;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .page {
+      padding: 27px 16px 46px;
+    }
+
+    .page-head {
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 33px;
+    }
+
+    .intro {
+      max-width: 46ch;
+      font-size: 13.5px;
+    }
+
+    .period {
+      flex-direction: row;
+      align-items: baseline;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 17px;
+      padding-top: 11px;
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .period__value {
+      font-size: 12.5px;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 8px;
+      padding: 12px;
+    }
+
+    .search-field {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .search-field input {
+      height: 44px;
+      font-size: 16px;
+    }
+
+    .toolbar__actions {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+      gap: 8px;
+      margin-left: 0;
+    }
+
+    .select-field select,
+    .toolbar .btn {
+      width: 100%;
+      height: 44px;
+    }
+
+    .select-field select {
+      min-width: 0;
+      font-size: 14px;
+    }
+
+    .table-wrap {
+      overflow: hidden;
+    }
+
+    .orders,
+    .orders tbody,
+    .orders tr,
+    .orders td {
+      display: block;
+      width: 100%;
+    }
+
+    .orders colgroup,
+    .orders thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .orders tbody tr[data-row] {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas:
+        "customer status"
+        "order order"
+        "amount created";
+      gap: 2px 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .orders tbody tr[data-row]:last-child {
+      border-bottom: 0;
+    }
+
+    .orders td {
+      width: auto;
+      height: auto;
+      padding: 0;
+      border: 0;
+    }
+
+    .orders td.cell-customer {
+      grid-area: customer;
+      align-self: center;
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+
+    .orders td.cell-status {
+      grid-area: status;
+      justify-self: end;
+      align-self: start;
+    }
+
+    .orders td.cell-order {
+      grid-area: order;
+      margin-top: 1px;
+    }
+
+    .order-id {
+      color: var(--quiet);
+      font-size: 11px;
+    }
+
+    .orders td.cell-amount {
+      grid-area: amount;
+      margin-top: 9px;
+      text-align: left;
+    }
+
+    .amount {
+      font-size: 12px;
+    }
+
+    .orders td.cell-created {
+      grid-area: created;
+      justify-self: end;
+      margin-top: 9px;
+      text-align: right;
+    }
+
+    .created {
+      font-size: 12px;
+    }
+
+    .status {
+      min-width: 0;
+      min-height: 23px;
+      padding: 3px 7px;
+      font-size: 11px;
+    }
+
+    .table-footer {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 7px;
+      padding: 10px 12px 12px;
+    }
+
+    .table-footer__summary {
+      font-size: 11.5px;
+    }
+
+    .pagination {
+      justify-content: flex-end;
+    }
+
+    .page-btn {
+      min-width: 44px;
+      min-height: 44px;
+    }
+
+    .page-current {
+      min-width: 40px;
+      min-height: 40px;
+    }
+
+    .empty-state .btn {
+      min-height: 44px;
+    }
+
+    .empty-section {
+      margin-top: 30px;
+      padding-top: 20px;
+    }
+
+    .empty-section__head {
+      display: block;
+      margin-bottom: 11px;
+    }
+
+    .empty-section__head p {
+      margin-top: 3px;
+    }
+
+    .empty-state {
+      padding: 32px 20px 30px;
+    }
+  }
+
+  @media (max-width: 540px) {
+    .topbar__inner {
+      height: 46px;
+      padding: 0 16px;
+      gap: 16px;
+    }
+
+    .topbar__section {
+      display: none;
+    }
+
+    .topbar__name {
+      font-size: 11px;
+    }
+
+    .topbar__meta {
+      font-size: 9.5px;
+      letter-spacing: 0.1em;
+    }
+
+    .eyebrow {
+      margin-bottom: 8px;
+      font-size: 9.5px;
+    }
+
+    .empty-state p {
+      max-width: 30ch;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#orders-table">Skip to orders</a>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <div class="topbar__identity">
+      <span class="topbar__name">Operations</span>
+      <span class="topbar__slash" aria-hidden="true">/</span>
+      <span class="topbar__section">Order management</span>
+    </div>
+    <span class="topbar__meta">Support console</span>
+  </div>
+</header>
+
+<main class="page">
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Support <span aria-hidden="true">/</span> Orders</p>
+      <h1>Orders</h1>
+      <p class="intro">Review payment activity, follow up on exceptions, and export the current view.</p>
+    </div>
+    <div class="period" aria-label="Viewing March 2026">
+      <span class="period__label">Period</span>
+      <span class="period__value">March 2026</span>
+    </div>
+  </header>
+
+  <section class="panel" aria-labelledby="orders-panel-title">
+    <h2 class="visually-hidden" id="orders-panel-title">Order records</h2>
+
+    <div class="toolbar" role="group" aria-label="Order filters">
+      <div class="search-field">
+        <svg class="search-field__icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="8.6" cy="8.6" r="5.6" stroke="currentColor" stroke-width="1.6"/>
+          <path d="m13 13 4.1 4.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <label class="visually-hidden" for="order-search">Search orders or customers</label>
+        <input id="order-search" type="search" placeholder="Search orders or customers" autocomplete="off" aria-controls="orders-table">
+      </div>
+
+      <div class="toolbar__actions">
+        <div class="select-field">
+          <label class="visually-hidden" for="status-filter">Filter by status</label>
+          <select id="status-filter" aria-controls="orders-table">
+            <option value="all">All statuses</option>
+            <option value="paid">Paid</option>
+            <option value="pending">Pending</option>
+            <option value="refunded">Refunded</option>
+          </select>
+          <svg class="select-field__chevron" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <button class="btn btn--primary" id="export-csv" type="button">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M8 2v7m0 0 2.8-2.8M8 9 5.2 6.2M3 10.5v2.2c0 .7.6 1.3 1.3 1.3h7.4c.7 0 1.3-.6 1.3-1.3v-2.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Export CSV
+        </button>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="orders" id="orders-table" role="table">
+        <caption class="visually-hidden">Orders for March 2026</caption>
+        <colgroup>
+          <col class="col-order">
+          <col class="col-customer">
+          <col class="col-status">
+          <col class="col-amount">
+          <col class="col-created">
+        </colgroup>
+        <thead role="rowgroup">
+          <tr role="row">
+            <th scope="col" role="columnheader">Order</th>
+            <th scope="col" role="columnheader">Customer</th>
+            <th scope="col" role="columnheader">Status</th>
+            <th scope="col" role="columnheader" class="is-amount">Amount</th>
+            <th scope="col" role="columnheader">Created</th>
+          </tr>
+        </thead>
+        <tbody id="orders-body" role="rowgroup">
+          <tr data-row data-status="paid" role="row">
+            <td class="cell-order" role="cell"><span class="order-id">#ORD-10482</span></td>
+            <td class="cell-customer" role="cell"><span class="customer-name">Alice Bennett</span></td>
+            <td class="cell-status" role="cell"><span class="status status--paid"><span class="status__dot" aria-hidden="true"></span>Paid</span></td>
+            <td class="cell-amount is-amount" role="cell"><span class="amount">$128.00</span></td>
+            <td class="cell-created" role="cell"><time class="created" datetime="2026-03-12">12 Mar 2026</time></td>
+          </tr>
+          <tr data-row data-status="pending" role="row">
+            <td class="cell-order" role="cell"><span class="order-id">#ORD-10481</span></td>
+            <td class="cell-customer" role="cell"><span class="customer-name">Marco Silva</span></td>
+            <td class="cell-status" role="cell"><span class="status status--pending"><span class="status__dot" aria-hidden="true"></span>Pending</span></td>
+            <td class="cell-amount is-amount" role="cell"><span class="amount">$84.50</span></td>
+            <td class="cell-created" role="cell"><time class="created" datetime="2026-03-12">12 Mar 2026</time></td>
+          </tr>
+          <tr data-row data-status="paid" role="row">
+            <td class="cell-order" role="cell"><span class="order-id">#ORD-10480</span></td>
+            <td class="cell-customer" role="cell"><span class="customer-name">Priya Nair</span></td>
+            <td class="cell-status" role="cell"><span class="status status--paid"><span class="status__dot" aria-hidden="true"></span>Paid</span></td>
+            <td class="cell-amount is-amount" role="cell"><span class="amount">$212.75</span></td>
+            <td class="cell-created" role="cell"><time class="created" datetime="2026-03-11">11 Mar 2026</time></td>
+          </tr>
+          <tr data-row data-status="refunded" role="row">
+            <td class="cell-order" role="cell"><span class="order-id">#ORD-10479</span></td>
+            <td class="cell-customer" role="cell"><span class="customer-name">Daniel Kim</span></td>
+            <td class="cell-status" role="cell"><span class="status status--refunded"><span class="status__dot" aria-hidden="true"></span>Refunded</span></td>
+            <td class="cell-amount is-amount" role="cell"><span class="amount">$46.00</span></td>
+            <td class="cell-created" role="cell"><time class="created" datetime="2026-03-11">11 Mar 2026</time></td>
+          </tr>
+          <tr data-row data-status="paid" role="row">
+            <td class="cell-order" role="cell"><span class="order-id">#ORD-10478</span></td>
+            <td class="cell-customer" role="cell"><span class="customer-name">Sofia Rossi</span></td>
+            <td class="cell-status" role="cell"><span class="status status--paid"><span class="status__dot" aria-hidden="true"></span>Paid</span></td>
+            <td class="cell-amount is-amount" role="cell"><span class="amount">$1,048.00</span></td>
+            <td class="cell-created" role="cell"><time class="created" datetime="2026-03-10">10 Mar 2026</time></td>
+          </tr>
+          <tr data-row data-status="pending" role="row">
+            <td class="cell-order" role="cell"><span class="order-id">#ORD-10477</span></td>
+            <td class="cell-customer" role="cell"><span class="customer-name">Marcus Bell</span></td>
+            <td class="cell-status" role="cell"><span class="status status--pending"><span class="status__dot" aria-hidden="true"></span>Pending</span></td>
+            <td class="cell-amount is-amount" role="cell"><span class="amount">$64.20</span></td>
+            <td class="cell-created" role="cell"><time class="created" datetime="2026-03-10">10 Mar 2026</time></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="table-empty" id="table-empty" hidden>
+        <p class="table-empty__title">No matching orders</p>
+        <p class="table-empty__copy">Clear the search or choose a different status to see more results.</p>
+      </div>
+    </div>
+
+    <footer class="table-footer">
+      <p class="table-footer__summary" id="pagination-summary" aria-live="polite">Showing 1–6 of 6 orders</p>
+      <nav class="pagination" aria-label="Pagination">
+        <button class="page-btn" type="button" disabled aria-label="Previous page">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M9.8 3.8 5.6 8l4.2 4.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Previous
+        </button>
+        <span class="page-current" aria-current="page">1</span>
+        <button class="page-btn" type="button" disabled aria-label="Next page">
+          Next
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M6.2 3.8 10.4 8l-4.2 4.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </nav>
+    </footer>
+  </section>
+
+  <section class="empty-section" aria-labelledby="empty-state-title">
+    <div class="empty-section__head">
+      <h2 id="empty-state-title">Empty state</h2>
+      <p>Shown when no orders match the active filters.</p>
+    </div>
+    <div class="empty-state">
+      <div class="empty-state__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M4 6.5h10M4 11h7M4 15.5h5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="16.2" cy="15.2" r="2.8" stroke="currentColor" stroke-width="1.5"/>
+          <path d="m18.3 17.3 2.2 2.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3>No orders found</h3>
+      <p>Try a different search term or clear the status filter to see all orders.</p>
+      <button class="btn btn--secondary" type="button" data-clear-filters>Clear filters</button>
+    </div>
+  </section>
+</main>
+
+<script>
+  (function () {
+    var search = document.getElementById('order-search');
+    var statusFilter = document.getElementById('status-filter');
+    var table = document.getElementById('orders-table');
+    var tableEmpty = document.getElementById('table-empty');
+    var summary = document.getElementById('pagination-summary');
+    var exportButton = document.getElementById('export-csv');
+    var rows = Array.prototype.slice.call(document.querySelectorAll('#orders-body tr[data-row]'));
+    var total = rows.length;
+
+    function visibleRows() {
+      return rows.filter(function (row) {
+        return !row.hidden;
+      });
+    }
+
+    function updateSummary(count) {
+      if (count === 0) {
+        summary.textContent = 'Showing 0 of ' + total + ' orders';
+      } else if (count === total) {
+        summary.textContent = 'Showing 1–' + total + ' of ' + total + ' orders';
+      } else {
+        summary.textContent = 'Showing ' + count + ' of ' + total + ' orders';
+      }
+    }
+
+    function applyFilters() {
+      var query = search.value.trim().toLowerCase();
+      var selectedStatus = statusFilter.value;
+      var shown = 0;
+
+      rows.forEach(function (row) {
+        var matchesText = !query || row.textContent.toLowerCase().indexOf(query) !== -1;
+        var matchesStatus = selectedStatus === 'all' || row.getAttribute('data-status') === selectedStatus;
+        var isVisible = matchesText && matchesStatus;
+        row.hidden = !isVisible;
+        if (isVisible) {
+          shown += 1;
+        }
+      });
+
+      table.hidden = shown === 0;
+      tableEmpty.hidden = shown !== 0;
+      exportButton.disabled = shown === 0;
+      updateSummary(shown);
+    }
+
+    function clearFilters() {
+      search.value = '';
+      statusFilter.value = 'all';
+      applyFilters();
+      search.focus();
+    }
+
+    search.addEventListener('input', applyFilters);
+    statusFilter.addEventListener('change', applyFilters);
+
+    Array.prototype.forEach.call(document.querySelectorAll('[data-clear-filters]'), function (button) {
+      button.addEventListener('click', clearFilters);
+    });
+
+    exportButton.addEventListener('click', function () {
+      var header = ['Order', 'Customer', 'Status', 'Amount', 'Created'];
+      var dataRows = visibleRows().map(function (row) {
+        return Array.prototype.map.call(row.cells, function (cell) {
+          return cell.textContent.replace(/\s+/g, ' ').trim();
+        });
+      });
+      var csvRows = [header].concat(dataRows).map(function (cells) {
+        return cells.map(function (value) {
+          return '"' + value.replace(/"/g, '""') + '"';
+        }).join(',');
+      });
+      var blob = new Blob(['﻿' + csvRows.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
+      var url = URL.createObjectURL(blob);
+      var link = document.createElement('a');
+      link.href = url;
+      link.download = 'orders-march-2026.csv';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.setTimeout(function () {
+        URL.revokeObjectURL(url);
+      }, 0);
+    });
+  }());
+</script>
+</body>
+</html>

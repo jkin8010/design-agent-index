@@ -1,0 +1,1015 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pulse — Analytics</title>
+<style>
+  :root {
+    --bg: #f3f5f2;
+    --surface: #ffffff;
+    --surface-soft: #fbfcfa;
+    --ink: #18221d;
+    --muted: #5c6961;
+    --subtle: #68756d;
+    --line: #e3e8e2;
+    --line-soft: #edf1ed;
+    --accent: #2f6b51;
+    --accent-deep: #1f5038;
+    --accent-soft: #edf4ef;
+    --green: #1f7a54;
+    --green-soft: #eaf5ef;
+    --red: #b04a43;
+    --red-soft: #fbeeed;
+    --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    --topbar-h: 64px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    background: linear-gradient(180deg, #f5f7f4 0%, var(--bg) 42%, #f1f4f0 100%);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; }
+  svg { display: block; }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    height: var(--topbar-h);
+    padding: 0 26px;
+    background: rgba(251, 252, 250, 0.88);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    border-radius: 8px;
+  }
+
+  .brand-mark {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    flex: none;
+    border-radius: 9px;
+    background: linear-gradient(145deg, #3a755a 0%, #1d4a35 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 1px 2px rgba(20, 41, 30, 0.16);
+  }
+
+  .brand-mark svg { width: 18px; height: 18px; }
+
+  .brand-name {
+    font-size: 17px;
+    font-weight: 650;
+    letter-spacing: -0.025em;
+    white-space: nowrap;
+  }
+
+  .brand-tag {
+    margin-left: 1px;
+    padding-left: 12px;
+    border-left: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .top-actions {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    flex: none;
+  }
+
+  .date-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: var(--surface);
+    box-shadow: 0 1px 1px rgba(24, 34, 29, 0.03);
+    color: #445149;
+    font-size: 12.5px;
+    font-weight: 550;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+  }
+
+  .date-btn:hover {
+    border-color: #ccd6ce;
+    background: #fdfdfc;
+    box-shadow: 0 1px 3px rgba(24, 34, 29, 0.06);
+  }
+
+  .date-btn .calendar { width: 14px; height: 14px; color: var(--muted); }
+  .date-btn .chevron { width: 12px; height: 12px; margin-left: 1px; color: var(--subtle); }
+
+  .top-divider {
+    width: 1px;
+    height: 22px;
+    background: var(--line);
+  }
+
+  .avatar-btn {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.28), transparent 42%),
+      linear-gradient(140deg, #486d5b 0%, #274936 100%);
+    box-shadow: 0 0 0 2px var(--surface-soft), 0 0 0 3px #dfe6df;
+    color: #fff;
+    font-size: 10.5px;
+    font-weight: 650;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: box-shadow 160ms ease;
+  }
+
+  .avatar-btn:hover { box-shadow: 0 0 0 2px var(--surface-soft), 0 0 0 3px #c8d4ca; }
+
+  .app {
+    display: grid;
+    grid-template-columns: 224px minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: var(--topbar-h);
+    height: calc(100vh - var(--topbar-h));
+    padding: 24px 14px;
+    background: var(--surface-soft);
+    border-right: 1px solid var(--line);
+  }
+
+  .side-label {
+    padding: 0 12px 10px;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 650;
+    letter-spacing: 0.12em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .nav-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+    padding: 9px 11px;
+    border-radius: 8px;
+    color: #52605a;
+    font-size: 13.5px;
+    font-weight: 500;
+    transition: background 150ms ease, color 150ms ease;
+  }
+
+  .nav-item:hover { background: #f0f3ef; color: var(--ink); }
+
+  .nav-item.active {
+    background: var(--accent-soft);
+    color: var(--accent-deep);
+    font-weight: 600;
+  }
+
+  .nav-item.active::before {
+    content: "";
+    position: absolute;
+    left: -14px;
+    top: 9px;
+    bottom: 9px;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: var(--accent);
+  }
+
+  .nav-icon {
+    width: 17px;
+    height: 17px;
+    flex: none;
+    opacity: 0.9;
+  }
+
+  .nav-item span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  .main {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 28px 30px 42px;
+    min-width: 0;
+  }
+
+  .page-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+  }
+
+  .page-title {
+    margin: 0;
+    font-size: 23px;
+    font-weight: 650;
+    letter-spacing: -0.032em;
+    line-height: 1.15;
+  }
+
+  .page-sub {
+    margin: 6px 0 0;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 21px;
+  }
+
+  .kpi {
+    min-width: 0;
+    padding: 16px 17px 15px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(24, 34, 29, 0.035);
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+  }
+
+  .kpi:hover {
+    border-color: #d5ded6;
+    box-shadow: 0 3px 10px rgba(24, 34, 29, 0.045);
+  }
+
+  .kpi-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .kpi-label {
+    overflow: hidden;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.005em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .kpi-icon {
+    display: grid;
+    place-items: center;
+    width: 27px;
+    height: 27px;
+    flex: none;
+    border-radius: 7px;
+    background: #f2f5f1;
+    color: #627168;
+  }
+
+  .kpi-icon svg { width: 15px; height: 15px; }
+
+  .kpi-value {
+    margin: 12px 0 0;
+    font-size: 30px;
+    font-weight: 620;
+    letter-spacing: -0.038em;
+    line-height: 1.05;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .kpi-foot {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 9px;
+    min-width: 0;
+  }
+
+  .delta {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 2px 7px 2px 5px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.45;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .delta svg { width: 11px; height: 11px; flex: none; }
+  .delta.pos { color: var(--green); background: var(--green-soft); }
+  .delta.neg { color: var(--red); background: var(--red-soft); }
+
+  .kpi-note {
+    overflow: hidden;
+    color: var(--subtle);
+    font-size: 11px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .dash-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(340px, 0.95fr);
+    gap: 14px;
+    align-items: start;
+    margin-top: 14px;
+  }
+
+  .card {
+    min-width: 0;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    box-shadow: 0 1px 2px rgba(24, 34, 29, 0.035);
+  }
+
+  .chart-card { padding: 18px 20px 14px; }
+  .table-card { padding: 18px 0 5px; }
+
+  .card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .table-card .card-head { padding: 0 18px; }
+
+  .card-title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 650;
+    letter-spacing: -0.012em;
+    line-height: 1.35;
+  }
+
+  .card-sub {
+    margin: 3px 0 0;
+    color: var(--muted);
+    font-size: 11.5px;
+  }
+
+  .legend {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-top: 2px;
+    color: var(--muted);
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .legend-dot {
+    width: 6px;
+    height: 6px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+
+  .chart-wrap {
+    position: relative;
+    height: 236px;
+    margin-top: 12px;
+  }
+
+  .chart-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .chart-svg .grid-line {
+    stroke: #e8ece7;
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .chart-svg .baseline {
+    stroke: #dfe5df;
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .chart-svg .trend-line {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2.25;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .chart-point {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.42;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .chart-end {
+    position: absolute;
+    left: 98.33%;
+    top: 21.67%;
+    width: 8px;
+    height: 8px;
+    border: 2px solid var(--surface);
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px rgba(47, 107, 81, 0.15);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .x-axis {
+    position: relative;
+    height: 16px;
+    margin-top: 5px;
+    color: var(--subtle);
+    font-size: 10px;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .x-axis span {
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+
+  .x-axis .first { transform: none; }
+  .x-axis .last { transform: translateX(-100%); }
+
+  .table-wrap { margin-top: 10px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+  th {
+    padding: 8px 9px;
+    border-bottom: 1px solid var(--line);
+    color: var(--subtle);
+    font-size: 9.5px;
+    font-weight: 650;
+    letter-spacing: 0.075em;
+    line-height: 1.4;
+    text-align: left;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  th:first-child,
+  td:first-child { padding-left: 18px; }
+  th:last-child,
+  td:last-child { padding-right: 18px; }
+
+  td {
+    height: 47px;
+    padding: 8px 9px;
+    border-bottom: 1px solid var(--line-soft);
+    color: #36433c;
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr { transition: background 140ms ease; }
+  tbody tr:hover { background: #fafbf9; }
+
+  .col-event { width: 48%; }
+  .col-count { width: 18%; }
+  .col-users { width: 18%; }
+  .col-trend { width: 16%; }
+
+  th.col-count,
+  td.col-count,
+  th.col-users,
+  td.col-users { text-align: right; }
+
+  th.col-trend,
+  td.col-trend { text-align: right; }
+
+  .event {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .event-dot {
+    width: 6px;
+    height: 6px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--dot, #789087);
+    box-shadow: 0 0 0 3px rgba(90, 110, 100, 0.09);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--dot, #789087) 12%, transparent);
+  }
+
+  .event-name {
+    overflow: hidden;
+    color: #35443b;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: -0.015em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .event-trend {
+    display: inline-grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 7px;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 650;
+    line-height: 1;
+  }
+
+  .event-trend.up { color: var(--green); background: var(--green-soft); }
+  .event-trend.down { color: var(--red); background: var(--red-soft); }
+
+  @media (max-width: 1120px) {
+    .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .dash-grid { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  @media (max-width: 840px) {
+    :root { --topbar-h: 56px; }
+
+    .topbar { padding: 0 14px; gap: 10px; }
+    .brand { gap: 8px; }
+    .brand-mark { width: 28px; height: 28px; border-radius: 8px; }
+    .brand-mark svg { width: 17px; height: 17px; }
+    .brand-name { font-size: 16px; }
+    .brand-tag, .top-divider { display: none; }
+
+    .top-actions { gap: 9px; }
+    .date-btn { height: 32px; padding: 0 9px; gap: 6px; font-size: 11.5px; }
+    .date-btn .calendar { width: 13px; height: 13px; }
+    .avatar-btn { width: 32px; height: 32px; font-size: 10px; }
+
+    .app { display: block; }
+
+    .sidebar {
+      position: static;
+      width: 100%;
+      height: auto;
+      padding: 7px 10px;
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface-soft);
+    }
+
+    .side-label { display: none; }
+
+    .sidebar nav {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 3px;
+    }
+
+    .nav-item {
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 4px;
+      font-size: 11.5px;
+    }
+
+    .nav-icon { width: 15px; height: 15px; }
+    .nav-item.active::before { display: none; }
+
+    .main { padding: 18px 14px 32px; }
+    .page-title { font-size: 21px; }
+    .page-sub { margin-top: 5px; font-size: 12px; }
+
+    .kpi-grid { gap: 10px; margin-top: 16px; }
+    .kpi { padding: 13px 13px 12px; border-radius: 11px; }
+    .kpi-icon { width: 24px; height: 24px; border-radius: 6px; }
+    .kpi-icon svg { width: 14px; height: 14px; }
+    .kpi-value { margin-top: 10px; font-size: 26px; }
+    .kpi-foot { margin-top: 8px; }
+
+    .dash-grid { gap: 10px; margin-top: 10px; }
+
+    .chart-card { padding: 14px 14px 12px; }
+    .table-card { padding: 14px 0 4px; }
+    .table-card .card-head { padding: 0 14px; }
+    .chart-wrap { height: 170px; margin-top: 10px; }
+    .x-axis { margin-top: 4px; font-size: 9.5px; }
+
+    .table-wrap { margin-top: 8px; }
+    th { padding-top: 7px; padding-bottom: 7px; font-size: 9px; }
+    th:first-child, td:first-child { padding-left: 14px; }
+    th:last-child, td:last-child { padding-right: 14px; }
+    td { height: 46px; font-size: 11.5px; }
+    .event-name { font-size: 11px; }
+  }
+
+  @media (max-width: 600px) {
+    .kpi-note { display: none; }
+    .kpi-foot { gap: 0; }
+  }
+
+  @media (max-width: 360px) {
+    .nav-icon { display: none; }
+    .nav-item { font-size: 11px; }
+    .event-dot { display: none; }
+    .event-name { font-size: 10.5px; }
+    .page-sub { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Pulse home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M2.8 12h4.1l1.7-4.7 3.1 9.4 1.9-4.7H21" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="brand-name">Pulse</span>
+      <span class="brand-tag">Analytics</span>
+    </a>
+
+    <div class="top-actions">
+      <button class="date-btn" type="button" aria-haspopup="dialog">
+        <svg class="calendar" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <rect x="2.25" y="3.25" width="11.5" height="10.5" rx="2" stroke="currentColor" stroke-width="1.25"/>
+          <path d="M5 1.75v3M11 1.75v3M2.25 6.75h11.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+        </svg>
+        <span>Oct 26 – Nov 6</span>
+        <svg class="chevron" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <path d="m3 4.5 3 3 3-3" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <span class="top-divider" aria-hidden="true"></span>
+      <button class="avatar-btn" type="button" aria-label="Open account menu">AM</button>
+    </div>
+  </header>
+
+  <div class="app">
+    <aside class="sidebar">
+      <div class="side-label">Workspace</div>
+      <nav aria-label="Primary navigation">
+        <a class="nav-item active" href="#" aria-current="page">
+          <svg class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <rect x="3" y="3" width="5.25" height="5.25" rx="1.2"/>
+            <rect x="11.75" y="3" width="5.25" height="5.25" rx="1.2"/>
+            <rect x="3" y="11.75" width="5.25" height="5.25" rx="1.2"/>
+            <rect x="11.75" y="11.75" width="5.25" height="5.25" rx="1.2"/>
+          </svg>
+          <span>Overview</span>
+        </a>
+        <a class="nav-item" href="#">
+          <svg class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M3 4.5h14l-5.25 5.4v5.1l-3.5 1.75v-6.85L3 4.5Z" stroke-linejoin="round"/>
+          </svg>
+          <span>Funnels</span>
+        </a>
+        <a class="nav-item" href="#">
+          <svg class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M16.3 6.4A7 7 0 1 0 17 10.9" stroke-linecap="round"/>
+            <path d="M16.8 2.7v4h-4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Retention</span>
+        </a>
+        <a class="nav-item" href="#">
+          <svg class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M3 6.5h14M3 13.5h14" stroke-linecap="round"/>
+            <circle cx="7.25" cy="6.5" r="2"/>
+            <circle cx="13" cy="13.5" r="2"/>
+          </svg>
+          <span>Settings</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="page-head">
+        <div>
+          <h1 class="page-title">Overview</h1>
+          <p class="page-sub">How people are using Pulse this period.</p>
+        </div>
+      </div>
+
+      <section class="kpi-grid" aria-label="Key metrics">
+        <article class="kpi">
+          <div class="kpi-top">
+            <span class="kpi-label">Active users</span>
+            <span class="kpi-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4">
+                <circle cx="8" cy="5.4" r="2.45"/>
+                <path d="M3.2 13.1c.55-2.4 2.45-3.9 4.8-3.9s4.25 1.5 4.8 3.9" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </div>
+          <p class="kpi-value">12,480</p>
+          <div class="kpi-foot">
+            <span class="delta pos">
+              <svg viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M3 9 9 3M4.1 3H9v4.9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              +4.2%
+            </span>
+            <span class="kpi-note">vs prior period</span>
+          </div>
+        </article>
+
+        <article class="kpi">
+          <div class="kpi-top">
+            <span class="kpi-label">Retention</span>
+            <span class="kpi-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4">
+                <path d="M13 5.4A5.4 5.4 0 1 0 13.6 8.6" stroke-linecap="round"/>
+                <path d="M13.3 2.5v3.1H10.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
+          <p class="kpi-value">38.1%</p>
+          <div class="kpi-foot">
+            <span class="delta neg">
+              <svg viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="m3 3 6 6M4.1 9H9V4.1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              −0.8%
+            </span>
+            <span class="kpi-note">vs prior period</span>
+          </div>
+        </article>
+
+        <article class="kpi">
+          <div class="kpi-top">
+            <span class="kpi-label">Events</span>
+            <span class="kpi-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4">
+                <path d="M8.8 1.8 3.9 8.6h3.6l-.4 5.6 4.9-6.8H8.4l.4-5.6Z" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
+          <p class="kpi-value">4.2M</p>
+          <div class="kpi-foot">
+            <span class="delta pos">
+              <svg viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M3 9 9 3M4.1 3H9v4.9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              +11%
+            </span>
+            <span class="kpi-note">vs prior period</span>
+          </div>
+        </article>
+
+        <article class="kpi">
+          <div class="kpi-top">
+            <span class="kpi-label">Error rate</span>
+            <span class="kpi-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4">
+                <path d="M8 2.2 14 13H2L8 2.2Z" stroke-linejoin="round"/>
+                <path d="M8 6v3.1M8 11.3v.1" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </div>
+          <p class="kpi-value">0.42%</p>
+          <div class="kpi-foot">
+            <span class="delta neg">
+              <svg viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="m3 3 6 6M4.1 9H9V4.1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              −0.05%
+            </span>
+            <span class="kpi-note">vs prior period</span>
+          </div>
+        </article>
+      </section>
+
+      <div class="dash-grid">
+        <section class="card chart-card" aria-labelledby="chart-title">
+          <div class="card-head">
+            <div>
+              <h2 class="card-title" id="chart-title">Active users</h2>
+              <p class="card-sub">Daily, last 12 days</p>
+            </div>
+            <div class="legend"><span class="legend-dot" aria-hidden="true"></span>Unique users</div>
+          </div>
+
+          <div class="chart-wrap">
+            <svg class="chart-svg" viewBox="0 0 720 240" preserveAspectRatio="none" role="img" aria-labelledby="chart-svg-title">
+              <title id="chart-svg-title">Active users line chart for October 26 through November 6</title>
+              <defs>
+                <linearGradient id="area-fill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#3b7c5d" stop-opacity="0.16"/>
+                  <stop offset="65%" stop-color="#3b7c5d" stop-opacity="0.045"/>
+                  <stop offset="100%" stop-color="#3b7c5d" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <line class="grid-line" x1="0" y1="40" x2="720" y2="40"/>
+              <line class="grid-line" x1="0" y1="90" x2="720" y2="90"/>
+              <line class="grid-line" x1="0" y1="140" x2="720" y2="140"/>
+              <line class="grid-line" x1="0" y1="190" x2="720" y2="190"/>
+              <line class="baseline" x1="0" y1="216" x2="720" y2="216"/>
+              <path fill="url(#area-fill)" d="M12 158C33.09 152 54.18 141.67 75.27 140C96.36 138.33 117.45 150.67 138.55 148C159.64 145.33 180.73 126.67 201.82 124C222.91 121.33 243.99 135.17 265.09 132C286.18 128.83 307.27 107.83 328.36 105C349.45 102.17 370.55 117.83 391.64 115C412.73 112.17 433.82 90.83 454.91 88C476 85.17 497.09 100.67 518.18 98C539.27 95.33 560.36 74.67 581.45 72C602.55 69.33 623.64 84.67 644.73 82C665.82 78.67 686.91 62 708 52L708 216L12 216Z"/>
+              <path class="trend-line" d="M12 158C33.09 152 54.18 141.67 75.27 140C96.36 138.33 117.45 150.67 138.55 148C159.64 145.33 180.73 126.67 201.82 124C222.91 121.33 243.99 135.17 265.09 132C286.18 128.83 307.27 107.83 328.36 105C349.45 102.17 370.55 117.83 391.64 115C412.73 112.17 433.82 90.83 454.91 88C476 85.17 497.09 100.67 518.18 98C539.27 95.33 560.36 74.67 581.45 72C602.55 69.33 623.64 84.67 644.73 82C665.82 78.67 686.91 62 708 52"/>
+            </svg>
+            <span class="chart-point" style="left:1.67%;top:65.83%" aria-hidden="true"></span>
+            <span class="chart-point" style="left:10.45%;top:58.33%" aria-hidden="true"></span>
+            <span class="chart-point" style="left:19.24%;top:61.67%" aria-hidden="true"></span>
+            <span class="chart-point" style="left:28.03%;top:51.67%" aria-hidden="true"></span>
+            <span class="chart-point" style="left:36.82%;top:55%" aria-hidden="true"></span>
+            <span class="chart-point" style="left:45.61%;top:43.75%" aria-hidden="true"></span>
+            <span class="chart-point" style="left:54.39%;top:47.92%" aria-hidden="true"></span>
+            <span class="chart-point" style="left:63.18%;top:36.67%" aria-hidden="true"></span>
+            <span class="chart-point" style="left:71.97%;top:40.83%" aria-hidden="true"></span>
+            <span class="chart-point" style="left:80.76%;top:30%" aria-hidden="true"></span>
+            <span class="chart-point" style="left:89.55%;top:34.17%" aria-hidden="true"></span>
+            <span class="chart-end" aria-hidden="true"></span>
+          </div>
+
+          <div class="x-axis" aria-hidden="true">
+            <span class="first" style="left: 1.67%">Oct 26</span>
+            <span style="left: 19.24%">Oct 28</span>
+            <span style="left: 36.82%">Oct 30</span>
+            <span style="left: 54.39%">Nov 1</span>
+            <span style="left: 71.97%">Nov 3</span>
+            <span class="last" style="left: 98.33%">Nov 6</span>
+          </div>
+        </section>
+
+        <section class="card table-card" aria-labelledby="events-title">
+          <div class="card-head">
+            <div>
+              <h2 class="card-title" id="events-title">Events</h2>
+              <p class="card-sub">Tracked product events this period.</p>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <caption class="sr-only">Event volume, users, and trend</caption>
+              <colgroup>
+                <col class="col-event">
+                <col class="col-count">
+                <col class="col-users">
+                <col class="col-trend">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col">Event</th>
+                  <th scope="col" class="col-count">Count</th>
+                  <th scope="col" class="col-users">Users</th>
+                  <th scope="col" class="col-trend">Trend</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <span class="event">
+                      <span class="event-dot" style="--dot:#4d8b6b" aria-hidden="true"></span>
+                      <span class="event-name">signup_completed</span>
+                    </span>
+                  </td>
+                  <td class="col-count">8,204</td>
+                  <td class="col-users">6,731</td>
+                  <td class="col-trend"><span class="event-trend up" role="img" aria-label="Trending up">↑</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="event">
+                      <span class="event-dot" style="--dot:#b58a3e" aria-hidden="true"></span>
+                      <span class="event-name">checkout_started</span>
+                    </span>
+                  </td>
+                  <td class="col-count">3,918</td>
+                  <td class="col-users">3,102</td>
+                  <td class="col-trend"><span class="event-trend up" role="img" aria-label="Trending up">↑</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="event">
+                      <span class="event-dot" style="--dot:#b3635b" aria-hidden="true"></span>
+                      <span class="event-name">checkout_failed</span>
+                    </span>
+                  </td>
+                  <td class="col-count">412</td>
+                  <td class="col-users">388</td>
+                  <td class="col-trend"><span class="event-trend down" role="img" aria-label="Trending down">↓</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="event">
+                      <span class="event-dot" style="--dot:#5c809a" aria-hidden="true"></span>
+                      <span class="event-name">invite_sent</span>
+                    </span>
+                  </td>
+                  <td class="col-count">1,204</td>
+                  <td class="col-users">890</td>
+                  <td class="col-trend"><span class="event-trend up" role="img" aria-label="Trending up">↑</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="event">
+                      <span class="event-dot" style="--dot:#7d6d9b" aria-hidden="true"></span>
+                      <span class="event-name">export_created</span>
+                    </span>
+                  </td>
+                  <td class="col-count">268</td>
+                  <td class="col-users">201</td>
+                  <td class="col-trend"><span class="event-trend up" role="img" aria-label="Trending up">↑</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

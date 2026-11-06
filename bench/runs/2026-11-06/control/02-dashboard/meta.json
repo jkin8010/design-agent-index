@@ -1,0 +1,16 @@
+{
+ "skill": "control",
+ "repo": null,
+ "skill_commit": "",
+ "installed_skills": [],
+ "brief": "02-dashboard",
+ "agent": "claude",
+ "agent_version": "2.1.263 (Claude Code)",
+ "model_env": {},
+ "started": "2026-11-06T14:13:36",
+ "seconds": 613.9,
+ "exit_code": 0,
+ "html_written": true,
+ "html_bytes": 30739,
+ "stdout_tail": "Created `index.html`.\n"
+}

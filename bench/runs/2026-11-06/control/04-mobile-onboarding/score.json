@@ -1,0 +1,18 @@
+{
+ "total": 92,
+ "parts": {
+  "render": 10,
+  "responsive": 15,
+  "contrast": 14,
+  "typography": 10,
+  "colour": 7,
+  "anti_slop": 16,
+  "structure": 10,
+  "weight": 10
+ },
+ "slop_penalty": 4,
+ "skill": "control",
+ "brief": "04-mobile-onboarding",
+ "seconds": 325.4,
+ "agent": "claude"
+}

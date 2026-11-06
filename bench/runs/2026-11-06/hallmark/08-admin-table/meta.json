@@ -1,0 +1,18 @@
+{
+ "skill": "hallmark",
+ "repo": "Nutlope/hallmark",
+ "skill_commit": "407fa689f4a276f2fd389208d271d0fef08f5058",
+ "installed_skills": [
+  "hallmark-skills-hallmark"
+ ],
+ "brief": "08-admin-table",
+ "agent": "claude",
+ "agent_version": "2.1.263 (Claude Code)",
+ "model_env": {},
+ "started": "2026-11-06T15:11:28",
+ "seconds": 483.0,
+ "exit_code": 0,
+ "html_written": true,
+ "html_bytes": 17936,
+ "stdout_tail": "`index.html` is written in the workspace root, following the Hallmark floor and the brief’s constraints.\n\nIt includes the toolbar (search, status filter, working CSV export), the six-row orders table with tabular amounts and three status states, an honest one-page pagination control, and a labelled empty-state block. The table restacks into a compact two-line ledger at 375px with no horizontal overflow.\n\nNote: the skill’s `sloplint` script sits outside this session’s permitted path, so I verified the markup and layout by review rather than the scripted sweep.\n"
+}

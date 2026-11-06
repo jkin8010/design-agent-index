@@ -1,0 +1,1149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Pulse — Overview</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23141917'/%3E%3Cpath d='M5 17h5l2.4-6 4.6 12 2.6-7 1.6 1.6H27' fill='none' stroke='%2377dcb0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #f2f3ef;
+    --surface: #fdfdfb;
+    --surface-mute: #f7f8f4;
+    --ink: #141917;
+    --secondary: #46504a;
+    --muted: #5f6a63;
+    --faint: #8a938c;
+    --line: #e3e6e0;
+    --line-strong: #d3d8d1;
+    --accent: #0d684d;
+    --accent-ink: #0a4e3a;
+    --accent-soft: #e8f0ea;
+    --good: #0d684d;
+    --bad: #a34035;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    --sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --radius: 11px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  a, button { font: inherit; color: inherit; }
+  a { text-decoration: none; }
+  button { cursor: pointer; }
+
+  :where(a, button):focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .topbar {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 0 24px;
+    background: #fbfbf8;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+    border-radius: 6px;
+  }
+
+  .brand-mark {
+    width: 23px;
+    height: 23px;
+    flex: none;
+    display: grid;
+    place-items: center;
+    background: var(--ink);
+    border-radius: 6.5px;
+  }
+
+  .brand-mark svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+  }
+
+  .brand-name {
+    font-size: 17px;
+    font-weight: 650;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .brand-tag {
+    margin-left: 2px;
+    padding-left: 12px;
+    border-left: 1px solid var(--line-strong);
+    font-size: 12px;
+    font-weight: 450;
+    letter-spacing: 0.005em;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: none;
+  }
+
+  .range-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    height: 34px;
+    padding: 0 10px;
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    color: var(--ink);
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    white-space: nowrap;
+    transition: border-color 140ms ease, background-color 140ms ease;
+  }
+
+  .range-btn:hover {
+    border-color: #c3cac2;
+    background: #ffffff;
+  }
+
+  .range-btn svg {
+    color: var(--muted);
+    flex: none;
+  }
+
+  .avatar {
+    width: 31px;
+    height: 31px;
+    flex: none;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 1px solid rgba(10, 78, 58, 0.28);
+    border-radius: 50%;
+    background: linear-gradient(145deg, #337c63 0%, #12583f 100%);
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.13);
+    color: #ffffff;
+    font-size: 10.5px;
+    font-weight: 650;
+    letter-spacing: 0.03em;
+    line-height: 1;
+  }
+
+  .shell {
+    display: grid;
+    grid-template-columns: 212px minmax(0, 1fr);
+    min-height: calc(100vh - 64px);
+  }
+
+  .sidebar {
+    padding: 17px 13px 20px;
+    background: var(--surface-mute);
+    border-right: 1px solid var(--line);
+  }
+
+  .nav {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .nav-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 38px;
+    padding: 0 10px;
+    border-radius: 8px;
+    color: var(--secondary);
+    font-size: 13.5px;
+    font-weight: 500;
+    letter-spacing: -0.004em;
+    white-space: nowrap;
+    transition: background-color 140ms ease, color 140ms ease;
+  }
+
+  .nav-link svg {
+    width: 17px;
+    height: 17px;
+    flex: none;
+    color: var(--faint);
+    transition: color 140ms ease;
+  }
+
+  .nav-link:hover {
+    background: #eef0ea;
+    color: var(--ink);
+  }
+
+  .nav-link:hover svg { color: var(--secondary); }
+
+  .nav-link.is-active {
+    background: #e9ede6;
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .nav-link.is-active svg { color: var(--accent); }
+
+  .nav-link.is-active::after {
+    content: "";
+    width: 5px;
+    height: 5px;
+    margin-left: auto;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .main {
+    min-width: 0;
+    padding: 24px 28px 40px;
+  }
+
+  .main-inner {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .page-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 2px 0 18px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 24px;
+    line-height: 1.1;
+    font-weight: 650;
+    letter-spacing: -0.028em;
+  }
+
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .kpi {
+    position: relative;
+    min-width: 0;
+    padding: 16px 17px 15px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 1px 0 rgba(20, 25, 23, 0.02);
+  }
+
+  .kpi-label {
+    display: block;
+    padding-right: 24px;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 530;
+    line-height: 1.2;
+    letter-spacing: -0.003em;
+  }
+
+  .kpi-value {
+    margin: 10px 0 7px;
+    color: var(--ink);
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.032em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .kpi-delta {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
+  .kpi-delta.is-good { color: var(--good); }
+  .kpi-delta.is-bad { color: var(--bad); }
+
+  .kpi-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 16px;
+    height: 16px;
+    color: #949d96;
+  }
+
+  .lower {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .panel {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 1px 0 rgba(20, 25, 23, 0.02);
+  }
+
+  .panel-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 18px 6px;
+  }
+
+  .panel-title {
+    margin: 0;
+    font-size: 14.5px;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+  }
+
+  .panel-meta {
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  .chart-canvas {
+    position: relative;
+    flex: 1;
+    min-height: 248px;
+    margin: 6px 10px 10px 10px;
+  }
+
+  #chartSvg {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .chart-grid {
+    stroke: #e9ece6;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+  }
+
+  .chart-axis {
+    fill: var(--muted);
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  .chart-area {
+    fill: url(#chartAreaFill);
+  }
+
+  .chart-line {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .chart-dot {
+    fill: var(--accent);
+    stroke: var(--surface);
+    stroke-width: 1.5;
+  }
+
+  .chart-halo {
+    fill: var(--accent);
+    opacity: 0.1;
+  }
+
+  .chart-endpoint {
+    fill: var(--accent);
+    stroke: var(--surface);
+    stroke-width: 2;
+  }
+
+  .chart-value-label {
+    fill: var(--ink);
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hover-line {
+    stroke: #b7c3ba;
+    stroke-width: 1;
+    stroke-dasharray: 3 3;
+  }
+
+  .hover-dot {
+    fill: var(--accent);
+    stroke: var(--surface);
+    stroke-width: 2;
+  }
+
+  .chart-tip {
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 5px 9px;
+    border-radius: 7px;
+    background: var(--ink);
+    box-shadow: 0 6px 18px rgba(20, 25, 23, 0.16);
+    color: #f5f8f4;
+    font-size: 12px;
+    line-height: 1.3;
+    white-space: nowrap;
+    pointer-events: none;
+    transform: translate(-50%, -100%);
+  }
+
+  .chart-tip.below { transform: translate(-50%, 0); }
+  .chart-tip[hidden] { display: none; }
+
+  .tip-date {
+    color: #aeb9b1;
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+
+  .tip-value {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .table-wrap {
+    flex: 1;
+    min-width: 0;
+    padding: 2px 18px 12px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+  col.c-event { width: 44%; }
+  col.c-count { width: 20%; }
+  col.c-users { width: 20%; }
+  col.c-trend { width: 16%; }
+
+  thead th {
+    padding: 0 0 9px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 550;
+    line-height: 1.2;
+    letter-spacing: 0.005em;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  thead th:first-child { text-align: left; }
+
+  tbody td {
+    height: 47px;
+    padding: 0;
+    border-bottom: 1px solid #eceee9;
+    color: var(--secondary);
+    font-size: 12.5px;
+    vertical-align: middle;
+  }
+
+  tbody tr:last-child td { border-bottom: 0; }
+
+  tbody tr { transition: background-color 120ms ease; }
+  tbody tr:hover { background: var(--surface-mute); }
+
+  td.event {
+    overflow: hidden;
+    padding-right: 10px;
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: -0.015em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  td.num {
+    padding-left: 8px;
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  td.num.soft { color: var(--secondary); }
+
+  td.trend {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .trend-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .trend-arrow.up {
+    background: #e9f2ec;
+    color: var(--good);
+  }
+
+  .trend-arrow.down {
+    background: #f6e9e6;
+    color: var(--bad);
+  }
+
+  @media (max-width: 1160px) {
+    .lower { grid-template-columns: minmax(0, 1fr); }
+    .chart-canvas { min-height: 300px; }
+  }
+
+  @media (max-width: 980px) {
+    .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 760px) {
+    .topbar {
+      height: 58px;
+      padding: 0 14px;
+      gap: 10px;
+    }
+
+    .brand { gap: 8px; }
+    .brand-mark { width: 22px; height: 22px; }
+    .brand-name { font-size: 16px; }
+    .brand-tag { display: none; }
+
+    .topbar-actions { gap: 8px; }
+
+    .range-btn {
+      height: 32px;
+      padding: 0 9px;
+      gap: 6px;
+      font-size: 12px;
+    }
+
+    .range-btn .chev { display: none; }
+
+    .avatar {
+      width: 29px;
+      height: 29px;
+      font-size: 10px;
+    }
+
+    .shell {
+      grid-template-columns: minmax(0, 1fr);
+      min-height: calc(100vh - 58px);
+    }
+
+    .sidebar {
+      padding: 6px 10px;
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      flex-direction: row;
+      gap: 2px;
+    }
+
+    .nav-link {
+      flex: 1 1 0;
+      justify-content: center;
+      height: 41px;
+      padding: 0 4px;
+      gap: 0;
+      font-size: 12.5px;
+    }
+
+    .nav-link svg { display: none; }
+    .nav-link.is-active::after { display: none; }
+
+    .main { padding: 19px 16px 32px; }
+    .page-head { margin: 0 0 15px; }
+    h1 { font-size: 22px; }
+
+    .kpis { gap: 10px; margin-bottom: 10px; }
+
+    .kpi { padding: 14px 14px 13px; }
+
+    .kpi-label {
+      padding-right: 20px;
+      font-size: 12.5px;
+    }
+
+    .kpi-value {
+      margin: 9px 0 7px;
+      font-size: 25px;
+    }
+
+    .kpi-delta { font-size: 12px; }
+
+    .kpi-icon {
+      top: 13px;
+      right: 13px;
+      width: 15px;
+      height: 15px;
+    }
+
+    .lower { gap: 10px; }
+
+    .panel-head { padding: 14px 14px 5px; }
+
+    .chart-canvas {
+      min-height: 224px;
+      margin: 4px 8px 8px 8px;
+    }
+
+    .table-wrap { padding: 2px 14px 10px; }
+
+    tbody td { height: 45px; }
+
+    td.event { font-size: 12px; }
+    td.num { font-size: 12px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="#overview" aria-label="Pulse">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 13h4.2l2-5.4 4.1 10.8 2.4-6.4 1.5 1H22" stroke="#77dcb0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+    <span class="brand-name">Pulse</span>
+    <span class="brand-tag">Product analytics</span>
+  </a>
+
+  <div class="topbar-actions">
+    <button class="range-btn" type="button" aria-label="Date range: Last 30 days">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <rect x="2.2" y="3.2" width="11.6" height="10.6" rx="2" stroke="currentColor" stroke-width="1.3"/>
+        <path d="M2.6 6.2h10.8M5.4 2v2.4M10.6 2v2.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+      <span>Last 30 days</span>
+      <svg class="chev" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+        <path d="M2.6 3.9 5 6.3l2.4-2.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <button class="avatar" type="button" aria-label="Open account menu">AK</button>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="sidebar" aria-label="Workspace navigation">
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link is-active" href="#overview" aria-current="page">
+        <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <rect x="2" y="2" width="5.4" height="5.4" rx="1.4" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="10.6" y="2" width="5.4" height="5.4" rx="1.4" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="2" y="10.6" width="5.4" height="5.4" rx="1.4" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="10.6" y="10.6" width="5.4" height="5.4" rx="1.4" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <span>Overview</span>
+      </a>
+      <a class="nav-link" href="#funnels">
+        <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M2.2 2.8h13.6l-5 6.1v5.1l-3.6 1.6V8.9l-5-6.1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+        <span>Funnels</span>
+      </a>
+      <a class="nav-link" href="#retention">
+        <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M14.9 6.3A6.4 6.4 0 1 0 15 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M15.4 2.6v4.1h-4.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Retention</span>
+      </a>
+      <a class="nav-link" href="#settings">
+        <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M2.5 5.2h13M2.5 9h13M2.5 12.8h13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="6.6" cy="5.2" r="1.6" fill="var(--surface-mute)" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="11.6" cy="9" r="1.6" fill="var(--surface-mute)" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="5.2" cy="12.8" r="1.6" fill="var(--surface-mute)" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <span>Settings</span>
+      </a>
+    </nav>
+  </aside>
+
+  <main class="main" id="overview">
+    <div class="main-inner">
+      <div class="page-head">
+        <h1>Overview</h1>
+      </div>
+
+      <section class="kpis" aria-label="Key metrics">
+        <article class="kpi">
+          <span class="kpi-label">Active users</span>
+          <p class="kpi-value">12,480</p>
+          <p class="kpi-delta is-good">(+4.2%)</p>
+          <svg class="kpi-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <circle cx="6.8" cy="6.2" r="2.5" stroke="currentColor" stroke-width="1.4"/>
+            <path d="M2.3 15c.4-2.5 2.3-4.1 4.5-4.1s4.1 1.6 4.5 4.1M12 4.1a2.4 2.4 0 0 1 0 4.4M13.1 10.9c1.5.4 2.5 1.7 2.7 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+        </article>
+
+        <article class="kpi">
+          <span class="kpi-label">Retention</span>
+          <p class="kpi-value">38.1%</p>
+          <p class="kpi-delta is-bad">(−0.8%)</p>
+          <svg class="kpi-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M14.9 6.3A6.4 6.4 0 1 0 15 11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M15.4 2.6v4.1h-4.1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </article>
+
+        <article class="kpi">
+          <span class="kpi-label">Events</span>
+          <p class="kpi-value">4.2M</p>
+          <p class="kpi-delta is-good">(+11%)</p>
+          <svg class="kpi-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M1.8 9.2h3.1l1.7-4.7 3.1 8.9 1.9-5.1 1.2 1.1h3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </article>
+
+        <article class="kpi">
+          <span class="kpi-label">Error rate</span>
+          <p class="kpi-value">0.42%</p>
+          <p class="kpi-delta is-good">(−0.05%)</p>
+          <svg class="kpi-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M9 2.4 16 15H2L9 2.4Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+            <path d="M9 7.1v3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            <circle cx="9" cy="12.8" r="0.75" fill="currentColor"/>
+          </svg>
+        </article>
+      </section>
+
+      <div class="lower">
+        <section class="panel chart-panel" aria-labelledby="chartTitle">
+          <div class="panel-head">
+            <h2 class="panel-title" id="chartTitle">Active users</h2>
+            <span class="panel-meta">Oct 8 – Nov 6</span>
+          </div>
+          <div class="chart-canvas" id="chart">
+            <svg id="chartSvg" role="img" aria-labelledby="chartSvgTitle" aria-describedby="chartSvgDesc" viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg">
+              <title id="chartSvgTitle">Active users over the last 30 days</title>
+              <desc id="chartSvgDesc">A line chart with 12 points. Active users rise from 8,420 on October 8 to 12,480 on November 6.</desc>
+              <defs>
+                <linearGradient id="chartAreaFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#0d684d" stop-opacity="0.15"/>
+                  <stop offset="100%" stop-color="#0d684d" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <g id="chartLayer">
+                <polygon class="chart-area" points="34,103.5 93.5,96.7 152.9,100.4 212.4,91.2 271.8,82.7 331.3,86.6 390.7,76.2 450.2,69.1 509.6,73.1 569.1,59.5 628.5,49.1 688,40.6 688,234 34,234"/>
+                <polyline class="chart-line" points="34,103.5 93.5,96.7 152.9,100.4 212.4,91.2 271.8,82.7 331.3,86.6 390.7,76.2 450.2,69.1 509.6,73.1 569.1,59.5 628.5,49.1 688,40.6"/>
+                <circle class="chart-dot" cx="34" cy="103.5" r="2.4"/>
+                <circle class="chart-dot" cx="93.5" cy="96.7" r="2.4"/>
+                <circle class="chart-dot" cx="152.9" cy="100.4" r="2.4"/>
+                <circle class="chart-dot" cx="212.4" cy="91.2" r="2.4"/>
+                <circle class="chart-dot" cx="271.8" cy="82.7" r="2.4"/>
+                <circle class="chart-dot" cx="331.3" cy="86.6" r="2.4"/>
+                <circle class="chart-dot" cx="390.7" cy="76.2" r="2.4"/>
+                <circle class="chart-dot" cx="450.2" cy="69.1" r="2.4"/>
+                <circle class="chart-dot" cx="509.6" cy="73.1" r="2.4"/>
+                <circle class="chart-dot" cx="569.1" cy="59.5" r="2.4"/>
+                <circle class="chart-dot" cx="628.5" cy="49.1" r="2.4"/>
+                <circle class="chart-dot" cx="688" cy="40.6" r="2.4"/>
+              </g>
+              <g id="hovLayer"></g>
+            </svg>
+            <div class="chart-tip" id="chartTip" hidden></div>
+          </div>
+          <table class="sr-only">
+            <caption>Active users by date</caption>
+            <thead>
+              <tr><th scope="col">Date</th><th scope="col">Active users</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Oct 8</td><td>8,420</td></tr>
+              <tr><td>Oct 11</td><td>8,860</td></tr>
+              <tr><td>Oct 13</td><td>8,620</td></tr>
+              <tr><td>Oct 16</td><td>9,210</td></tr>
+              <tr><td>Oct 19</td><td>9,760</td></tr>
+              <tr><td>Oct 21</td><td>9,510</td></tr>
+              <tr><td>Oct 24</td><td>10,180</td></tr>
+              <tr><td>Oct 27</td><td>10,640</td></tr>
+              <tr><td>Oct 29</td><td>10,380</td></tr>
+              <tr><td>Nov 1</td><td>11,260</td></tr>
+              <tr><td>Nov 4</td><td>11,930</td></tr>
+              <tr><td>Nov 6</td><td>12,480</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="panel table-panel" aria-labelledby="tableTitle">
+          <div class="panel-head">
+            <h2 class="panel-title" id="tableTitle">Events</h2>
+            <span class="panel-meta">Last 30 days</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <colgroup>
+                <col class="c-event">
+                <col class="c-count">
+                <col class="c-users">
+                <col class="c-trend">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col">Event</th>
+                  <th scope="col">Count</th>
+                  <th scope="col">Users</th>
+                  <th scope="col">Trend</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="event">signup_completed</td>
+                  <td class="num">8,204</td>
+                  <td class="num soft">6,731</td>
+                  <td class="trend"><span class="trend-arrow up" aria-hidden="true">↑</span><span class="sr-only">Trending up</span></td>
+                </tr>
+                <tr>
+                  <td class="event">checkout_started</td>
+                  <td class="num">3,918</td>
+                  <td class="num soft">3,102</td>
+                  <td class="trend"><span class="trend-arrow up" aria-hidden="true">↑</span><span class="sr-only">Trending up</span></td>
+                </tr>
+                <tr>
+                  <td class="event">checkout_failed</td>
+                  <td class="num">412</td>
+                  <td class="num soft">388</td>
+                  <td class="trend"><span class="trend-arrow down" aria-hidden="true">↓</span><span class="sr-only">Trending down</span></td>
+                </tr>
+                <tr>
+                  <td class="event">invite_sent</td>
+                  <td class="num">1,204</td>
+                  <td class="num soft">890</td>
+                  <td class="trend"><span class="trend-arrow up" aria-hidden="true">↑</span><span class="sr-only">Trending up</span></td>
+                </tr>
+                <tr>
+                  <td class="event">export_created</td>
+                  <td class="num">268</td>
+                  <td class="num soft">201</td>
+                  <td class="trend"><span class="trend-arrow up" aria-hidden="true">↑</span><span class="sr-only">Trending up</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+(() => {
+  const data = [
+    { label: "Oct 8", value: 8420 },
+    { label: "Oct 11", value: 8860 },
+    { label: "Oct 13", value: 8620 },
+    { label: "Oct 16", value: 9210 },
+    { label: "Oct 19", value: 9760 },
+    { label: "Oct 21", value: 9510 },
+    { label: "Oct 24", value: 10180 },
+    { label: "Oct 27", value: 10640 },
+    { label: "Oct 29", value: 10380 },
+    { label: "Nov 1", value: 11260 },
+    { label: "Nov 4", value: 11930 },
+    { label: "Nov 6", value: 12480 }
+  ];
+
+  const NS = "http://www.w3.org/2000/svg";
+  const root = document.getElementById("chart");
+  const svg = document.getElementById("chartSvg");
+  const layer = document.getElementById("chartLayer");
+  const hovLayer = document.getElementById("hovLayer");
+  const tip = document.getElementById("chartTip");
+  const fmt = new Intl.NumberFormat("en-US");
+  const yMax = 14000;
+  const yTicks = [0, 4000, 8000, 12000, 14000];
+
+  let points = [];
+  let W = 0;
+  let H = 0;
+  let lastW = -1;
+  let lastH = -1;
+
+  const el = (tag, attrs, text) => {
+    const node = document.createElementNS(NS, tag);
+    for (const key in attrs) node.setAttribute(key, attrs[key]);
+    if (text != null) node.textContent = text;
+    return node;
+  };
+
+  const smoothPath = (pts) => {
+    const n = pts.length;
+    if (n < 2) return "";
+    const h = [];
+    const delta = [];
+    for (let i = 0; i < n - 1; i++) {
+      h[i] = pts[i + 1].x - pts[i].x;
+      delta[i] = (pts[i + 1].y - pts[i].y) / h[i];
+    }
+    const m = new Array(n);
+    m[0] = delta[0];
+    m[n - 1] = delta[n - 2];
+    for (let i = 1; i < n - 1; i++) {
+      if (delta[i - 1] * delta[i] <= 0) {
+        m[i] = 0;
+      } else {
+        const w1 = 2 * h[i] + h[i - 1];
+        const w2 = h[i] + 2 * h[i - 1];
+        m[i] = (w1 + w2) / (w1 / delta[i - 1] + w2 / delta[i]);
+      }
+    }
+    let d = `M ${pts[0].x.toFixed(2)} ${pts[0].y.toFixed(2)}`;
+    for (let i = 0; i < n - 1; i++) {
+      const c1x = pts[i].x + h[i] / 3;
+      const c1y = pts[i].y + (m[i] * h[i]) / 3;
+      const c2x = pts[i + 1].x - h[i] / 3;
+      const c2y = pts[i + 1].y - (m[i + 1] * h[i]) / 3;
+      d += ` C ${c1x.toFixed(2)} ${c1y.toFixed(2)} ${c2x.toFixed(2)} ${c2y.toFixed(2)} ${pts[i + 1].x.toFixed(2)} ${pts[i + 1].y.toFixed(2)}`;
+    }
+    return d;
+  };
+
+  const draw = () => {
+    const rect = root.getBoundingClientRect();
+    const w = Math.max(280, Math.round(rect.width));
+    const h = Math.max(170, Math.round(rect.height));
+    if (w === lastW && h === lastH) return;
+    lastW = w;
+    lastH = h;
+    W = w;
+    H = h;
+
+    svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+    svg.setAttribute("width", w);
+    svg.setAttribute("height", h);
+    layer.replaceChildren();
+    hovLayer.replaceChildren();
+    tip.hidden = true;
+
+    const m = { top: 17, right: 12, bottom: 26, left: 34 };
+    const iw = w - m.left - m.right;
+    const ih = h - m.top - m.bottom;
+    const x = (i) => m.left + (i / (data.length - 1)) * iw;
+    const y = (v) => m.top + ih - (v / yMax) * ih;
+
+    points = data.map((d, i) => ({ x: x(i), y: y(d.value), label: d.label, value: d.value }));
+
+    yTicks.forEach((tick) => {
+      const ty = y(tick);
+      layer.appendChild(el("line", {
+        x1: m.left,
+        x2: w - m.right,
+        y1: ty,
+        y2: ty,
+        class: "chart-grid"
+      }));
+      layer.appendChild(el("text", {
+        x: m.left - 8,
+        y: ty,
+        class: "chart-axis",
+        "text-anchor": "end",
+        "dominant-baseline": "middle"
+      }, tick === 0 ? "0" : fmt.format(tick / 1000).replace(",", ".") + "k"));
+    });
+
+    const lineD = smoothPath(points);
+    const baseline = m.top + ih;
+    const areaD = `${lineD} L ${points[points.length - 1].x.toFixed(2)} ${baseline} L ${points[0].x.toFixed(2)} ${baseline} Z`;
+
+    layer.appendChild(el("path", { d: areaD, class: "chart-area" }));
+    layer.appendChild(el("path", { d: lineD, class: "chart-line" }));
+
+    points.forEach((p) => {
+      layer.appendChild(el("circle", {
+        cx: p.x,
+        cy: p.y,
+        r: 2.4,
+        class: "chart-dot"
+      }));
+    });
+
+    const last = points[points.length - 1];
+    layer.appendChild(el("circle", {
+      cx: last.x,
+      cy: last.y,
+      r: 9,
+      class: "chart-halo"
+    }));
+    layer.appendChild(el("circle", {
+      cx: last.x,
+      cy: last.y,
+      r: 4.5,
+      class: "chart-endpoint"
+    }));
+    layer.appendChild(el("text", {
+      x: last.x - 6,
+      y: last.y - 13,
+      class: "chart-value-label",
+      "text-anchor": "end"
+    }, fmt.format(last.value)));
+
+    const labelIdx = w < 460 ? [0, 4, 8, 11] : [0, 3, 6, 9, 11];
+    labelIdx.forEach((i, n) => {
+      const p = points[i];
+      const anchor = n === 0 ? "start" : n === labelIdx.length - 1 ? "end" : "middle";
+      layer.appendChild(el("text", {
+        x: p.x,
+        y: h - 7,
+        class: "chart-axis",
+        "text-anchor": anchor
+      }, p.label));
+    });
+  };
+
+  const hideHover = () => {
+    hovLayer.replaceChildren();
+    tip.hidden = true;
+  };
+
+  const showHover = (event) => {
+    if (!points.length) return;
+    const rect = svg.getBoundingClientRect();
+    const localX = ((event.clientX - rect.left) / rect.width) * W;
+    let nearest = 0;
+    for (let i = 1; i < points.length; i++) {
+      if (Math.abs(points[i].x - localX) < Math.abs(points[nearest].x - localX)) nearest = i;
+    }
+    const p = points[nearest];
+    hovLayer.replaceChildren();
+    hovLayer.appendChild(el("line", {
+      x1: p.x,
+      x2: p.x,
+      y1: 17,
+      y2: H - 26,
+      class: "hover-line"
+    }));
+    hovLayer.appendChild(el("circle", {
+      cx: p.x,
+      cy: p.y,
+      r: 5,
+      class: "hover-dot"
+    }));
+
+    tip.replaceChildren();
+    const date = document.createElement("span");
+    date.className = "tip-date";
+    date.textContent = p.label;
+    const value = document.createElement("span");
+    value.className = "tip-value";
+    value.textContent = fmt.format(p.value);
+    tip.append(date, value);
+    tip.hidden = false;
+
+    const clampedX = Math.min(Math.max(p.x, 62), W - 62);
+    const below = p.y < 58;
+    tip.classList.toggle("below", below);
+    tip.style.left = `${clampedX}px`;
+    tip.style.top = `${below ? p.y + 16 : p.y - 12}px`;
+  };
+
+  svg.addEventListener("pointermove", showHover);
+  svg.addEventListener("pointerleave", hideHover);
+
+  if ("ResizeObserver" in window) {
+    const ro = new ResizeObserver(() => requestAnimationFrame(draw));
+    ro.observe(root);
+  } else {
+    window.addEventListener("resize", draw);
+  }
+
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+ "skill": "control",
+ "repo": null,
+ "skill_commit": "",
+ "installed_skills": [],
+ "brief": "04-mobile-onboarding",
+ "agent": "claude",
+ "agent_version": "2.1.263 (Claude Code)",
+ "model_env": {},
+ "started": "2026-11-06T14:19:06",
+ "seconds": 325.4,
+ "exit_code": 0,
+ "html_written": true,
+ "html_bytes": 22919,
+ "stdout_tail": "Wrote `index.html`.\n"
+}

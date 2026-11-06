@@ -1,0 +1,18 @@
+{
+ "total": 79,
+ "parts": {
+  "render": 10,
+  "responsive": 10,
+  "contrast": 14,
+  "typography": 7,
+  "colour": 2,
+  "anti_slop": 16,
+  "structure": 10,
+  "weight": 10
+ },
+ "slop_penalty": 4,
+ "skill": "control",
+ "brief": "02-dashboard",
+ "seconds": 613.9,
+ "agent": "claude"
+}

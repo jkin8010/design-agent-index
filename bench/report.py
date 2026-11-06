@@ -49,8 +49,8 @@ def main():
         s = scores[k]
         d = os.path.join(base, *k.split("/"))
         cards.append(
-            f'<figure><img src="{k}/shot-1440.png"><figcaption>{k} — <b>{s["total"]}</b></figcaption></figure>'
-            f'<figure><img class="m" src="{k}/shot-375.png"><figcaption>375px</figcaption></figure>'
+            f'<figure><img src="{k}/shot-1440.jpg"><figcaption>{k} — <b>{s["total"]}</b></figcaption></figure>'
+            f'<figure><img class="m" src="{k}/shot-375.jpg"><figcaption>375px</figcaption></figure>'
         )
     html = ("<!doctype html><meta charset=utf-8><title>bench</title>"
             "<style>body{font:14px/1.5 system-ui;margin:24px;background:#111;color:#eee}"

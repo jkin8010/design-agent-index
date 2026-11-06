@@ -15,8 +15,8 @@ bench/runs/<date>/<skill>/<brief>/
   meta.json      model, CLI version, skill commit, duration, exit code
   metrics.json   objective measurements (playwright)
   score.json     the 0–100 score with its component breakdown
-  shot-1440.png  render at 1440px
-  shot-375.png   render at 375px
+  shot-1440.jpg  render at 1440px
+  shot-375.jpg   render at 375px
 ```
 
 A *cell* is one (skill, brief) pair. The control cell has no skill installed — it is the baseline

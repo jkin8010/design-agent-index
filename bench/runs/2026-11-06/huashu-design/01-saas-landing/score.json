@@ -1,0 +1,18 @@
+{
+ "total": 77,
+ "parts": {
+  "render": 10,
+  "responsive": 10,
+  "contrast": 14,
+  "typography": 5,
+  "colour": 2,
+  "anti_slop": 16,
+  "structure": 10,
+  "weight": 10
+ },
+ "slop_penalty": 4,
+ "skill": "huashu-design",
+ "brief": "01-saas-landing",
+ "seconds": 900.1,
+ "agent": "claude"
+}

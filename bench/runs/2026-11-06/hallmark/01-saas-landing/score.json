@@ -1,11 +1,11 @@
 {
- "total": 89,
+ "total": 100,
  "parts": {
   "render": 10,
-  "responsive": 10,
+  "responsive": 15,
   "contrast": 15,
-  "typography": 7,
-  "colour": 7,
+  "typography": 10,
+  "colour": 10,
   "anti_slop": 20,
   "structure": 10,
   "weight": 10
@@ -13,6 +13,6 @@
  "slop_penalty": 0,
  "skill": "hallmark",
  "brief": "01-saas-landing",
- "seconds": 660,
+ "seconds": 900.1,
  "agent": "claude"
 }

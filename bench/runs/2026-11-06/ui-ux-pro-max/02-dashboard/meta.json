@@ -1,0 +1,30 @@
+{
+ "skill": "ui-ux-pro-max",
+ "repo": "nextlevelbuilder/ui-ux-pro-max-skill",
+ "skill_commit": "b7d5353e0130feb8c5574ef1251f8a1db1873ccb",
+ "installed_skills": [
+  "ui-ux-pro-max-.claude-skills-ui-ux-pro-max",
+  "ui-ux-pro-max-.claude-skills-design",
+  "ui-ux-pro-max-.claude-skills-banner-design",
+  "ui-ux-pro-max-.claude-skills-ui-styling",
+  "ui-ux-pro-max-.claude-skills-brand",
+  "ui-ux-pro-max-.claude-skills-slides",
+  "ui-ux-pro-max-.claude-skills-design-system",
+  "ui-ux-pro-max-cli-assets-skills-design",
+  "ui-ux-pro-max-cli-assets-skills-banner-design",
+  "ui-ux-pro-max-cli-assets-skills-ui-styling",
+  "ui-ux-pro-max-cli-assets-skills-brand",
+  "ui-ux-pro-max-cli-assets-skills-slides",
+  "ui-ux-pro-max-cli-assets-skills-design-system"
+ ],
+ "brief": "02-dashboard",
+ "agent": "claude",
+ "agent_version": "2.1.263 (Claude Code)",
+ "model_env": {},
+ "started": "2026-11-06T14:40:48",
+ "seconds": 871.2,
+ "exit_code": 0,
+ "html_written": true,
+ "html_bytes": 27646,
+ "stdout_tail": "`index.html` is written in the workspace root — a single self-contained file with:\n\n- Pulse app shell: top bar (wordmark, date-range control, avatar) and left nav (Overview, Funnels, Retention, Settings; horizontal tab bar below 820px)\n- Four KPI cards with the exact required values and deltas\n- A responsive 12-point inline SVG line chart with hairline gridlines, endpoint label, crosshair tooltip, keyboard inspection, and an expandable data table\n- The five-event table with Event / Count / Users / Trend, plus a compact footer\n\nThe markup and required copy were verified statically. The sandbox blocked launching a browser, so I couldn't capture screenshots at 375/1440.\n"
+}

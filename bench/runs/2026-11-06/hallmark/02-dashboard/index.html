@@ -1,0 +1,1362 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Pulse Overview</title>
+<style>
+/* Hallmark · v2.0.0 · genre: modern-minimal · deal: manual · theme: Signal · shape: Instrument panel · job: monitor performance · signature: twelve-week pulse chart */
+/* Critique: one chart carries the screen; the chrome recedes, hairlines hold the density, and the accent is spent only on the signal. */
+/* waive: none · answered: app-screen scope, 375px layout, reduced motion */
+:root {
+  --font-ui: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --bg: #F3F1EA;
+  --surface: #FBFAF6;
+  --surface-2: #F5F3ED;
+  --ink: #1E2523;
+  --ink-2: #5E6965;
+  --ink-3: #66706B;
+  --line: #DEDCD3;
+  --line-2: #CECBC1;
+  --rail: #1A2321;
+  --rail-2: #24302D;
+  --rail-3: #2C3935;
+  --rail-line: #33403C;
+  --rail-line-strong: #45534E;
+  --rail-ink: #AEB8B3;
+  --rail-ink-2: #818D87;
+  --rail-ink-strong: #F3EFE4;
+  --accent: #C35232;
+  --accent-soft: #F0DED5;
+  --on-accent: #FFF9F0;
+  --avatar-bg: #D9D3C4;
+  --avatar-hover: #E4DED0;
+  --avatar-ink: #2B3431;
+  --tooltip-muted: #C9D1CC;
+  --focus: #236B5E;
+  --focus-dark: #F0AB8E;
+  --shadow: rgba(16, 23, 21, 0.12);
+  --clear: transparent;
+  --radius-sm: 6px;
+  --radius-md: 11px;
+  --radius-pill: 999px;
+  --shell-max: 1480px;
+  --plot-h: 264px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  overflow-x: clip;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button {
+  margin: 0;
+  border: 0;
+  background: var(--clear);
+  color: inherit;
+  font: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+a {
+  color: inherit;
+}
+
+svg {
+  display: block;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1,
+h2 {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+:where(a, button, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--ink);
+  color: var(--surface);
+  font-size: 13px;
+  text-decoration: none;
+  transform: translateY(-180%);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 224px minmax(0, 1fr);
+  grid-template-rows: 68px minmax(0, 1fr);
+  width: 100%;
+  max-width: var(--shell-max);
+  min-height: 100dvh;
+  margin-inline: auto;
+  overflow: clip;
+  background: var(--bg);
+}
+
+.topbar {
+  position: relative;
+  z-index: 3;
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 22px 0 24px;
+  border-bottom: 1px solid var(--rail-line);
+  background: var(--rail);
+  color: var(--rail-ink-strong);
+  --focus: var(--focus-dark);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: var(--radius-sm);
+  color: var(--rail-ink-strong);
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.brand-mark svg {
+  width: 17px;
+  height: 17px;
+}
+
+.brand-name {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.topbar-tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.range-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 11px;
+  border: 1px solid var(--rail-line);
+  border-radius: 8px;
+  background: var(--rail-2);
+  color: var(--rail-ink-strong);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.16s var(--ease), border-color 0.16s var(--ease);
+}
+
+.range-control:hover {
+  background: var(--rail-3);
+  border-color: var(--rail-line-strong);
+}
+
+.range-control:active {
+  transform: translateY(1px);
+}
+
+.range-control .icon {
+  width: 15px;
+  height: 15px;
+  color: var(--rail-ink);
+}
+
+.range-chevron {
+  width: 12px;
+  height: 12px;
+  margin-left: 1px;
+  color: var(--rail-ink-2);
+}
+
+.topbar-rule {
+  width: 1px;
+  height: 22px;
+  background: var(--rail-line);
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--rail-line);
+  border-radius: var(--radius-pill);
+  background: var(--avatar-bg);
+  color: var(--avatar-ink);
+  cursor: pointer;
+  transition: background-color 0.16s var(--ease), transform 0.16s var(--ease);
+}
+
+.avatar:hover {
+  background: var(--avatar-hover);
+}
+
+.avatar:active {
+  transform: scale(0.96);
+}
+
+.avatar svg {
+  width: 18px;
+  height: 18px;
+}
+
+.icon,
+.nav-icon {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.rail {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 24px 14px;
+  border-right: 1px solid var(--rail-line);
+  background: var(--rail);
+  --focus: var(--focus-dark);
+}
+
+.nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--rail-ink);
+  font-size: 13.5px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s var(--ease), color 0.15s var(--ease);
+}
+
+.nav-item:hover {
+  background: var(--rail-2);
+  color: var(--rail-ink-strong);
+}
+
+.nav-item[aria-current="page"] {
+  background: var(--rail-3);
+  color: var(--rail-ink-strong);
+  font-weight: 600;
+}
+
+.nav-item[aria-current="page"]::before {
+  position: absolute;
+  top: 9px;
+  bottom: 9px;
+  left: 0;
+  width: 2px;
+  border-radius: 0 2px 2px 0;
+  background: var(--accent);
+  content: "";
+}
+
+.nav-icon {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  color: var(--rail-ink-2);
+}
+
+.nav-item:hover .nav-icon,
+.nav-item[aria-current="page"] .nav-icon {
+  color: var(--rail-ink-strong);
+}
+
+main {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 30px 34px 36px;
+}
+
+.page-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 19px;
+}
+
+h1 {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.kpi {
+  min-width: 0;
+  padding: 15px 16px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+
+.kpi-label {
+  margin-bottom: 9px;
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.kpi-value {
+  color: var(--ink);
+  font-size: clamp(27px, 2.3vw, 32px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  font-variant-numeric: tabular-nums;
+}
+
+.kpi-delta {
+  margin-top: 8px;
+  color: var(--ink-2);
+  font-size: 12.5px;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.dashboard-grid {
+  display: grid;
+  flex: 1;
+  grid-template-columns: minmax(0, 1.58fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: stretch;
+  min-height: 0;
+}
+
+.panel {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 56px;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.panel-head h2 {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+.panel-note {
+  color: var(--ink-3);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.chart-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.chart {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  margin: 0;
+}
+
+.chart-grid {
+  display: grid;
+  flex: 1;
+  grid-template-columns: 30px minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto;
+  column-gap: 8px;
+  row-gap: 8px;
+  min-height: 0;
+  padding: 16px 20px 10px;
+}
+
+.y-axis {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: auto;
+  min-height: var(--plot-h);
+  padding-block: 1px;
+  color: var(--ink-3);
+  font-size: 11px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.plot {
+  position: relative;
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  min-height: var(--plot-h);
+  touch-action: pan-y;
+  cursor: crosshair;
+}
+
+.chart-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.grid-line {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1;
+  stroke-dasharray: 2 5;
+  vector-effect: non-scaling-stroke;
+}
+
+.axis-line {
+  fill: none;
+  stroke: var(--line-2);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.series-area {
+  fill: url(#area-fill);
+}
+
+.area-stop-top {
+  stop-color: var(--accent);
+  stop-opacity: 0.14;
+}
+
+.area-stop-bottom {
+  stop-color: var(--accent);
+  stop-opacity: 0;
+}
+
+.series-line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.chart-point {
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-pill);
+  transform: translate(-50%, -50%);
+}
+
+.chart-point::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  box-shadow: 0 0 0 2px var(--surface);
+  content: "";
+  transform: translate(-50%, -50%);
+  transition: transform 0.14s var(--ease), box-shadow 0.14s var(--ease);
+}
+
+.chart-point.is-latest::before {
+  width: 10px;
+  height: 10px;
+}
+
+.chart-point.is-active::before {
+  box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent-soft);
+  transform: translate(-50%, -50%) scale(1.35);
+}
+
+.chart-cursor {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--line-2);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chart-cursor[data-visible="true"] {
+  opacity: 1;
+}
+
+.chart-tip {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  gap: 2px;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--ink);
+  color: var(--surface);
+  box-shadow: 0 8px 24px var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, calc(-100% - 10px));
+  transition: opacity 0.12s var(--ease);
+}
+
+.chart-tip[data-visible="true"] {
+  opacity: 1;
+}
+
+.chart-tip[data-align="start"] {
+  transform: translate(0, calc(-100% - 10px));
+}
+
+.chart-tip[data-align="end"] {
+  transform: translate(-100%, calc(-100% - 10px));
+}
+
+.tip-week {
+  color: var(--tooltip-muted);
+  font-size: 10.5px;
+  line-height: 1.2;
+}
+
+.tip-value {
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.x-axis {
+  position: relative;
+  grid-column: 2;
+  grid-row: 2;
+  height: 14px;
+  color: var(--ink-3);
+  font-size: 11px;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.x-axis span {
+  position: absolute;
+  top: 0;
+  left: var(--tick);
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.x-axis span:first-child {
+  left: 0;
+  transform: none;
+}
+
+.x-axis span:last-child {
+  left: 100%;
+  transform: translateX(-100%);
+}
+
+.x-axis span:nth-child(2) {
+  --tick: 27.27%;
+}
+
+.x-axis span:nth-child(3) {
+  --tick: 54.55%;
+}
+
+.chart-data {
+  margin-top: auto;
+  border-top: 1px solid var(--line);
+}
+
+.chart-data summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 20px;
+  color: var(--ink-2);
+  font-size: 12px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.chart-data summary::-webkit-details-marker {
+  display: none;
+}
+
+.chart-data summary svg {
+  width: 11px;
+  height: 11px;
+  color: var(--ink-3);
+  transition: transform 0.16s var(--ease);
+}
+
+.chart-data[open] summary svg {
+  transform: rotate(90deg);
+}
+
+.data-body {
+  padding: 0 20px 16px;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--ink-2);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.data-table th,
+.data-table td {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.data-table th {
+  color: var(--ink-3);
+  font-weight: 500;
+}
+
+.data-table td:last-child,
+.data-table th:last-child {
+  text-align: right;
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.table-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.table-foot {
+  padding: 11px 20px;
+  border-top: 1px solid var(--line);
+  color: var(--ink-3);
+  font-size: 11.5px;
+}
+
+.table-wrap {
+  display: flex;
+  flex: 1;
+  padding: 0 20px;
+}
+
+.top-events {
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.top-events th {
+  padding: 10px 6px 9px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-3);
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.2;
+  text-align: right;
+}
+
+.top-events th:first-child,
+.top-events td:first-child {
+  padding-left: 0;
+  text-align: left;
+}
+
+.top-events th:last-child,
+.top-events td:last-child {
+  padding-right: 0;
+  text-align: center;
+}
+
+.top-events td {
+  padding: 13px 6px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+
+.top-events tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.top-events tbody tr {
+  transition: background-color 0.12s var(--ease);
+}
+
+.top-events tbody tr:hover {
+  background: var(--surface-2);
+}
+
+.event-name {
+  display: inline-block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+
+.num {
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.trend-arrow {
+  display: inline-block;
+  color: var(--ink-2);
+  font-size: 14px;
+  line-height: 1;
+  text-align: center;
+}
+
+@media (max-width: 1240px) {
+  .dashboard-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .table-panel {
+    min-height: 330px;
+  }
+}
+
+@media (max-width: 900px) {
+  :root {
+    --plot-h: 226px;
+  }
+
+  .app {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 60px auto minmax(0, 1fr);
+    min-height: 100dvh;
+  }
+
+  .topbar {
+    grid-column: 1;
+    grid-row: 1;
+    padding: 0 16px;
+  }
+
+  .rail {
+    grid-column: 1;
+    grid-row: 2;
+    flex-direction: row;
+    gap: 2px;
+    padding: 4px 6px;
+    border-right: 0;
+    border-bottom: 1px solid var(--rail-line);
+  }
+
+  .nav-item {
+    flex: 1;
+    justify-content: center;
+    gap: 7px;
+    padding: 11px 5px;
+    font-size: 12.5px;
+  }
+
+  .nav-item[aria-current="page"]::before {
+    top: auto;
+    right: 9px;
+    bottom: 0;
+    left: 9px;
+    width: auto;
+    height: 2px;
+    border-radius: 2px 2px 0 0;
+  }
+
+  .nav-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  main {
+    grid-column: 1;
+    grid-row: 3;
+    padding: 22px 18px 28px;
+  }
+
+  .range-control {
+    height: 34px;
+    padding: 0 9px;
+    gap: 6px;
+    font-size: 12.5px;
+  }
+
+  .range-control .icon-calendar,
+  .topbar-rule {
+    display: none;
+  }
+
+  .avatar {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --plot-h: 204px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  .page-head {
+    margin-bottom: 16px;
+  }
+
+  .kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .kpi {
+    padding: 14px;
+  }
+
+  .kpi-value {
+    font-size: 28px;
+  }
+
+  .dashboard-grid {
+    gap: 14px;
+  }
+
+  .panel-head {
+    min-height: 52px;
+    padding: 0 16px;
+  }
+
+  .chart-grid {
+    grid-template-columns: 26px minmax(0, 1fr);
+    padding: 14px 16px 8px;
+  }
+
+  .chart-data summary {
+    height: 36px;
+    padding: 0 16px;
+  }
+
+  .data-body {
+    padding: 0 16px 14px;
+  }
+
+  .table-wrap {
+    padding: 0 16px;
+  }
+
+  .table-foot {
+    padding: 10px 16px;
+  }
+
+  .top-events {
+    font-size: 12.5px;
+  }
+
+  .top-events th {
+    padding: 9px 4px 8px;
+    font-size: 11px;
+  }
+
+  .top-events td {
+    padding: 11px 4px;
+  }
+
+  .table-panel {
+    min-height: 300px;
+  }
+
+  .brand-name {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  .topbar {
+    gap: 10px;
+    padding: 0 12px;
+  }
+
+  main {
+    padding: 18px 12px 24px;
+  }
+
+  .range-chevron {
+    display: none;
+  }
+
+  .nav-item {
+    gap: 5px;
+    padding-inline: 4px;
+    font-size: 12px;
+  }
+
+  .top-events {
+    font-size: 12px;
+  }
+
+  .event-name {
+    letter-spacing: -0.01em;
+  }
+
+  .panel-head {
+    padding: 0 14px;
+  }
+
+  .chart-grid {
+    padding: 13px 14px 8px;
+  }
+
+  .chart-data summary {
+    padding: 0 14px;
+  }
+
+  .data-body {
+    padding: 0 14px 14px;
+  }
+
+  .table-wrap {
+    padding: 0 14px;
+  }
+
+  .table-foot {
+    padding-inline: 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .nav-icon {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="app">
+  <header class="topbar">
+    <a class="brand" href="#main" aria-label="Pulse home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M2.5 12h4l2.1-4.8 3.1 9.6 2.5-7 1.7 2.2h5.6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="brand-name">Pulse</span>
+    </a>
+    <div class="topbar-tools">
+      <button class="range-control" type="button" aria-label="Date range, Aug 17 – Nov 2">
+        <svg class="icon icon-calendar" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3.5" y="5.5" width="17" height="15" rx="2.5"/>
+          <path d="M7.5 3.5v4M16.5 3.5v4M3.5 10h17"/>
+        </svg>
+        <span>Aug 17 – Nov 2</span>
+        <svg class="icon range-chevron" viewBox="0 0 12 12" aria-hidden="true">
+          <path d="m3 4.5 3 3 3-3"/>
+        </svg>
+      </button>
+      <span class="topbar-rule" aria-hidden="true"></span>
+      <button class="avatar" type="button" aria-label="Open account menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="8.5" r="3.4" fill="currentColor"/>
+          <path d="M5.2 20c.6-4 3.3-6.2 6.8-6.2s6.2 2.2 6.8 6.2" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="Primary">
+    <button class="nav-item" type="button" aria-current="page">
+      <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/>
+        <rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/>
+        <rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>
+        <rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/>
+      </svg>
+      <span>Overview</span>
+    </button>
+    <button class="nav-item" type="button">
+      <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 5.5h16l-6.2 7v5.1l-3.6 1.9v-7L4 5.5Z"/>
+      </svg>
+      <span>Funnels</span>
+    </button>
+    <button class="nav-item" type="button">
+      <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20 11.2a8 8 0 1 0-2.3 5.5"/>
+        <path d="M20 5v6.2h-6.2"/>
+      </svg>
+      <span>Retention</span>
+    </button>
+    <button class="nav-item" type="button">
+      <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 7h8M16 7h4M4 17h4M12 17h8"/>
+        <circle cx="14" cy="7" r="2"/>
+        <circle cx="10" cy="17" r="2"/>
+      </svg>
+      <span>Settings</span>
+    </button>
+  </nav>
+
+  <main id="main">
+    <header class="page-head">
+      <h1>Overview</h1>
+    </header>
+
+    <section class="kpis" aria-label="Key metrics">
+      <article class="kpi">
+        <h2 class="kpi-label">Active users</h2>
+        <p class="kpi-value">12,480</p>
+        <p class="kpi-delta">(+4.2%)</p>
+      </article>
+      <article class="kpi">
+        <h2 class="kpi-label">Retention</h2>
+        <p class="kpi-value">38.1%</p>
+        <p class="kpi-delta">(−0.8%)</p>
+      </article>
+      <article class="kpi">
+        <h2 class="kpi-label">Events</h2>
+        <p class="kpi-value">4.2M</p>
+        <p class="kpi-delta">(+11%)</p>
+      </article>
+      <article class="kpi">
+        <h2 class="kpi-label">Error rate</h2>
+        <p class="kpi-value">0.42%</p>
+        <p class="kpi-delta">(−0.05%)</p>
+      </article>
+    </section>
+
+    <div class="dashboard-grid">
+      <section class="panel chart-panel" aria-labelledby="chart-heading">
+        <div class="panel-head">
+          <h2 id="chart-heading">Active users</h2>
+          <span class="panel-note">Weekly</span>
+        </div>
+        <figure class="chart">
+          <figcaption class="sr-only">Active users over the last 12 weeks, rising from 10,840 in the week of August 17 to 12,480 in the week of November 2.</figcaption>
+          <div class="chart-grid" aria-hidden="true">
+            <div class="y-axis">
+              <span>13k</span>
+              <span>12k</span>
+              <span>11k</span>
+              <span>10k</span>
+            </div>
+            <div class="plot">
+              <svg class="chart-svg" viewBox="0 0 1200 300" preserveAspectRatio="none" focusable="false">
+                <defs>
+                  <linearGradient id="area-fill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" class="area-stop-top"/>
+                    <stop offset="1" class="area-stop-bottom"/>
+                  </linearGradient>
+                </defs>
+                <line class="grid-line" x1="0" y1="0.5" x2="1200" y2="0.5"/>
+                <line class="grid-line" x1="0" y1="100" x2="1200" y2="100"/>
+                <line class="grid-line" x1="0" y1="200" x2="1200" y2="200"/>
+                <line class="axis-line" x1="0" y1="299.5" x2="1200" y2="299.5"/>
+                <path class="series-area" d="M0 216 L109.09 188 L218.18 202 L327.27 164 L436.36 138 L545.45 152 L654.55 126 L763.64 101 L872.73 119 L981.82 94 L1090.91 71 L1200 52 L1200 300 L0 300 Z"/>
+                <path class="series-line" d="M0 216 L109.09 188 L218.18 202 L327.27 164 L436.36 138 L545.45 152 L654.55 126 L763.64 101 L872.73 119 L981.82 94 L1090.91 71 L1200 52"/>
+              </svg>
+              <span class="chart-cursor"></span>
+              <span class="chart-point" style="--x:0%; --y:72%" data-week="Aug 17" data-value="10,840"></span>
+              <span class="chart-point" style="--x:9.09%; --y:62.67%" data-week="Aug 24" data-value="11,120"></span>
+              <span class="chart-point" style="--x:18.18%; --y:67.33%" data-week="Aug 31" data-value="10,980"></span>
+              <span class="chart-point" style="--x:27.27%; --y:54.67%" data-week="Sep 7" data-value="11,360"></span>
+              <span class="chart-point" style="--x:36.36%; --y:46%" data-week="Sep 14" data-value="11,620"></span>
+              <span class="chart-point" style="--x:45.45%; --y:50.67%" data-week="Sep 21" data-value="11,480"></span>
+              <span class="chart-point" style="--x:54.55%; --y:42%" data-week="Sep 28" data-value="11,740"></span>
+              <span class="chart-point" style="--x:63.64%; --y:33.67%" data-week="Oct 5" data-value="11,990"></span>
+              <span class="chart-point" style="--x:72.73%; --y:39.67%" data-week="Oct 12" data-value="11,810"></span>
+              <span class="chart-point" style="--x:81.82%; --y:31.33%" data-week="Oct 19" data-value="12,060"></span>
+              <span class="chart-point" style="--x:90.91%; --y:23.67%" data-week="Oct 26" data-value="12,290"></span>
+              <span class="chart-point is-latest" style="--x:100%; --y:17.33%" data-week="Nov 2" data-value="12,480"></span>
+              <span class="chart-tip">
+                <span class="tip-week"></span>
+                <span class="tip-value"></span>
+              </span>
+            </div>
+            <div></div>
+            <div class="x-axis">
+              <span>Aug 17</span>
+              <span>Sep 7</span>
+              <span>Sep 28</span>
+              <span>Nov 2</span>
+            </div>
+          </div>
+        </figure>
+        <details class="chart-data">
+          <summary>
+            <svg viewBox="0 0 12 12" aria-hidden="true">
+              <path d="m4 2.5 3.5 3.5L4 9.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>View data</span>
+          </summary>
+          <div class="data-body">
+            <table class="data-table">
+              <caption class="sr-only">Active users by week</caption>
+              <thead>
+                <tr><th scope="col">Week</th><th scope="col">Active users</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Aug 17</td><td>10,840</td></tr>
+                <tr><td>Aug 24</td><td>11,120</td></tr>
+                <tr><td>Aug 31</td><td>10,980</td></tr>
+                <tr><td>Sep 7</td><td>11,360</td></tr>
+                <tr><td>Sep 14</td><td>11,620</td></tr>
+                <tr><td>Sep 21</td><td>11,480</td></tr>
+                <tr><td>Sep 28</td><td>11,740</td></tr>
+                <tr><td>Oct 5</td><td>11,990</td></tr>
+                <tr><td>Oct 12</td><td>11,810</td></tr>
+                <tr><td>Oct 19</td><td>12,060</td></tr>
+                <tr><td>Oct 26</td><td>12,290</td></tr>
+                <tr><td>Nov 2</td><td>12,480</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </section>
+
+      <section class="panel table-panel" aria-labelledby="events-heading">
+        <div class="panel-head">
+          <h2 id="events-heading">Top events</h2>
+          <span class="panel-note">5 events</span>
+        </div>
+        <div class="table-wrap">
+          <table class="top-events">
+            <caption class="sr-only">Five events with count, users, and trend</caption>
+            <colgroup>
+              <col style="width:42%">
+              <col style="width:20%">
+              <col style="width:20%">
+              <col style="width:18%">
+            </colgroup>
+            <thead>
+              <tr>
+                <th scope="col">Event</th>
+                <th scope="col">Count</th>
+                <th scope="col">Users</th>
+                <th scope="col">Trend</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="event-name">signup_completed</span></td>
+                <td class="num">8,204</td>
+                <td class="num">6,731</td>
+                <td><span class="trend-arrow" role="img" aria-label="Up">↑</span></td>
+              </tr>
+              <tr>
+                <td><span class="event-name">checkout_started</span></td>
+                <td class="num">3,918</td>
+                <td class="num">3,102</td>
+                <td><span class="trend-arrow" role="img" aria-label="Up">↑</span></td>
+              </tr>
+              <tr>
+                <td><span class="event-name">checkout_failed</span></td>
+                <td class="num">412</td>
+                <td class="num">388</td>
+                <td><span class="trend-arrow" role="img" aria-label="Down">↓</span></td>
+              </tr>
+              <tr>
+                <td><span class="event-name">invite_sent</span></td>
+                <td class="num">1,204</td>
+                <td class="num">890</td>
+                <td><span class="trend-arrow" role="img" aria-label="Up">↑</span></td>
+              </tr>
+              <tr>
+                <td><span class="event-name">export_created</span></td>
+                <td class="num">268</td>
+                <td class="num">201</td>
+                <td><span class="trend-arrow" role="img" aria-label="Up">↑</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-foot">Compared with previous 12 weeks</p>
+      </section>
+    </div>
+  </main>
+</div>
+<script>
+(() => {
+  const plot = document.querySelector(".plot");
+  if (!plot) return;
+
+  const points = Array.from(plot.querySelectorAll(".chart-point"));
+  const cursor = plot.querySelector(".chart-cursor");
+  const tip = plot.querySelector(".chart-tip");
+  const tipWeek = tip.querySelector(".tip-week");
+  const tipValue = tip.querySelector(".tip-value");
+  let activeIndex = -1;
+
+  function activate(index) {
+    if (index === activeIndex) return;
+    activeIndex = index;
+
+    const point = points[index];
+    const x = point.style.getPropertyValue("--x");
+    const y = parseFloat(point.style.getPropertyValue("--y"));
+    const rect = plot.getBoundingClientRect();
+
+    cursor.style.left = x;
+    cursor.dataset.visible = "true";
+
+    tip.style.left = x;
+    tip.style.top = Math.max(48, (y / 100) * rect.height) + "px";
+    tip.dataset.align = index <= 1 ? "start" : index >= points.length - 2 ? "end" : "center";
+    tipWeek.textContent = "Week of " + point.dataset.week;
+    tipValue.textContent = point.dataset.value;
+    tip.dataset.visible = "true";
+
+    points.forEach((item, i) => item.classList.toggle("is-active", i === index));
+  }
+
+  function deactivate() {
+    activeIndex = -1;
+    cursor.dataset.visible = "false";
+    tip.dataset.visible = "false";
+    points.forEach((item) => item.classList.remove("is-active"));
+  }
+
+  plot.addEventListener("pointermove", (event) => {
+    const rect = plot.getBoundingClientRect();
+    const ratio = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
+    activate(Math.round(ratio * (points.length - 1)));
+  });
+
+  plot.addEventListener("pointerleave", deactivate);
+})();
+</script>
+</body>
+</html>

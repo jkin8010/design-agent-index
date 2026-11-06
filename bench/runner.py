@@ -72,7 +72,13 @@ def install_skill(skill, workspace):
         if "SKILL.md" in filenames:
             rel = os.path.relpath(dirpath, cache)
             name = skill["name"] if rel == "." else f"{skill['name']}-{rel.replace(os.sep, '-')}"
-            shutil.copytree(dirpath, os.path.join(dest_root, name), dirs_exist_ok=True)
+            # Symlink, not copy: some skills ship 100MB of references and 24 cells
+            # would eat gigabytes on a disk that is already 96% full.
+            dst = os.path.join(dest_root, name)
+            try:
+                os.symlink(dirpath, dst)
+            except OSError:
+                shutil.copytree(dirpath, dst, dirs_exist_ok=True)
             installed.append(name)
             dirnames[:] = []
     return installed, head
@@ -112,7 +118,7 @@ def cli_version(agent):
     return out.splitlines()[0] if out else "unknown"
 
 
-def run_cell(skill, brief_id, agent, date, force=False):
+def run_cell(skill, brief_id, agent, date, force=False, post=False):
     brief_path = os.path.join(BENCH, "briefs", f"{brief_id}.md")
     brief = open(brief_path).read()
     cell = os.path.join(BENCH, "runs", date, skill["name"], brief_id)
@@ -168,27 +174,44 @@ def run_cell(skill, brief_id, agent, date, force=False):
         "stdout_tail": tail,
     }
     open(os.path.join(cell, "meta.json"), "w").write(json.dumps(meta, ensure_ascii=False, indent=1))
+    if ok and post:
+        subprocess.run([sys.executable, os.path.join(BENCH, "measure.py"),
+                        "--date", date, "--cell", f"{skill['name']}/{brief_id}"])
     print(f"{'ok ' if ok else 'FAIL'} {skill['name']}/{brief_id} {secs}s exit={code} bytes={meta['html_bytes']}")
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--skill", default="all")
+    ap.add_argument("--skills", default=None, help="comma separated skill names")
     ap.add_argument("--brief", default="all")
+    ap.add_argument("--briefs", default=None, help="comma separated brief ids")
     ap.add_argument("--agent", default="claude")
     ap.add_argument("--date", default=datetime.date.today().isoformat())
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--parallel", type=int, default=1, help="cells to run concurrently")
+    ap.add_argument("--post", action="store_true", help="measure each cell as soon as it finishes")
     args = ap.parse_args()
 
     skills = SKILLS["skills"]
-    if args.skill != "all":
+    if args.skills:
+        wanted = [x.strip() for x in args.skills.split(",") if x.strip()]
+        skills = [s for s in skills if s["name"] in wanted]
+        missing = set(wanted) - {s["name"] for s in skills}
+        if missing:
+            raise SystemExit(f"unknown skills: {sorted(missing)}")
+    elif args.skill != "all":
         skills = [s for s in skills if s["name"] == args.skill]
         if not skills:
             raise SystemExit(f"unknown skill {args.skill}")
 
     briefs = sorted(f[:-3] for f in os.listdir(os.path.join(BENCH, "briefs")) if f.endswith(".md"))
-    if args.brief != "all":
+    if args.briefs:
+        wanted = [x.strip() for x in args.briefs.split(",") if x.strip()]
+        briefs = [b for b in briefs if any(b.startswith(w) for w in wanted)]
+        if not briefs:
+            raise SystemExit("no briefs matched")
+    elif args.brief != "all":
         briefs = [b for b in briefs if b == args.brief or b.startswith(args.brief)]
         if not briefs:
             raise SystemExit(f"unknown brief {args.brief}")
@@ -196,10 +219,10 @@ def main():
     cells = [(s, b) for s in skills for b in briefs]
     if args.parallel > 1:
         with ThreadPoolExecutor(max_workers=args.parallel) as ex:
-            list(ex.map(lambda sb: run_cell(sb[0], sb[1], args.agent, args.date, args.force), cells))
+            list(ex.map(lambda sb: run_cell(sb[0], sb[1], args.agent, args.date, args.force, args.post), cells))
     else:
         for skill, brief in cells:
-            run_cell(skill, brief, args.agent, args.date, args.force)
+            run_cell(skill, brief, args.agent, args.date, args.force, args.post)
 
 
 if __name__ == "__main__":

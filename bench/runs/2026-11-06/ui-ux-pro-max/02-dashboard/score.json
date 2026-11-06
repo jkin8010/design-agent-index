@@ -1,0 +1,18 @@
+{
+ "total": 85,
+ "parts": {
+  "render": 10,
+  "responsive": 10,
+  "contrast": 15,
+  "typography": 7,
+  "colour": 7,
+  "anti_slop": 16,
+  "structure": 10,
+  "weight": 10
+ },
+ "slop_penalty": 4,
+ "skill": "ui-ux-pro-max",
+ "brief": "02-dashboard",
+ "seconds": 871.2,
+ "agent": "claude"
+}

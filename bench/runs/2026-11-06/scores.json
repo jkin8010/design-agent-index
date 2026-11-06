@@ -1,9 +1,9 @@
 {
  "control/01-saas-landing": {
-  "total": 79,
+  "total": 84,
   "parts": {
    "render": 10,
-   "responsive": 5,
+   "responsive": 10,
    "contrast": 15,
    "typography": 5,
    "colour": 4,
@@ -14,10 +14,154 @@
   "slop_penalty": 0,
   "skill": "control",
   "brief": "01-saas-landing",
-  "seconds": 900.0,
+  "seconds": 827.6,
+  "agent": "claude"
+ },
+ "control/02-dashboard": {
+  "total": 79,
+  "parts": {
+   "render": 10,
+   "responsive": 10,
+   "contrast": 14,
+   "typography": 7,
+   "colour": 2,
+   "anti_slop": 16,
+   "structure": 10,
+   "weight": 10
+  },
+  "slop_penalty": 4,
+  "skill": "control",
+  "brief": "02-dashboard",
+  "seconds": 613.9,
+  "agent": "claude"
+ },
+ "control/04-mobile-onboarding": {
+  "total": 92,
+  "parts": {
+   "render": 10,
+   "responsive": 15,
+   "contrast": 14,
+   "typography": 10,
+   "colour": 7,
+   "anti_slop": 16,
+   "structure": 10,
+   "weight": 10
+  },
+  "slop_penalty": 4,
+  "skill": "control",
+  "brief": "04-mobile-onboarding",
+  "seconds": 325.4,
+  "agent": "claude"
+ },
+ "control/08-admin-table": {
+  "total": 85,
+  "parts": {
+   "render": 10,
+   "responsive": 12,
+   "contrast": 14,
+   "typography": 7,
+   "colour": 2,
+   "anti_slop": 20,
+   "structure": 10,
+   "weight": 10
+  },
+  "slop_penalty": 0,
+  "skill": "control",
+  "brief": "08-admin-table",
+  "seconds": 542.4,
   "agent": "claude"
  },
  "hallmark/01-saas-landing": {
+  "total": 100,
+  "parts": {
+   "render": 10,
+   "responsive": 15,
+   "contrast": 15,
+   "typography": 10,
+   "colour": 10,
+   "anti_slop": 20,
+   "structure": 10,
+   "weight": 10
+  },
+  "slop_penalty": 0,
+  "skill": "hallmark",
+  "brief": "01-saas-landing",
+  "seconds": 900.1,
+  "agent": "claude"
+ },
+ "hallmark/02-dashboard": {
+  "total": 86,
+  "parts": {
+   "render": 10,
+   "responsive": 10,
+   "contrast": 15,
+   "typography": 7,
+   "colour": 4,
+   "anti_slop": 20,
+   "structure": 10,
+   "weight": 10
+  },
+  "slop_penalty": 0,
+  "skill": "hallmark",
+  "brief": "02-dashboard",
+  "seconds": 900.1,
+  "agent": "claude"
+ },
+ "hallmark/04-mobile-onboarding": {
+  "total": 97,
+  "parts": {
+   "render": 10,
+   "responsive": 15,
+   "contrast": 15,
+   "typography": 10,
+   "colour": 10,
+   "anti_slop": 20,
+   "structure": 7,
+   "weight": 10
+  },
+  "slop_penalty": 0,
+  "skill": "hallmark",
+  "brief": "04-mobile-onboarding",
+  "seconds": 412.9,
+  "agent": "claude"
+ },
+ "hallmark/08-admin-table": {
+  "total": 94,
+  "parts": {
+   "render": 10,
+   "responsive": 12,
+   "contrast": 15,
+   "typography": 10,
+   "colour": 7,
+   "anti_slop": 20,
+   "structure": 10,
+   "weight": 10
+  },
+  "slop_penalty": 0,
+  "skill": "hallmark",
+  "brief": "08-admin-table",
+  "seconds": 483.0,
+  "agent": "claude"
+ },
+ "huashu-design/01-saas-landing": {
+  "total": 77,
+  "parts": {
+   "render": 10,
+   "responsive": 10,
+   "contrast": 14,
+   "typography": 5,
+   "colour": 2,
+   "anti_slop": 16,
+   "structure": 10,
+   "weight": 10
+  },
+  "slop_penalty": 4,
+  "skill": "huashu-design",
+  "brief": "01-saas-landing",
+  "seconds": 900.1,
+  "agent": "claude"
+ },
+ "huashu-design/02-dashboard": {
   "total": 89,
   "parts": {
    "render": 10,
@@ -30,9 +174,261 @@
    "weight": 10
   },
   "slop_penalty": 0,
-  "skill": "hallmark",
+  "skill": "huashu-design",
+  "brief": "02-dashboard",
+  "seconds": 697.4,
+  "agent": "claude"
+ },
+ "huashu-design/04-mobile-onboarding": {
+  "total": 91,
+  "parts": {
+   "render": 10,
+   "responsive": 15,
+   "contrast": 15,
+   "typography": 10,
+   "colour": 4,
+   "anti_slop": 20,
+   "structure": 7,
+   "weight": 10
+  },
+  "slop_penalty": 0,
+  "skill": "huashu-design",
+  "brief": "04-mobile-onboarding",
+  "seconds": 400.6,
+  "agent": "claude"
+ },
+ "huashu-design/08-admin-table": {
+  "total": 87,
+  "parts": {
+   "render": 10,
+   "responsive": 10,
+   "contrast": 15,
+   "typography": 10,
+   "colour": 2,
+   "anti_slop": 20,
+   "structure": 10,
+   "weight": 10
+  },
+  "slop_penalty": 0,
+  "skill": "huashu-design",
+  "brief": "08-admin-table",
+  "seconds": 740.7,
+  "agent": "claude"
+ },
+ "impeccable/01-saas-landing": {
+  "total": 84,
+  "parts": {
+   "render": 10,
+   "responsive": 10,
+   "contrast": 15,
+   "typography": 5,
+   "colour": 4,
+   "anti_slop": 20,
+   "structure": 10,
+   "weight": 10
+  },
+  "slop_penalty": 0,
+  "skill": "impeccable",
   "brief": "01-saas-landing",
-  "seconds": 660,
+  "seconds": 900.0,
+  "agent": "claude"
+ },
+ "impeccable/02-dashboard": {
+  "total": 87,
+  "parts": {
+   "render": 10,
+   "responsive": 12,
+   "contrast": 13,
+   "typography": 10,
+   "colour": 2,
+   "anti_slop": 20,
+   "structure": 10,
+   "weight": 10
+  },
+  "slop_penalty": 0,
+  "skill": "impeccable",
+  "brief": "02-dashboard",
+  "seconds": 744.4,
+  "agent": "claude"
+ },
+ "impeccable/04-mobile-onboarding": {
+  "total": 100,
+  "parts": {
+   "render": 10,
+   "responsive": 15,
+   "contrast": 15,
+   "typography": 10,
+   "colour": 10,
+   "anti_slop": 20,
+   "structure": 10,
+   "weight": 10
+  },
+  "slop_penalty": 0,
+  "skill": "impeccable",
+  "brief": "04-mobile-onboarding",
+  "seconds": 699.2,
+  "agent": "claude"
+ },
+ "impeccable/08-admin-table": {
+  "total": 84,
+  "parts": {
+   "render": 10,
+   "responsive": 10,
+   "contrast": 15,
+   "typography": 7,
+   "colour": 2,
+   "anti_slop": 20,
+   "structure": 10,
+   "weight": 10
+  },
+  "slop_penalty": 0,
+  "skill": "impeccable",
+  "brief": "08-admin-table",
+  "seconds": 549.4,
+  "agent": "claude"
+ },
+ "superdesign/01-saas-landing": {
+  "total": 80,
+  "parts": {
+   "render": 10,
+   "responsive": 12,
+   "contrast": 15,
+   "typography": 5,
+   "colour": 2,
+   "anti_slop": 16,
+   "structure": 10,
+   "weight": 10
+  },
+  "slop_penalty": 4,
+  "skill": "superdesign",
+  "brief": "01-saas-landing",
+  "seconds": 707.2,
+  "agent": "claude"
+ },
+ "superdesign/02-dashboard": {
+  "total": 86,
+  "parts": {
+   "render": 10,
+   "responsive": 10,
+   "contrast": 15,
+   "typography": 7,
+   "colour": 4,
+   "anti_slop": 20,
+   "structure": 10,
+   "weight": 10
+  },
+  "slop_penalty": 0,
+  "skill": "superdesign",
+  "brief": "02-dashboard",
+  "seconds": 809.9,
+  "agent": "claude"
+ },
+ "superdesign/04-mobile-onboarding": {
+  "total": 91,
+  "parts": {
+   "render": 10,
+   "responsive": 15,
+   "contrast": 12,
+   "typography": 10,
+   "colour": 4,
+   "anti_slop": 20,
+   "structure": 10,
+   "weight": 10
+  },
+  "slop_penalty": 0,
+  "skill": "superdesign",
+  "brief": "04-mobile-onboarding",
+  "seconds": 364.6,
+  "agent": "claude"
+ },
+ "superdesign/08-admin-table": {
+  "total": 87,
+  "parts": {
+   "render": 10,
+   "responsive": 10,
+   "contrast": 15,
+   "typography": 10,
+   "colour": 2,
+   "anti_slop": 20,
+   "structure": 10,
+   "weight": 10
+  },
+  "slop_penalty": 0,
+  "skill": "superdesign",
+  "brief": "08-admin-table",
+  "seconds": 429.4,
+  "agent": "claude"
+ },
+ "ui-ux-pro-max/01-saas-landing": {
+  "total": 83,
+  "parts": {
+   "render": 10,
+   "responsive": 15,
+   "contrast": 15,
+   "typography": 5,
+   "colour": 2,
+   "anti_slop": 16,
+   "structure": 10,
+   "weight": 10
+  },
+  "slop_penalty": 4,
+  "skill": "ui-ux-pro-max",
+  "brief": "01-saas-landing",
+  "seconds": 651.9,
+  "agent": "claude"
+ },
+ "ui-ux-pro-max/02-dashboard": {
+  "total": 85,
+  "parts": {
+   "render": 10,
+   "responsive": 10,
+   "contrast": 15,
+   "typography": 7,
+   "colour": 7,
+   "anti_slop": 16,
+   "structure": 10,
+   "weight": 10
+  },
+  "slop_penalty": 4,
+  "skill": "ui-ux-pro-max",
+  "brief": "02-dashboard",
+  "seconds": 871.2,
+  "agent": "claude"
+ },
+ "ui-ux-pro-max/04-mobile-onboarding": {
+  "total": 94,
+  "parts": {
+   "render": 10,
+   "responsive": 15,
+   "contrast": 15,
+   "typography": 10,
+   "colour": 4,
+   "anti_slop": 20,
+   "structure": 10,
+   "weight": 10
+  },
+  "slop_penalty": 0,
+  "skill": "ui-ux-pro-max",
+  "brief": "04-mobile-onboarding",
+  "seconds": 725.4,
+  "agent": "claude"
+ },
+ "ui-ux-pro-max/08-admin-table": {
+  "total": 85,
+  "parts": {
+   "render": 10,
+   "responsive": 12,
+   "contrast": 14,
+   "typography": 7,
+   "colour": 2,
+   "anti_slop": 20,
+   "structure": 10,
+   "weight": 10
+  },
+  "slop_penalty": 0,
+  "skill": "ui-ux-pro-max",
+  "brief": "08-admin-table",
+  "seconds": 446.5,
   "agent": "claude"
  }
 }
