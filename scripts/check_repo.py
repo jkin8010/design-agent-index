@@ -9,6 +9,7 @@ mean anything.
 """
 import json
 import os
+import re
 import subprocess
 import sys
 
@@ -76,6 +77,29 @@ def main():
     except Exception:  # noqa: BLE001
         tracked = ""
     check("bench/runs not committed", not tracked, f"{len(tracked.splitlines())} files tracked" if tracked else "clean")
+
+    # --- no secrets in tracked files
+    secret_pat = re.compile(
+        r"(sk-[A-Za-z0-9]{16,}|ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}"
+        r"|AKIA[0-9A-Z]{16}|-----BEGIN [A-Z ]*PRIVATE KEY-----"
+        r"|ANTHROPIC_(AUTH_TOKEN|API_KEY)\s*[=:]\s*['\"]?[A-Za-z0-9_\-]{12,}"
+        r"|(api[_-]?key|secret|password)\s*[=:]\s*['\"][A-Za-z0-9_\-]{16,}['\"])", re.I)
+    tracked = subprocess.run(["git", "ls-files"], cwd=REPO, capture_output=True, text=True).stdout.split()
+    leaks, env_files = [], []
+    for rel in tracked:
+        if re.search(r"(\.env$|\.env\.(?!example)|\.pem$|id_rsa)", rel):
+            env_files.append(rel)
+        full = os.path.join(REPO, rel)
+        if os.path.getsize(full) > 2_000_000:
+            continue
+        try:
+            body = open(full, encoding="utf-8", errors="ignore").read()
+        except Exception:  # noqa: BLE001
+            continue
+        if secret_pat.search(body):
+            leaks.append(rel)
+    check("no committed secrets", not leaks and not env_files,
+          f"{leaks + env_files}" if (leaks or env_files) else f"{len(tracked)} files scanned")
 
     # --- every published batch must pass the publication gate
     results = os.path.join(REPO, "bench", "results")
