@@ -1,0 +1,20 @@
+{
+ "hallmark/01-saas-landing": {
+  "total": 89,
+  "parts": {
+   "render": 10,
+   "responsive": 10,
+   "contrast": 15,
+   "typography": 7,
+   "colour": 7,
+   "anti_slop": 20,
+   "structure": 10,
+   "weight": 10
+  },
+  "slop_penalty": 0,
+  "skill": "hallmark",
+  "brief": "01-saas-landing",
+  "seconds": 660,
+  "agent": "claude"
+ }
+}

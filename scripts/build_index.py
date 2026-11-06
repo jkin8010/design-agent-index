@@ -181,6 +181,12 @@ corpora, and the tools that extract a design system from a live site.
 | Docs surface | 15 | ≥200 files 15 · ≥50 10 · else 5 |
 
 Full rules, inclusion criteria and known biases: [METHODOLOGY.md](METHODOLOGY.md).
+### Benchmark (v0.2, in progress)
+
+Signal scores say whether a skill is maintained, not whether it designs well. The bench runs the **same 12
+briefs** through each skill with one model and publishes the renders, screenshots and a deterministic score
+(contrast, responsiveness, typography, colour discipline, anti-slop heuristics). Harness and rubric:
+[`bench/`](bench/README.md). First pilot cell is committed under `bench/runs/`.
 Raw data for this snapshot: [`data/snapshots/{today.isoformat()}.json`](data/snapshots/{today.isoformat()}.json).
 
 ## Skills

@@ -1,0 +1,18 @@
+{
+ "skill": "hallmark",
+ "repo": "Nutlope/hallmark",
+ "skill_commit": "407fa689f4a276f2fd389208d271d0fef08f5058",
+ "installed_skills": [
+  "hallmark-skills-hallmark"
+ ],
+ "brief": "01-saas-landing",
+ "agent": "claude",
+ "agent_version": "2.1.263 (Claude Code)",
+ "model": "deepseek-v4.1-flash-1017",
+ "started": "2026-11-06T13:25:00",
+ "seconds": 660,
+ "exit_code": 0,
+ "html_written": true,
+ "html_bytes": 27787,
+ "note": "agent wrote index.html at 13:36 then kept running; runner was killed manually at 13:50. meta backfilled by hand, run itself is genuine."
+}

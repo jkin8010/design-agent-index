@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "note": "Fixed model, fixed briefs, one skill per cell. Control = no skill installed.",
+  "skills": [
+    {"name": "control", "repo": null, "note": "no skill installed"},
+    {"name": "ui-ux-pro-max", "repo": "nextlevelbuilder/ui-ux-pro-max-skill"},
+    {"name": "hallmark", "repo": "Nutlope/hallmark"},
+    {"name": "impeccable", "repo": "pbakaus/impeccable"},
+    {"name": "huashu-design", "repo": "alchaincyf/huashu-design"},
+    {"name": "oil-ui", "repo": "oil-oil/oil-ui"},
+    {"name": "superdesign", "repo": "superdesigndev/superdesign-skill"},
+    {"name": "tasteskill", "repo": "tasteskill/tasteskill"},
+    {"name": "oh-my-design", "repo": "kwakseongjae/oh-my-design"},
+    {"name": "design-how", "repo": "arla6ka/design.how"},
+    {"name": "motion-principles", "repo": "kylezantos/design-motion-principles"},
+    {"name": "qiaomu-design", "repo": "joeseesun/qiaomu-design"},
+    {"name": "ojo-design", "repo": "touchine-ojo/OJO-Design-Skills"}
+  ]
+}
