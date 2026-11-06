@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3efe4">
+  <meta name="color-scheme" content="light">
   <title>Ledgerly — Spend analytics for finance teams</title>
   <meta name="description" content="Ledgerly categorises company spend automatically, flags duplicates, and closes the month in hours instead of weeks.">
   <style>
@@ -12,7 +14,7 @@
       --paper-deep: #e8e2d3;
       --ink: #12241c;
       --ink-soft: #44564b;
-      --muted: #728078;
+      --muted: #5f6c64;
       --line: #d8d1c1;
       --line-strong: #c0b8a6;
       --pine: #17372a;
@@ -26,9 +28,13 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
     body {
       margin: 0;
+      overflow-x: hidden;
       overflow-x: clip;
       background: var(--paper);
       color: var(--ink);
@@ -129,6 +135,7 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
+      min-height: 44px;
       font-size: 19px;
       font-weight: 700;
       letter-spacing: -0.035em;
@@ -150,14 +157,16 @@
     }
     .nav-links a {
       position: relative;
-      padding: 6px 0;
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
     }
     .nav-links a::after {
       content: "";
       position: absolute;
       left: 0;
       right: 100%;
-      bottom: 0;
+      bottom: 10px;
       height: 1px;
       background: var(--ember-deep);
       transition: right 180ms ease;
@@ -218,6 +227,7 @@
     }
     .hero-sub {
       max-width: 530px;
+      text-wrap: pretty;
       margin-top: 31px;
       color: var(--ink-soft);
       font-size: clamp(16.5px, 1.25vw, 19px);
@@ -250,20 +260,1119 @@
       box-shadow: 0 0 0 4px var(--sage-light);
     }
 
-    /* __VISUAL_CSS__ */
+    /* Hero product visual */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      min-height: 574px;
+      z-index: 1;
+    }
+    .visual-stage {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      padding: 38px 10px 38px 18px;
+    }
+    .visual-disc {
+      position: absolute;
+      top: 50%;
+      right: -21px;
+      width: 446px;
+      height: 446px;
+      border-radius: 50%;
+      background: var(--sage-light);
+      transform: translateY(-50%);
+    }
+    .visual-disc::before {
+      content: "";
+      position: absolute;
+      inset: 21px;
+      border: 1px solid rgba(18, 36, 28, 0.11);
+      border-radius: inherit;
+    }
+    .visual-disc::after {
+      content: "";
+      position: absolute;
+      top: 28px;
+      right: 27px;
+      width: 88px;
+      height: 88px;
+      border: 1px solid rgba(18, 36, 28, 0.13);
+      border-radius: 50%;
+    }
+    .dot-field {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      width: 114px;
+      height: 76px;
+      opacity: 0.62;
+      background-image: radial-gradient(circle, rgba(18, 36, 28, 0.4) 1.15px, transparent 1.3px);
+      background-size: 13px 13px;
+    }
+    .review-shell {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      transform: rotate(-1.15deg);
+    }
+    .review-back {
+      position: absolute;
+      z-index: 0;
+      inset: 13px -10px -14px 16px;
+      border-radius: 27px;
+      background: var(--pine);
+      box-shadow: 0 30px 70px rgba(16, 39, 30, 0.2);
+      transform: rotate(2.7deg);
+    }
+    .review-panel {
+      position: relative;
+      z-index: 1;
+      padding: 22px;
+      border: 1px solid rgba(18, 36, 28, 0.13);
+      border-radius: 23px;
+      background: var(--paper-raised);
+      box-shadow: 0 30px 60px -30px rgba(18, 36, 28, 0.34), 0 2px 8px rgba(18, 36, 28, 0.04);
+    }
+    .review-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+    .review-mark {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      flex: none;
+      border-radius: 9px;
+      background: var(--ink);
+      color: var(--paper-raised);
+    }
+    .review-mark svg { width: 18px; height: 18px; }
+    .review-head-copy { display: grid; gap: 1px; }
+    .review-kicker {
+      color: var(--muted);
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+    .review-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.3;
+    }
+    .review-period {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: auto;
+      padding: 6px 9px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink-soft);
+      font-size: 9.5px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .review-period::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #5f7f65;
+      box-shadow: 0 0 0 3px rgba(95, 127, 101, 0.13);
+    }
+    .tx-list { margin-top: 13px; }
+    .tx-row {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr) auto 18px;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 0;
+      border-bottom: 1px solid rgba(216, 209, 193, 0.76);
+    }
+    .tx-icon {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      color: var(--ink);
+    }
+    .tx-icon svg { width: 16px; height: 16px; }
+    .tx-icon--sand { background: #e9dfca; }
+    .tx-icon--clay { background: #efdcd2; }
+    .tx-icon--sage { background: #dde6d9; }
+    .tx-copy { display: grid; gap: 1px; min-width: 0; }
+    .tx-name {
+      overflow: hidden;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.35;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .tx-sub {
+      overflow: hidden;
+      color: var(--muted);
+      font-size: 9.5px;
+      line-height: 1.4;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .tx-tag {
+      padding: 4px 7px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--paper);
+      color: var(--ink-soft);
+      font-size: 9px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .tx-check {
+      display: grid;
+      place-items: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--sage-light);
+      color: #355c40;
+    }
+    .tx-check svg { width: 10px; height: 10px; }
+    .duplicate {
+      margin-top: 14px;
+      padding: 11px 12px 12px;
+      border: 1px solid #e4b6a2;
+      border-radius: 13px;
+      background: #f4e1d7;
+    }
+    .duplicate-head {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--ember-deep);
+      font-size: 9px;
+      font-weight: 750;
+      letter-spacing: 0.075em;
+      text-transform: uppercase;
+    }
+    .duplicate-head svg { width: 13px; height: 13px; }
+    .duplicate-review {
+      margin-left: auto;
+      padding: 3px 7px;
+      border: 1px solid rgba(185, 71, 38, 0.2);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.56);
+      color: var(--ink-soft);
+      font-size: 8.5px;
+      font-weight: 650;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+    .duplicate-rows {
+      display: grid;
+      gap: 4px;
+      margin-top: 8px;
+    }
+    .duplicate-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 6px 8px;
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.54);
+      font-size: 10px;
+      font-weight: 650;
+    }
+    .duplicate-row span:last-child {
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 500;
+    }
+    .review-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 15px;
+    }
+    .review-ready {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--ink-soft);
+      font-size: 9.5px;
+      line-height: 1.3;
+    }
+    .review-ready svg { width: 13px; height: 13px; color: #43664c; }
+    .export-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 11px;
+      border-radius: 8px;
+      background: var(--ink);
+      color: var(--paper-raised);
+      font-size: 10px;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+    .export-pill svg { width: 11px; height: 11px; }
+    .float-note {
+      position: absolute;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px 8px 8px;
+      border: 1px solid rgba(18, 36, 28, 0.13);
+      border-radius: 999px;
+      background: rgba(250, 247, 238, 0.97);
+      box-shadow: 0 13px 30px -12px rgba(18, 36, 28, 0.26);
+      color: var(--ink);
+      font-size: 10.5px;
+      font-weight: 650;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      animation: drift 7s ease-in-out infinite;
+    }
+    .float-note .note-icon {
+      display: grid;
+      place-items: center;
+      width: 23px;
+      height: 23px;
+      flex: none;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--paper-raised);
+    }
+    .float-note .note-icon svg { width: 11px; height: 11px; }
+    .float-note--a { top: 42px; left: -4px; }
+    .float-note--b { right: -8px; bottom: 90px; animation-delay: -3.2s; }
+    @keyframes drift {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
 
-    /* __SECTIONS_CSS__ */
+    /* Features */
+    .features {
+      position: relative;
+      padding: 108px 0 116px;
+      border-top: 1px solid var(--line);
+    }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(280px, 0.82fr);
+      gap: 72px;
+      align-items: end;
+      margin-bottom: 62px;
+    }
+    .section-head h2 {
+      max-width: 700px;
+      text-wrap: balance;
+      font-family: var(--serif);
+      font-size: clamp(2.55rem, 4.5vw, 4.15rem);
+      font-weight: 400;
+      letter-spacing: -0.04em;
+      line-height: 1.01;
+    }
+    .section-lede {
+      max-width: 370px;
+      padding-bottom: 7px;
+      color: var(--ink-soft);
+      font-size: 15px;
+      letter-spacing: -0.005em;
+      line-height: 1.7;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-top: 1px solid var(--line-strong);
+    }
+    .feature {
+      position: relative;
+      padding: 29px 40px 10px 0;
+      border-right: 1px solid var(--line);
+    }
+    .feature + .feature { padding-left: 40px; }
+    .feature:last-child {
+      padding-right: 0;
+      border-right: 0;
+    }
+    .feature-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+    .feature-icon {
+      display: grid;
+      place-items: center;
+      width: 50px;
+      height: 50px;
+      border: 1px solid var(--line-strong);
+      border-radius: 50%;
+      color: var(--ink);
+      transition: background-color 220ms ease, border-color 220ms ease, color 220ms ease, transform 220ms ease;
+    }
+    .feature-icon svg { width: 21px; height: 21px; }
+    .feature-index {
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 12px;
+      letter-spacing: 0.09em;
+    }
+    .feature h3 {
+      margin-bottom: 13px;
+      font-family: var(--serif);
+      font-size: clamp(1.45rem, 1.9vw, 1.75rem);
+      font-weight: 400;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+    }
+    .feature p {
+      max-width: 330px;
+      text-wrap: pretty;
+      color: var(--ink-soft);
+      font-size: 14.5px;
+      line-height: 1.7;
+    }
+    .feature:hover .feature-icon {
+      border-color: var(--ink);
+      background: var(--ink);
+      color: var(--paper-raised);
+      transform: translateY(-3px) rotate(-4deg);
+    }
 
-    /* __RESPONSIVE_CSS__ */
+    /* How it works */
+    .how {
+      position: relative;
+      overflow: hidden;
+      padding: 108px 0 116px;
+      background: var(--pine);
+      color: var(--paper);
+    }
+    .how::before {
+      content: "";
+      position: absolute;
+      top: -380px;
+      right: -200px;
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(217, 93, 57, 0.25) 0%, rgba(217, 93, 57, 0) 68%);
+      pointer-events: none;
+    }
+    .how::after {
+      content: "";
+      position: absolute;
+      left: -50px;
+      bottom: -190px;
+      width: 460px;
+      height: 460px;
+      border: 1px solid rgba(243, 239, 228, 0.09);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .how .wrap {
+      position: relative;
+      z-index: 1;
+    }
+    .how .eyebrow { color: rgba(243, 239, 228, 0.7); }
+    .how .eyebrow::before { background: var(--ember); }
+    .how-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+      gap: 64px;
+      align-items: end;
+      margin-bottom: 68px;
+    }
+    .how h2 {
+      max-width: 620px;
+      text-wrap: balance;
+      font-family: var(--serif);
+      font-size: clamp(2.55rem, 4.4vw, 4rem);
+      font-weight: 400;
+      letter-spacing: -0.04em;
+      line-height: 1.02;
+    }
+    .how-lede {
+      max-width: 345px;
+      padding-bottom: 7px;
+      color: rgba(243, 239, 228, 0.7);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .steps {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .steps::before {
+      content: "";
+      position: absolute;
+      top: 27px;
+      left: 28px;
+      right: calc(33.333% - 68px);
+      height: 1px;
+      background: repeating-linear-gradient(90deg, rgba(243, 239, 228, 0.26) 0 4px, transparent 4px 11px);
+    }
+    .step {
+      position: relative;
+      padding-right: 40px;
+    }
+    .step + .step { padding-left: 40px; }
+    .step-num {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      width: 56px;
+      height: 56px;
+      border: 1px solid rgba(243, 239, 228, 0.24);
+      border-radius: 50%;
+      background: var(--pine);
+      color: var(--paper);
+      font-family: var(--serif);
+      font-size: 15px;
+      letter-spacing: 0.04em;
+      transition: background-color 220ms ease, border-color 220ms ease;
+    }
+    .step h3 {
+      margin-top: 28px;
+      font-size: 19px;
+      font-weight: 650;
+      letter-spacing: -0.025em;
+      line-height: 1.3;
+    }
+    .step p {
+      max-width: 285px;
+      margin-top: 11px;
+      color: rgba(243, 239, 228, 0.64);
+      font-size: 14px;
+      line-height: 1.68;
+    }
+    .step:hover .step-num {
+      border-color: var(--ember);
+      background: var(--ember);
+      color: #fff8ed;
+    }
+
+    /* Closing call to action */
+    .closing {
+      position: relative;
+      overflow: hidden;
+      padding-top: 92px;
+      background: var(--ember-deep);
+      color: var(--paper-raised);
+    }
+    .closing::before {
+      content: "";
+      position: absolute;
+      top: -370px;
+      right: -150px;
+      width: 750px;
+      height: 750px;
+      border: 1px solid rgba(250, 247, 238, 0.17);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .closing::after {
+      content: "";
+      position: absolute;
+      top: -277px;
+      right: -57px;
+      width: 564px;
+      height: 564px;
+      border: 1px solid rgba(250, 247, 238, 0.11);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .closing-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 230px;
+      gap: 56px;
+      align-items: end;
+      padding-bottom: 92px;
+    }
+    .closing .eyebrow { color: var(--paper-raised); }
+    .closing .eyebrow::before { background: var(--paper-raised); }
+    .closing h2 {
+      max-width: 850px;
+      text-wrap: balance;
+      font-family: var(--serif);
+      font-size: clamp(3rem, 6.25vw, 6.2rem);
+      font-weight: 400;
+      letter-spacing: -0.048em;
+      line-height: 0.98;
+    }
+    .closing h2 em { font-style: italic; font-weight: 400; }
+    .closing-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 11px;
+      margin-top: 38px;
+    }
+    .btn-cream {
+      background: var(--paper-raised);
+      color: var(--ink);
+    }
+    .btn-cream:hover { background: #fffdf7; }
+    .btn-ghost {
+      border-color: rgba(250, 247, 238, 0.46);
+      color: var(--paper-raised);
+      background: transparent;
+    }
+    .btn-ghost:hover {
+      border-color: var(--paper-raised);
+      background: rgba(250, 247, 238, 0.09);
+    }
+    .closing-aside {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding-bottom: 7px;
+    }
+    .seal {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: 172px;
+      height: 172px;
+      border: 1px solid rgba(250, 247, 238, 0.36);
+      border-radius: 50%;
+      transform: rotate(7deg);
+    }
+    .seal::before {
+      content: "";
+      position: absolute;
+      inset: 11px;
+      border: 1px dashed rgba(250, 247, 238, 0.28);
+      border-radius: 50%;
+    }
+    .seal svg {
+      width: 44px;
+      height: 44px;
+      color: var(--paper-raised);
+    }
+    .closing-footer {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 24px 0 27px;
+      border-top: 1px solid rgba(250, 247, 238, 0.23);
+      color: var(--paper-raised);
+      font-size: 11.5px;
+    }
+    .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex: none;
+      color: var(--paper-raised);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+    .footer-brand .brand-mark {
+      width: 24px;
+      height: 24px;
+      border-radius: 7px;
+    }
+    .footer-tagline {
+      flex: 1;
+      text-align: center;
+      letter-spacing: 0.005em;
+    }
+    .footer-copy {
+      flex: none;
+      white-space: nowrap;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--ember);
+      outline-offset: 4px;
+    }
+    .closing a:focus-visible { outline-color: var(--paper-raised); }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (max-width: 1120px) {
+      .wrap { width: min(calc(100% - 64px), 1240px); }
+      .hero-grid { gap: 28px; }
+      .feature { padding-right: 30px; }
+      .feature + .feature { padding-left: 30px; }
+      .how-head, .section-head { gap: 48px; }
+      .steps::before { right: calc(33.333% - 58px); }
+      .step { padding-right: 30px; }
+      .step + .step { padding-left: 30px; }
+    }
+
+    @media (max-width: 900px) {
+      .hero { padding: 38px 0 82px; }
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 30px;
+      }
+      .hero-copy {
+        max-width: 660px;
+        padding-top: 6px;
+      }
+      .hero h1 { font-size: clamp(3.5rem, 9.4vw, 5.8rem); }
+      .hero-visual {
+        justify-content: center;
+        min-height: 0;
+        padding-top: 28px;
+      }
+      .visual-stage {
+        max-width: 540px;
+        margin-inline: auto;
+      }
+      .section-head, .how-head {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 22px;
+        margin-bottom: 44px;
+      }
+      .section-lede, .how-lede {
+        max-width: 520px;
+        padding-bottom: 0;
+      }
+      .feature-grid {
+        grid-template-columns: minmax(0, 1fr);
+        border-top: 0;
+      }
+      .feature, .feature + .feature {
+        padding: 30px 0 32px;
+        border-right: 0;
+        border-top: 1px solid var(--line);
+      }
+      .feature:last-child { padding-bottom: 4px; }
+      .feature-top { margin-bottom: 24px; }
+      .feature p { max-width: 560px; }
+      .steps {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .steps::before {
+        top: 28px;
+        right: auto;
+        bottom: 34px;
+        left: 27px;
+        width: 1px;
+        height: auto;
+        background: repeating-linear-gradient(180deg, rgba(243, 239, 228, 0.26) 0 4px, transparent 4px 11px);
+      }
+      .step {
+        position: relative;
+        min-height: 56px;
+        padding: 0 0 0 88px;
+      }
+      .step + .step {
+        margin-top: 38px;
+        padding-left: 88px;
+      }
+      .step-num {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .step h3 { margin-top: 9px; }
+      .closing-inner {
+        grid-template-columns: minmax(0, 1fr);
+        padding-bottom: 72px;
+      }
+      .closing-aside { display: none; }
+    }
+
+    @media (max-width: 720px) {
+      .wrap { width: calc(100% - 44px); }
+      .nav-inner { padding-block: 19px; }
+      .brand { font-size: 18px; gap: 9px; }
+      .brand-mark { width: 29px; height: 29px; }
+      .nav-links { display: none; }
+      .btn-small {
+        min-height: 38px;
+        padding: 0 14px;
+        font-size: 11.5px;
+      }
+      .hero { padding: 28px 0 64px; }
+      .hero h1 { font-size: clamp(3.3rem, 14vw, 4.6rem); }
+      .hero-sub {
+        margin-top: 23px;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+      .hero-actions { margin-top: 26px; gap: 8px; }
+      .hero-actions .btn {
+        min-height: 48px;
+        padding: 0 17px;
+        font-size: 12.5px;
+      }
+      .hero-meta {
+        margin-top: 25px;
+        font-size: 11px;
+      }
+      .hero-visual { padding-top: 28px; }
+      .visual-stage { padding: 21px 0; }
+      .visual-disc {
+        right: -80px;
+        width: 380px;
+        height: 380px;
+      }
+      .dot-field { display: none; }
+      .float-note { display: none; }
+      .review-panel { padding: 18px; border-radius: 20px; }
+      .review-back { inset: 10px -6px -11px 12px; border-radius: 23px; }
+      .review-head { padding-bottom: 13px; }
+      .review-mark { width: 31px; height: 31px; border-radius: 8px; }
+      .review-title { font-size: 13.5px; }
+      .review-period { padding: 5px 8px; font-size: 8.5px; }
+      .tx-list { margin-top: 9px; }
+      .tx-row {
+        grid-template-columns: 31px minmax(0, 1fr) auto 17px;
+        gap: 8px;
+        padding: 10px 0;
+      }
+      .tx-icon { width: 31px; height: 31px; border-radius: 8px; }
+      .tx-icon svg { width: 15px; height: 15px; }
+      .tx-name { font-size: 11.5px; }
+      .tx-sub { font-size: 9px; }
+      .tx-tag { font-size: 8.5px; padding: 3px 6px; }
+      .tx-check { width: 17px; height: 17px; }
+      .duplicate { padding: 10px; }
+      .review-foot { margin-top: 13px; }
+      .review-ready { display: none; }
+      .export-pill {
+        width: 100%;
+        justify-content: space-between;
+        padding: 10px 12px;
+      }
+      .features { padding: 76px 0 82px; }
+      .section-head h2 { font-size: clamp(2.35rem, 9.4vw, 3.2rem); }
+      .section-lede { font-size: 14.5px; }
+      .feature h3 { font-size: 1.55rem; }
+      .feature p { font-size: 14px; }
+      .how { padding: 76px 0 84px; }
+      .how h2 { font-size: clamp(2.35rem, 9.4vw, 3.2rem); }
+      .how-lede { font-size: 14.5px; }
+      .closing { padding-top: 68px; }
+      .closing h2 { font-size: clamp(2.75rem, 12.6vw, 4.1rem); }
+      .closing-actions { margin-top: 30px; gap: 8px; }
+      .closing-actions .btn {
+        min-height: 48px;
+        padding: 0 18px;
+        font-size: 12.5px;
+      }
+      .closing-inner { padding-bottom: 64px; }
+      .closing-footer {
+        padding: 20px 0 24px;
+        font-size: 11px;
+      }
+      .footer-tagline { display: none; }
+    }
+
+    @media (max-width: 390px) {
+      .hero-actions .btn {
+        flex: 1 1 auto;
+        padding-inline: 14px;
+      }
+      .review-period { display: none; }
+      .closing-actions .btn { flex: 1 1 auto; padding-inline: 15px; }
+    }
   </style>
 </head>
 <body>
-  <!-- __HEADER__ -->
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+    <defs>
+      <symbol id="icon-arrow" viewBox="0 0 16 16">
+        <path d="M2.5 8h10M8.7 4.2 12.5 8l-3.8 3.8" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="icon-check" viewBox="0 0 16 16">
+        <path d="m3.4 8.3 2.9 3 6.3-6.6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="icon-cloud" viewBox="0 0 20 20">
+        <path d="M5.4 15.2h9.1a3.15 3.15 0 0 0 .35-6.28 5.1 5.1 0 0 0-9.72-1.03 3.66 3.66 0 0 0 .27 7.31Z" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="icon-meal" viewBox="0 0 20 20">
+        <path d="M6.7 2.8v5a1.9 1.9 0 0 0 3.8 0v-5M8.6 9.7v7.5M13.9 2.8c-1.4 1.9-1.4 4.9 0 6.4v8" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="icon-train" viewBox="0 0 20 20">
+        <path d="M5.1 3.5h9.8A1.6 1.6 0 0 1 16.5 5v6.3a1.9 1.9 0 0 1-1.9 1.9H4.4a1.9 1.9 0 0 1-1.9-1.9V5a1.6 1.6 0 0 1 1.6-1.5ZM2.5 8.6h15M7.4 13.1l-2 4M12.6 13.1l2 4" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="6.2" cy="11" r="0.9" fill="currentColor"/>
+        <circle cx="13.8" cy="11" r="0.9" fill="currentColor"/>
+      </symbol>
+      <symbol id="icon-duplicate" viewBox="0 0 20 20">
+        <path d="M7.3 5.8h7a1.8 1.8 0 0 1 1.8 1.8v7a1.8 1.8 0 0 1-1.8 1.8h-7a1.8 1.8 0 0 1-1.8-1.8v-7a1.8 1.8 0 0 1 1.8-1.8Z" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round"/>
+        <path d="M12.3 3.6H5.5a1.9 1.9 0 0 0-1.9 1.9v6.8" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="icon-sparkle" viewBox="0 0 16 16">
+        <path d="M8 2.1c.4 3.1 1.8 4.6 4.9 5-3.1.4-4.5 1.9-4.9 5-.4-3.1-1.8-4.6-4.9-5 3.1-.4 4.5-1.9 4.9-5Z" fill="currentColor"/>
+      </symbol>
+      <symbol id="icon-tag" viewBox="0 0 24 24">
+        <path d="M20.4 13.3 12.7 21a1.9 1.9 0 0 1-2.7 0L3 14V3h11l6.4 6.4a1.9 1.9 0 0 1 0 2.7Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="7.8" cy="7.8" r="1.5" fill="currentColor"/>
+      </symbol>
+      <symbol id="icon-seal" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.8"/>
+        <path d="m15.5 24.2 5.6 5.6 11.7-12.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <header class="site-header" id="top">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="Ledgerly, back to top">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="9" fill="#12241c"/>
+          <path d="M9 10.2h14M9 16h9.6M9 21.8h14" fill="none" stroke="#f3efe4" stroke-width="2.2" stroke-linecap="round"/>
+          <circle cx="23.3" cy="16" r="2.5" fill="#d95d39"/>
+        </svg>
+        <span>Ledgerly</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+      </nav>
+      <a class="btn btn-primary btn-small" href="#start">
+        Start free trial
+        <svg aria-hidden="true"><use href="#icon-arrow"/></svg>
+      </a>
+    </div>
+  </header>
   <main>
-    <!-- __HERO__ -->
-    <!-- __FEATURES__ -->
-    <!-- __HOW__ -->
-    <!-- __CLOSING__ -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Spend analytics for finance teams</p>
+          <h1 id="hero-title" aria-label="Every card swipe, explained.">
+            <span class="line">Every card</span>
+            <span class="line">swipe,</span>
+            <span class="line"><em>explained.<svg class="h1-underline" viewBox="0 0 360 16" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M2 12.8C83 4.1 182 1.8 276 5.1c29 .95 57 2.65 82 4.7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></em></span>
+          </h1>
+          <p class="hero-sub">Ledgerly categorises company spend automatically, flags duplicates, and closes the month in hours instead of weeks.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#start">
+              Start free trial
+              <svg aria-hidden="true"><use href="#icon-arrow"/></svg>
+            </a>
+            <a class="btn btn-secondary" href="#start">Book a demo</a>
+          </div>
+          <p class="hero-meta">Built for finance teams at companies of 50–500.</p>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="visual-stage">
+            <div class="visual-disc"></div>
+            <div class="dot-field"></div>
+
+            <div class="review-shell">
+              <div class="review-back"></div>
+              <div class="review-panel">
+                <div class="review-head">
+                  <div class="review-mark">
+                    <svg viewBox="0 0 18 18">
+                      <path d="M4 5h10M4 9h6.7M4 13h10" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                      <circle cx="13.3" cy="9" r="1.6" fill="#d95d39"/>
+                    </svg>
+                  </div>
+                  <div class="review-head-copy">
+                    <span class="review-kicker">Ledgerly</span>
+                    <span class="review-title">Review queue</span>
+                  </div>
+                  <span class="review-period">This month</span>
+                </div>
+
+                <ul class="tx-list">
+                  <li class="tx-row">
+                    <span class="tx-icon tx-icon--sand"><svg><use href="#icon-cloud"/></svg></span>
+                    <span class="tx-copy">
+                      <span class="tx-name">Cloud hosting</span>
+                      <span class="tx-sub">Software subscription</span>
+                    </span>
+                    <span class="tx-tag">Software</span>
+                    <span class="tx-check"><svg><use href="#icon-check"/></svg></span>
+                  </li>
+                  <li class="tx-row">
+                    <span class="tx-icon tx-icon--clay"><svg><use href="#icon-meal"/></svg></span>
+                    <span class="tx-copy">
+                      <span class="tx-name">Client dinner</span>
+                      <span class="tx-sub">Company card</span>
+                    </span>
+                    <span class="tx-tag">Meals</span>
+                    <span class="tx-check"><svg><use href="#icon-check"/></svg></span>
+                  </li>
+                  <li class="tx-row">
+                    <span class="tx-icon tx-icon--sage"><svg><use href="#icon-train"/></svg></span>
+                    <span class="tx-copy">
+                      <span class="tx-name">Rail booking</span>
+                      <span class="tx-sub">Team travel</span>
+                    </span>
+                    <span class="tx-tag">Travel</span>
+                    <span class="tx-check"><svg><use href="#icon-check"/></svg></span>
+                  </li>
+                </ul>
+
+                <div class="duplicate">
+                  <div class="duplicate-head">
+                    <svg><use href="#icon-duplicate"/></svg>
+                    <span>Possible duplicate</span>
+                    <span class="duplicate-review">Review</span>
+                  </div>
+                  <div class="duplicate-rows">
+                    <div class="duplicate-row"><span>Client dinner</span><span>Meals</span></div>
+                    <div class="duplicate-row"><span>Client dinner</span><span>Meals</span></div>
+                  </div>
+                </div>
+
+                <div class="review-foot">
+                  <span class="review-ready">
+                    <svg><use href="#icon-check"/></svg>
+                    All clear for export
+                  </span>
+                  <span class="export-pill">
+                    Export to your ledger
+                    <svg><use href="#icon-arrow"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="float-note float-note--a">
+              <span class="note-icon"><svg><use href="#icon-sparkle"/></svg></span>
+              Auto-categorisation
+            </div>
+            <div class="float-note float-note--b">
+              <span class="note-icon"><svg><use href="#icon-duplicate"/></svg></span>
+              Duplicate detection
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="features" id="features" aria-labelledby="features-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Inside Ledgerly</p>
+            <h2 id="features-title">Spend that explains itself.</h2>
+          </div>
+          <p class="section-lede">Ledgerly sits between your company cards and your ledger, keeping the middle of the work clean.</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature">
+            <div class="feature-top">
+              <span class="feature-icon"><svg aria-hidden="true"><use href="#icon-tag"/></svg></span>
+              <span class="feature-index">01</span>
+            </div>
+            <h3>Auto-categorisation</h3>
+            <p>Every transaction is categorised the moment it lands, using rules you control. Your team reviews the exceptions, not the whole ledger.</p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-top">
+              <span class="feature-icon"><svg aria-hidden="true"><use href="#icon-duplicate"/></svg></span>
+              <span class="feature-index">02</span>
+            </div>
+            <h3>Duplicate detection</h3>
+            <p>Matching charges are paired before they reach the books. See both sides, keep the right one, and move on.</p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-top">
+              <span class="feature-icon"><svg aria-hidden="true"><use href="#icon-seal"/></svg></span>
+              <span class="feature-index">03</span>
+            </div>
+            <h3>Month-end close</h3>
+            <p>Reconcile, approve, and export from a single clean view. Close on time without chasing people for receipts.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="how" id="how-it-works" aria-labelledby="how-title">
+      <div class="wrap">
+        <div class="how-head">
+          <div>
+            <p class="eyebrow">How it works</p>
+            <h2 id="how-title">A close in three steps.</h2>
+          </div>
+          <p class="how-lede">Set up once, then review only what needs a decision. Ledgerly keeps the rest moving.</p>
+        </div>
+
+        <ol class="steps">
+          <li class="step">
+            <span class="step-num">01</span>
+            <h3>Connect your cards</h3>
+            <p>Securely connect the company cards your team already uses.</p>
+          </li>
+          <li class="step">
+            <span class="step-num">02</span>
+            <h3>Review flagged spend</h3>
+            <p>Review flagged transactions and resolve duplicates in one pass.</p>
+          </li>
+          <li class="step">
+            <span class="step-num">03</span>
+            <h3>Export to your ledger</h3>
+            <p>Send a clean, reconciled file to your accounting system.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+        <section class="closing" id="start" aria-labelledby="closing-title">
+      <div class="wrap closing-inner">
+        <div>
+          <p class="eyebrow">Ready when you are</p>
+          <h2 id="closing-title">Your books, before <em>the deadline.</em></h2>
+          <div class="closing-actions">
+            <a class="btn btn-cream" href="#start">
+              Start free trial
+              <svg aria-hidden="true"><use href="#icon-arrow"/></svg>
+            </a>
+            <a class="btn btn-ghost" href="#start">Book a demo</a>
+          </div>
+        </div>
+        <div class="closing-aside" aria-hidden="true">
+          <div class="seal"><svg><use href="#icon-seal"/></svg></div>
+        </div>
+      </div>
+
+      <footer class="wrap closing-footer">
+        <a class="footer-brand" href="#top" aria-label="Ledgerly, back to top">
+          <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+            <rect width="32" height="32" rx="9" fill="#12241c"/>
+            <path d="M9 10.2h14M9 16h9.6M9 21.8h14" fill="none" stroke="#f3efe4" stroke-width="2.2" stroke-linecap="round"/>
+            <circle cx="23.3" cy="16" r="2.5" fill="#d95d39"/>
+          </svg>
+          <span>Ledgerly</span>
+        </a>
+        <span class="footer-tagline">Spend analytics for finance teams.</span>
+        <span class="footer-copy">© 2026 Ledgerly</span>
+      </footer>
+    </section>
   </main>
 </body>
 </html>

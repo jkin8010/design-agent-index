@@ -1,0 +1,16 @@
+{
+ "skill": "control",
+ "repo": null,
+ "skill_commit": "",
+ "installed_skills": [],
+ "brief": "01-saas-landing",
+ "agent": "claude",
+ "agent_version": "2.1.263 (Claude Code)",
+ "model_env": {},
+ "started": "2026-11-06T13:58:55",
+ "seconds": 900.0,
+ "exit_code": "timeout",
+ "html_written": true,
+ "html_bytes": 42191,
+ "stdout_tail": ""
+}

@@ -1,21 +1,21 @@
 {
  "control/01-saas-landing": {
-  "total": 78,
+  "total": 79,
   "parts": {
    "render": 10,
-   "responsive": 10,
+   "responsive": 5,
    "contrast": 15,
    "typography": 5,
-   "colour": 2,
-   "anti_slop": 16,
+   "colour": 4,
+   "anti_slop": 20,
    "structure": 10,
    "weight": 10
   },
-  "slop_penalty": 4,
+  "slop_penalty": 0,
   "skill": "control",
   "brief": "01-saas-landing",
-  "seconds": null,
-  "agent": null
+  "seconds": 900.0,
+  "agent": "claude"
  },
  "hallmark/01-saas-landing": {
   "total": 89,

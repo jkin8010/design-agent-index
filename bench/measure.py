@@ -168,6 +168,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", default=None)
     ap.add_argument("--cell", default=None, help="skill/brief")
+    ap.add_argument("--allow-partial", action="store_true",
+                    help="measure even if the agent run has not finished (results may be stale)")
     args = ap.parse_args()
 
     runs = os.path.join(BENCH, "runs")
@@ -182,9 +184,17 @@ def main():
                 rel = f"{skill}/{brief}"
                 if args.cell and rel != args.cell:
                     continue
-                p = os.path.join(base, skill, brief, "index.html")
-                if os.path.exists(p):
-                    cells.append((d, skill, brief, p))
+                cell_dir = os.path.join(base, skill, brief)
+                p = os.path.join(cell_dir, "index.html")
+                if not os.path.exists(p):
+                    continue
+                # A cell is only final once runner.py wrote meta.json: the agent keeps
+                # editing index.html after its first write, so measuring early scores a
+                # version that no longer exists.
+                if not args.allow_partial and not os.path.exists(os.path.join(cell_dir, "meta.json")):
+                    print(f"skip (run not finished, no meta.json): {skill}/{brief}")
+                    continue
+                cells.append((d, skill, brief, p))
 
     if not cells:
         raise SystemExit("no cells to measure")
