@@ -110,6 +110,18 @@ def clean_claude_home():
     return dst_dir
 
 
+def model_env():
+    """The model actually used, read from the same clean config the agent runs with.
+
+    Recording this is not optional: a score whose model is unknown cannot be compared
+    to anything, and the publication gate rejects it.
+    """
+    path = os.path.join(clean_claude_home(), "settings.json")
+    env = json.load(open(path)).get("env", {}) if os.path.exists(path) else {}
+    safe = {k: v for k, v in env.items() if "TOKEN" not in k.upper() and "KEY" not in k.upper()}
+    return env.get("ANTHROPIC_MODEL") or env.get("ANTHROPIC_DEFAULT_SONNET_MODEL"), safe
+
+
 def cli_version(agent):
     try:
         out = subprocess.run([agent, "--version"], capture_output=True, text=True, timeout=30).stdout.strip()
@@ -167,7 +179,9 @@ def run_cell(skill, brief_id, agent, date, force=False, post=False, tag="", time
         "tag": tag,
         "agent": agent,
         "agent_version": cli_version(agent),
-        "model_env": {k: v for k, v in os.environ.items() if k.startswith("ANTHROPIC_MODEL")},
+        "model": model_env()[0],
+        "model_source": "agent config" if model_env()[0] else "unrecorded",
+        "model_env": model_env()[1],
         "started": datetime.datetime.now().isoformat(timespec="seconds"),
         "seconds": secs,
         "exit_code": code,
@@ -220,6 +234,13 @@ def main():
         if not briefs:
             raise SystemExit(f"unknown brief {args.brief}")
 
+    os.makedirs(os.path.join(BENCH, "runs", args.date), exist_ok=True)
+    json.dump({"batch": args.date, "agent": args.agent, "agent_version": cli_version(args.agent),
+               "model": model_env()[0], "timeout_s": args.timeout, "repeat": args.repeat,
+               "skills": [s["name"] for s in skills], "briefs": briefs,
+               "started": datetime.datetime.now().isoformat(timespec="seconds")},
+              open(os.path.join(BENCH, "runs", args.date, "BATCH.json"), "w"), indent=1)
+
     cells = [(s, b, f"r{i+1}" if args.repeat > 1 else "")
              for i in range(args.repeat) for s in skills for b in briefs]
     if args.parallel > 1:
@@ -229,6 +250,12 @@ def main():
     else:
         for skill, brief, tag in cells:
             run_cell(skill, brief, args.agent, args.date, args.force, args.post, tag, args.timeout)
+
+    # DONE marker: the gate treats a batch without finished_at as still running.
+    bpath = os.path.join(BENCH, "runs", args.date, "BATCH.json")
+    manifest = json.load(open(bpath)) if os.path.exists(bpath) else {"batch": args.date}
+    manifest["finished_at"] = datetime.datetime.now().isoformat(timespec="seconds")
+    json.dump(manifest, open(bpath, "w"), indent=1)
 
 
 if __name__ == "__main__":

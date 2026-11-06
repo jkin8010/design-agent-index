@@ -10,6 +10,7 @@ results get published are written down in [`METHODOLOGY.md`](METHODOLOGY.md#10-w
 
 | Path | What it is |
 |---|---|
+| [`../RULES.md`](../RULES.md) | what may be published and under which conditions — the authoritative rulebook |
 | [`METHODOLOGY.md`](METHODOLOGY.md) | the full method: briefs, isolation, stop rule, metrics, weights, biases, publication rules |
 | `briefs/` | 12 fixed briefs, copy pinned verbatim |
 | `runner.py` | runs one `(skill, brief)` cell, isolated, with a wall-clock budget |
@@ -17,6 +18,7 @@ results get published are written down in [`METHODOLOGY.md`](METHODOLOGY.md#10-w
 | `score.py` | deterministic 0–100 from `metrics.json` alone |
 | `check_content.py` | copy-fidelity gate, reported separately from the score |
 | `aggregate.py` | median + spread across N repetitions |
+| `check_publish_gate.py` | refuses a batch that cannot be published; exit 0/1/2 |
 | `report.py` | per-batch report and screenshot gallery |
 | `example/` | one complete worked cell (control, brief 01) — prompt, HTML, metrics, score, both screenshots |
 

@@ -217,6 +217,10 @@ Requirements: Python 3.12, Playwright with Chromium, and a coding-agent CLI that
 
 ## 13. Data and corrections policy
 
+The enforceable version of this section is [`../RULES.md`](../RULES.md), checked by
+`bench/check_publish_gate.py`. If the policy and the script disagree, the script is a bug — fix it in
+the same commit.
+
 - Raw cells for a published batch live under `bench/results/<batch>/` with prompts, metrics and
   screenshots. Unpublished batches are not committed.
 - **No paid placement, no sponsored inclusion, no ranking of our own products without marking them

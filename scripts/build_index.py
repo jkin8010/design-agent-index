@@ -189,7 +189,8 @@ deterministic dimensions (contrast, responsiveness, typography, colour disciplin
 
 **No leaderboard is published here yet.** A ranked table without a named model, N≥3 repetitions, a control
 row and published spread is a rumour, not a measurement — [the method and its publication rules](bench/METHODOLOGY.md)
-ship first, and one complete worked cell is in [`bench/example/`](bench/example/).
+ship first, and one complete worked cell is in [`bench/example/`](bench/example/). What may be published, and
+under which conditions, is written down in [`RULES.md`](RULES.md) and enforced by `bench/check_publish_gate.py`.
 Raw data for this snapshot: [`data/snapshots/{today.isoformat()}.json`](data/snapshots/{today.isoformat()}.json).
 
 ## Skills
