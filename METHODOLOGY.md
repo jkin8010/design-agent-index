@@ -37,8 +37,20 @@ admits PCB-design and FPGA-design repos, which is exactly the failure mode that 
 | Adoption | 25 | `min(25, round(6 × log10(stars)))` | Log scale: 100★ = 12, 1k★ = 18, 10k★ = 24. Stars are a proxy for use, not for quality. |
 | Docs surface | 15 | ≥200 files 15 · ≥50 10 · else 5 | Repo size correlates with a real system (rules, references, examples) rather than a single prompt. |
 
-Weights sum to 100. All inputs are re-computed from the GitHub API at snapshot time and stored verbatim in
-`data/snapshots/<date>.json`, so any row can be re-derived.
+Weights sum to 100. On a successful refresh, inputs are collected from the GitHub API and stored in
+`data/snapshots/`, so any row can be re-derived. If metadata or the tree cannot be fetched, the entry retains
+its signals from the latest snapshot (or the registry if no prior snapshot exists), is marked `missing` and
+`unavailable_at`, and is visibly labeled unavailable in the README. Both stages must succeed to replace signals
+and clear the marker. Scores use those retained signals and the current snapshot date: activity can decline as
+`pushed` ages, while all other components use the retained values. The usual weights and ordering still apply;
+a previously archived entry remains excluded based on its retained archived flag. Thus unavailable scores are
+estimates based on potentially stale data, not evidence of current availability.
+
+Each failed request is recorded in the corresponding `.errors.json` with its stage, URL, status, timestamp and
+classification. A refresh with only 404/410 failures exits successfully, with those failures visible; authentication,
+rate limit, server, other HTTP and network failures cause a nonzero exit after all entries are processed. The
+workflow uploads errors as an artifact on failure and does not commit that failed run. Snapshots are never
+overwritten; repeated runs on the same date get numbered filenames.
 
 ## Known biases
 

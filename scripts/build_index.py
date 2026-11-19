@@ -14,6 +14,8 @@ import math
 import os
 import sys
 import urllib.request
+import urllib.error
+import glob
 import datetime
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -38,8 +40,10 @@ def api(path):
 
 def refresh(entry):
     name = entry["repo"]
-    d = api(f"/repos/{name}")
-    tree = api(f"/repos/{name}/git/trees/{d['default_branch']}?recursive=1").get("tree", [])
+    meta_path = f"/repos/{name}"
+    d = request_stage(name, "meta", meta_path)
+    tree_path = f"/repos/{name}/git/trees/{d['default_branch']}?recursive=1"
+    tree = request_stage(name, "tree", tree_path)["tree"]
     paths = [t["path"] for t in tree]
     low = " ".join(paths).lower()
     entry["signals"] = {
@@ -57,7 +61,70 @@ def refresh(entry):
         "topics": d.get("topics") or [],
         "archived": bool(d.get("archived")),
     }
+    entry.pop("unavailable_at", None)
+    entry.pop("missing", None)
     return entry
+
+
+class RefreshError(Exception):
+    def __init__(self, record):
+        self.record = record
+        super().__init__(str(record))
+
+
+def request_stage(repo, stage, path):
+    try:
+        result = api(path)
+        if stage == "meta":
+            for key in ("default_branch", "stargazers_count", "forks_count", "pushed_at", "created_at"):
+                if key not in result or result[key] is None:
+                    raise ValueError(f"missing {key}")
+        elif not isinstance(result.get("tree"), list) or any("path" not in item for item in result["tree"]):
+            raise ValueError("invalid tree")
+        if stage == "tree" and result.get("truncated"):
+            raise ValueError("truncated tree")
+    except (urllib.error.URLError, TimeoutError, OSError, ValueError, TypeError, AttributeError) as exc:
+        status = exc.code if isinstance(exc, urllib.error.HTTPError) else None
+        if isinstance(exc, (ValueError, TypeError, AttributeError)):
+            kind = "invalid_response"
+        elif status in (404, 410):
+            kind = "unavailable"
+        elif status in (401, 403):
+            kind = "authentication"
+        elif status == 429 or (status is not None and status >= 500):
+            kind = "rate_limit_or_server"
+        else:
+            kind = "network" if status is None else "http_error"
+        record = {"repo": repo, "url": "https://api.github.com" + path,
+                  "http_status": status, "stage": stage,
+                  "ts": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                  "kind": kind, "message": str(exc)}
+        print(f"{repo} {stage} {kind} status={status}", file=sys.stderr, flush=True)
+        raise RefreshError(record) from exc
+    print(f"{repo} {stage} ok", flush=True)
+    return result
+
+
+def previous_entries():
+    """Read the latest snapshot, including its retained signals for failed entries."""
+    files = sorted((p for p in glob.glob(os.path.join(SNAPSHOT_DIR, "*.json"))
+                    if not p.endswith(".errors.json")),
+                   key=lambda p: (os.path.basename(p)[:10], os.path.basename(p)[10:-5]))
+    if not files:
+        return {}
+    with open(files[-1]) as f:
+        return {entry["repo"]: entry for entry in json.load(f)["entries"]}
+
+
+def snapshot_path(today):
+    """Never overwrite a snapshot, even when multiple runs occur on the same day."""
+    base = os.path.join(SNAPSHOT_DIR, today.isoformat())
+    path = base + ".json"
+    number = 1
+    while os.path.exists(path) or os.path.exists(path[:-5] + ".errors.json"):
+        path = f"{base}-{number:04d}.json"
+        number += 1
+    return path
 
 
 def days_since(date_str, today):
@@ -107,7 +174,8 @@ def table(rows, today, desc=False):
                "|---|---|---:|---:|---|---|"]
     for i, e in enumerate(rows, 1):
         s = e["signals"]
-        base = (f"[{e['repo']}](https://github.com/{e['repo']})")
+        base = (f"[{e['repo']}](https://github.com/{e['repo']})"
+                + (f" ⚠ unavailable since {e['unavailable_at']}" if e.get("unavailable_at") else ""))
         if desc:
             out.append(
                 f"| {i} | {base} | {short(e.get('author_desc'))} | {e['score']} | {fmt(s['stars'])} | "
@@ -125,8 +193,18 @@ def main():
     entries = json.load(open(REGISTRY))
     today = datetime.date.today()
 
+    errors = []
     if "--refresh" in sys.argv:
-        entries = [refresh(e) for e in entries]
+        previous = previous_entries()
+        for entry in entries:
+            old = previous.get(entry["repo"], entry)
+            try:
+                refresh(entry)
+            except RefreshError as exc:
+                entry["signals"] = old["signals"]
+                entry["unavailable_at"] = old.get("unavailable_at") or today.isoformat()
+                entry["missing"] = True
+                errors.append(exc.record)
 
     for e in entries:
         e["score_detail"] = score(e["signals"], today)
@@ -145,8 +223,12 @@ def main():
         "counts": {"skills": len(skills), "collections": len(colls), "extractors": len(exts)},
         "entries": entries,
     }
-    with open(os.path.join(SNAPSHOT_DIR, f"{today.isoformat()}.json"), "w") as f:
+    path = snapshot_path(today)
+    with open(path, "x") as f:
         json.dump(snap, f, ensure_ascii=False, indent=1)
+    if errors:
+        with open(path[:-5] + ".errors.json", "x") as f:
+            json.dump(errors, f, ensure_ascii=False, indent=1)
 
     doc = f"""# Design Agent Index
 
@@ -180,6 +262,8 @@ corpora, and the tools that extract a design system from a live site.
 | Adoption | 25 | `min(25, round(6 × log10(stars)))` |
 | Docs surface | 15 | ≥200 files 15 · ≥50 10 · else 5 |
 
+⚠ Unavailable rows retain their last recorded signals; their scores are recalculated for this date and may be stale.
+
 Full rules, inclusion criteria and known biases: [METHODOLOGY.md](METHODOLOGY.md).
 ### Benchmark (v0.2 — methodology published, results deliberately withheld)
 
@@ -191,7 +275,7 @@ deterministic dimensions (contrast, responsiveness, typography, colour disciplin
 row and published spread is a rumour, not a measurement — [the method and its publication rules](bench/METHODOLOGY.md)
 ship first, and one complete worked cell is in [`bench/example/`](bench/example/). What may be published, and
 under which conditions, is written down in [`RULES.md`](RULES.md) and enforced by `bench/check_publish_gate.py`.
-Raw data for this snapshot: [`data/snapshots/{today.isoformat()}.json`](data/snapshots/{today.isoformat()}.json).
+Raw data and refresh errors: [`data/snapshots/`](data/snapshots/).
 
 ## Skills
 
@@ -227,7 +311,8 @@ Data and text: CC BY 4.0. Scripts: MIT.
     open(README, "w").write(doc)
     print(f"snapshot {today} — skills={len(skills)} collections={len(colls)} extractors={len(exts)}")
     print("top 5:", ", ".join(f"{e['repo']}({e['score']})" for e in skills[:5]))
+    return 1 if any(e["kind"] != "unavailable" for e in errors) else 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
